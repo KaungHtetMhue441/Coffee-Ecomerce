@@ -44,6 +44,7 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="/assets/css/demo.css" />
+    <link rel="stylesheet" href="{{asset('css/admin/app.css')}}">
   </head>
   <body>
     <div class="wrapper">
@@ -147,7 +148,7 @@
         </div>
 
         <div class="container">
-          <div class="page-inner">
+          <div class="page-inner p-0">
             {{$content}}
           </div>
 

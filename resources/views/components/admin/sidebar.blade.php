@@ -19,7 +19,7 @@
       "sub_menu"=>[
         [
           "All Product",
-          route("category.create")
+          route("product.index")
         ],
         [
           "Add Product",

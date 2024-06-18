@@ -1,30 +1,28 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 Route::get('/', function () {
-    return view('welcome');
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
 
-Route::controller(CategoryController::class)->prefix('/category')->name("category.")->group(function(){
-    Route::get("/",'index')->name("index");
-    Route::get("/create",'create')->name("create");
-    Route::post("/store",'store')->name("store");
-    Route::get("/show/{category}",'show')->name("show");
-    Route::get("/edit/{category}",'edit')->name("edit");
-    Route::put("/update/{category}",'update')->name("update");
-    Route::get("/destroy/{category}",'destroy')->name("destroy");
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::controller(ProductController::class)->prefix('/product')->name("product.")->group(function(){
-    Route::get("/",'index')->name("index");
-    Route::get("/create",'create')->name("create");
-    Route::post("/store",'store')->name("store");
-    Route::get("/show/{product}",'show')->name("show");
-    Route::get("/edit/{product}",'edit')->name("edit");
-    Route::put("/update/{product}",'update')->name("update");
-    Route::get("/destroy/{product}",'destroy')->name("destroy");
-});
-// redirect()->route("product.index")
+require __DIR__.'/auth.php';
+require __DIR__."/admin.php";

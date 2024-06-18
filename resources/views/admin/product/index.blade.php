@@ -10,7 +10,7 @@
     <x-slot name="script">
 
     <x-slot name="content">
-      <div class="page-header ">
+      <div class="page-header">
         <x-admin.breadcrumbs :items="$breadCrumbs">
 
         </x-admin.breadcrumbs>
@@ -23,14 +23,10 @@
                 All products
                 <div class="inline-block float-end">
                   <form action="{{route('product.index')}}" method="get">
-                    @csrf
-                    <div class="row justify-end">
-                      <div class="col-8">
-                        <input type="text" name="product" class="form-control" placeholder="product name">
-                      </div>
-                      <div class="col-4">
-                        <button type="submit" class="btn btn-primary">search</button> 
-                      </div>                       
+                    <div class="d-flex justify-end">
+                        <input type="text" value="{{request()->get('category')}}" name="category" class="form-control me-3" placeholder="Enter Category Name"></input>
+                        <input type="text" value="{{request()->get('name')}}" name="name" class="form-control me-3" placeholder="Product Name">
+                        <button type="submit" class="btn btn-primary  float-end">Search</button> 
                     </div>
                   </form>
                 </div>
@@ -44,8 +40,10 @@
                   <thead>
                     <tr>
                       <th>Name</th>
+                      <th>Code</th>
                       <th>Image</th>                       
                       <th>Price</th>
+                      <th>Category</th>
                       <th>Description</th>
                       <th>created</th>
                       <th>Action</th>
@@ -55,12 +53,15 @@
                     @foreach ($products as $product)
                       <tr>
                         <td>{{$product->name}}</td>
+                        <td>{{$product->code}}</td>
                         <td>
-                          <img src="{{$product->imageUrl}}" class="rounded-full" alt="" width="50px" height="50px">
+                          <div>
+                          <img src="{{$product->imageUrl}}" class="rounded-circle" alt="" width="50px" height="50px">
+                          </div>
                         </td>
                         <td>{{$product->price}}</td>
                         <td>{{$product->category->name}}</td>
-                        <td>{{$product->description}}</td>
+                        <td>{{Str::words($product->description,5)}}</td>
                         <td>{{$product->created_at->diffForHumans()}}</td>
                         <td>
                           <span>

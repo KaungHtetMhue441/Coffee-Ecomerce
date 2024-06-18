@@ -35,10 +35,29 @@
                 />
               </div>
               <div class="form-group">
+                <label for="code">Code</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="code"
+                  name="code"
+                  placeholder="Enter product code"
+                />
+              </div>
+              <div class="form-group">
                 <div class="mb-3">
                   <label for="formFile" class="form-label">Choose product's image</label>
-                  <input class="form-control" type="file" id="formFile">
+                  <input class="form-control" name="file" type="file" id="formFile">
                 </div>                  
+              </div>
+              <div class="form-group">
+                <label for="price" >Category</label>
+                <select class="form-control form-select" name="category_id">
+                  @forelse ($categories as $category)
+                    <option value="{{$category->id}}">{{$category->name}}</option>
+                  @empty
+                  @endforelse
+                </select>
               </div>
               <div class="form-group">
                 <label for="price">Price</label>

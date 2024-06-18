@@ -2,7 +2,7 @@
 @props([
     "items"=>array()
 ])
-<ul class="breadcrumbs m-0 mb-3">
+<ul class="breadcrumbs m-0">
     @foreach ($items as $item)
     <li class="nav-item">
         <a href="#">{{$item}}</a>

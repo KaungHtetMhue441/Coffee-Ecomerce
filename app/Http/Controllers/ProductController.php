@@ -4,19 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        
+        $products = Product::query();
+        if($request['name']){
+            $products->where("name",'like','%'.$request['name'].'%');
+        }      
+        if($request['caategory']){
+            $products->whereHas("categories",function(Builder $query) use($request){
+                $query->where("name",'like','%'.$request['name'].'%');
+            });
+        }    
         return view('admin.product.index',[
-            "products"=>Product::with("category")->all()
+            "products"=>$products->paginate(10)
         ]);
     }
 
@@ -37,7 +45,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $file = $request->file("file");
-        $request['image'] = uploadFile($file,"products");
+        $request['image'] = uploadFile($file,"/products/");
 
         Product::create($request->all());
 
@@ -59,8 +67,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view("admin.category.edit",[
-            "products"=>$product
+        return view("admin.product.edit",[
+            "product"=>$product,
+            "categories"=>Category::all()
         ]);
     }
 
@@ -69,10 +78,16 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        if($request->hasFile("file")){
+            $file = $request->file("file");
+            $request['image'] = uploadFile($file,"/products/");
+            deleteFile("/products/",$product->image);
+        }
+
         $product->update($request->all());
         return redirect()
-        ->route("product.edit")
-        ->with("Product successfully created!");
+        ->route('product.index')
+        ->with('success',"Product successfully updated!");
     }
 
     /**
@@ -81,6 +96,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
+        deleteFile("/products",$product->image);
         return redirect()
         ->route("product.index")
         ->with("success","Product successfully created!");
