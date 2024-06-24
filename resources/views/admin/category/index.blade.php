@@ -22,7 +22,7 @@
               <div class="card-title">
                 All categories
                 <div class="inline-block float-end">
-                  <form action="{{route('category.index')}}" method="get">
+                  <form action="{{route('admin.category.index')}}" method="get">
                     @csrf
                     <div class="row justify-end">
                       <div class="col-8">
@@ -55,13 +55,13 @@
                         <td>{{$category->created_at->diffForHumans()}}</td>
                         <td>
                           <span>
-                           <a href="{{route("category.edit",$category->id)}}">
+                           <a href="{{route("admin.category.edit",$category->id)}}">
                             <i class="fa fa-edit text-info"></i>
                            </a>
                           </span>
                           &nbsp;&nbsp;
                           <span>
-                            <a href="{{route("category.destroy",$category->id)}}"  onclick="return confirm('Are you sure to delete')" >
+                            <a href="{{route("admin.category.destroy",$category->id)}}"  onclick="return confirm('Are you sure to delete')" >
                              <i class="fa fa-trash text-danger"></i>
                            </a> 
                            </span>
@@ -71,6 +71,7 @@
                   </tbody>
                 </table>
               </div>
+              {{$categories->links()}}
             </div>
           </div>
         </div>

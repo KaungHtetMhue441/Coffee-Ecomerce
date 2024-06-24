@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class CategoryController extends Controller
         $categories = Category::query();
         if($request['category'])
             $categories->where("name",$request['category']);
-        return view('admin.category.index',['categories'=>$categories->get()]);
+        return view('admin.category.index',['categories'=>$categories->paginate(10)]);
     }
 
     /**
@@ -32,7 +33,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         Category::create($request->all());
-        return redirect()->route("category.index");
+        return redirect()->route("admin.category.index");
     }
 
     /**
@@ -57,7 +58,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $category->update($request->all());
-        return redirect()->route("category.index");
+        return redirect()->route("admin.category.index");
     }
 
     /**
@@ -66,6 +67,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()->route("category.index");
+        return redirect()->route("admin.category.index");
     }
 }

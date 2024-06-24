@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Builder;
@@ -24,7 +25,7 @@ class ProductController extends Controller
             });
         }    
         return view('admin.product.index',[
-            "products"=>$products->paginate(10)
+            "products"=>$products->paginate(10)->appends($request->all())
         ]);
     }
 
@@ -46,11 +47,11 @@ class ProductController extends Controller
     {
         $file = $request->file("file");
         $request['image'] = uploadFile($file,"/products/");
-
+        
         Product::create($request->all());
 
         return redirect()
-        ->route('product.index')
+        ->route('admin.product.index')
         ->with('success',"Product successfully created!");
     }
 
@@ -86,7 +87,7 @@ class ProductController extends Controller
 
         $product->update($request->all());
         return redirect()
-        ->route('product.index')
+        ->route('admin.product.index')
         ->with('success',"Product successfully updated!");
     }
 
@@ -98,7 +99,7 @@ class ProductController extends Controller
         $product->delete();
         deleteFile("/products",$product->image);
         return redirect()
-        ->route("product.index")
+        ->route("admin.product.index")
         ->with("success","Product successfully created!");
     }
 }

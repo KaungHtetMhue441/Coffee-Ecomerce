@@ -25,7 +25,7 @@
               <div class="card-title">Edit Product</div>
             </div>
             <div class="card-body">
-              <form action="{{ route('product.update',$product->id)}}" method="POST" enctype="multipart/form-data">
+              <form action="{{ route('admin.product.update',$product->id)}}" method="POST" enctype="multipart/form-data">
               @csrf
               @method("PUT")
               <div class="form-group">

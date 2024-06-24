@@ -22,7 +22,7 @@
               <div class="card-title">Category Create</div>
             </div>
             <div class="card-body">
-             <form action="{{ route('category.store')}}" method="POST">
+             <form action="{{ route('admin.category.store')}}" method="POST">
               @csrf
               <div class="form-group">
                 <label for="email2">Category Name</label>

@@ -5,11 +5,11 @@
       "sub_menu"=>[
         [
           "All Categories",
-          route("category.index")
+          route("admin.category.index")
         ],
         [
           "Add Category",
-          route('category.create')
+          route('admin.category.create')
         ]
 
       ]
@@ -19,11 +19,11 @@
       "sub_menu"=>[
         [
           "All Product",
-          route("product.index")
+          route("admin.product.index")
         ],
         [
           "Add Product",
-          route("product.create")
+          route("admin.product.create")
         ]
       ]
     ]

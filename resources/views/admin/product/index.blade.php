@@ -22,7 +22,7 @@
               <div class="card-title">
                 All products
                 <div class="inline-block float-end">
-                  <form action="{{route('product.index')}}" method="get">
+                  <form action="{{route('admin.product.index')}}" method="get">
                     <div class="d-flex justify-end">
                         <input type="text" value="{{request()->get('category')}}" name="category" class="form-control me-3" placeholder="Enter Category Name"></input>
                         <input type="text" value="{{request()->get('name')}}" name="name" class="form-control me-3" placeholder="Product Name">
@@ -81,6 +81,7 @@
                   </tbody>
                 </table>
               </div>
+              {{$products->links()}}
             </div>
           </div>
         </div>
