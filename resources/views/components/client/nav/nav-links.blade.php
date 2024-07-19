@@ -1,24 +1,30 @@
 @props([
-"navItems"=>[
-[ "Home",
-route("client.index")
-],
-[
-"About",
-route("client.about")
-],
-[
-"Contact",
-route("client.contact")
-],
-]
+    "navItems" => [
+        [
+            "Home",
+            route("client.index")
+        ],
+        [
+            "Product",
+            route("client.product")
+        ],
+        [
+            "About",
+            route("client.about")
+        ],
+        [
+            "Contact",
+            route("client.contact")
+        ],
+    ]
 ])
-<ul class="navbar-nav float-end">
+<ul class="navbar-nav">
     @foreach ($navItems as $navItem)
-    <li class="">
-        <a class="nav_link d-inline-block text-decoration-none py-0 px-0 me-3 @if(url()->current()== $navItem[1]) active @endif" aria-current="page" href="{{$navItem[1]}}">
-            {{$navItem[0]}}
-        </a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link nav_link fs-18 p-0 @if($loop->index < count($navItems) - 1) me-3 @endif @if(url()->current() == $navItem[1]) custom_active @endif"
+                aria-current="page" style="color:wheat;" href="{{$navItem[1]}}">
+                {{$navItem[0]}}
+            </a>
+        </li>
     @endforeach
 </ul>

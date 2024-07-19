@@ -1,11 +1,22 @@
-<nav class="navbar navbar-expand-lg nav_container nav_text_color bg-body-tertiary">
+<nav class="navbar navbar-expand-lg nav_container nav_text_color bg-body-tertiary px-5 shadow"
+    style="position:sticky;top:0;z-index:1001;">
     <div class="container-fluid d-flex justify-content-between">
-        <a class="navbar-brand" href="/">Kaung Coffee</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
-            <x-client.nav.nav-links></x-client.nav.nav-links>
+        <div class="col-md-4 col-12">
+            <a class="navbar-brand" href="/">Kaung Coffee</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <div class="col-4 ">
+            <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNav">
+                <x-client.nav.nav-links></x-client.nav.nav-links>
+            </div>
+        </div>
+        <div class="col-4 d-flex justify-content-end">
+            <a class="btn btn-secondary">Login</a>
+            <a class="btn btn-outline-secondary ms-2">Register</a>
         </div>
     </div>
 </nav>

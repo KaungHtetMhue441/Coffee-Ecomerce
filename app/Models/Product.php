@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
 class Product extends Model
 {
     use HasFactory;
-    protected $fillable=[
+    protected $fillable = [
         'name',
         'code',
         'image',
@@ -18,11 +19,22 @@ class Product extends Model
         'category_id'
     ];
 
+    public function GetshortDescAttribute()
+    {
+        return Str::words($this->description, 10, '...');
+    }
+
     public function category()
     {
-        return $this->belongsTo(Category::class,'category_id','id');
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
-    public function getImageUrlAttribute(){
-        return '/storage/products/'.$this->image;
+    public function getImageUrlAttribute()
+    {
+        return '/storage/products/' . $this->image;
+    }
+
+    public function sales()
+    {
+        return $this->belongsToMany(Sale::class);
     }
 }
