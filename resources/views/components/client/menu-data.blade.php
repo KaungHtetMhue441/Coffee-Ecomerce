@@ -1,6 +1,7 @@
 @props([
 "title" => "",
 "products" => [],
+"menuCount"=>""
 ])
 
 
