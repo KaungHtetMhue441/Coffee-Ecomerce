@@ -3,7 +3,7 @@ $breadCrumbs = ['Product','all'];
 @endphp
 <x-layouts.admin>
   <x-slot name="header">
-    Products
+    All Products
   </x-slot>
 
   <x-slot name="script">
@@ -19,7 +19,7 @@ $breadCrumbs = ['Product','all'];
           <div class="card">
             <div class="card-header">
               <div class="card-title">
-                All products
+                <!-- All products -->
                 <div class="inline-block float-end">
                   <form action="{{route('admin.product.index')}}" method="get">
                     <div class="d-flex justify-end">
@@ -49,7 +49,7 @@ $breadCrumbs = ['Product','all'];
                   <tbody>
                     @foreach ($products as $product)
                     <tr>
-                      <td>{{$product->name}}</td>
+                      <td>{{$product->name."(".$product->en_name.")"}}</td>
                       <td>{{$product->code}}</td>
                       <td>
                         <div>

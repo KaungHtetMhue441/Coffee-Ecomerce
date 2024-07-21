@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Product;
+use PDF;
 use App\Models\Sale;
+use App\Models\Product;
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class SaleController extends Controller
 {
@@ -15,7 +18,31 @@ class SaleController extends Controller
      */
     public function index(Request $request)
     {
-        $sales = Sale::with("admin")->where("status", "complete")->paginate(10)->appends($request->inputs);
+        $sales = Sale::with("admin")->where("status", "complete");
+        if ($request["customer_name"]) {
+            $sales->where("customer", "like", "%" . $request["customer_name"] . "%");
+        }
+
+        if ($request["admin_name"]) {
+            $sales->whereHas("admin", function ($query) use ($request) {
+                $query->where("name", "like", "%" . $request['admin_name'] . "%");
+            });
+        }
+        if ($request["payment_type"]) {
+            $sales->where("payment_type", "like", "%" . $request["payment_type"] . "%");
+        }
+        if ($request["total_cost"]) {
+            $sales->where("total_cost", ">=", $request['total_cost']);
+        }
+        if ($request["form"]) {
+            $sales->whereDate("created_at", ">=", $request["from"]);
+        }
+        if ($request["to"]) {
+            $sales->whereDate("created_at", "<=", $request["to"]);
+        }
+
+        $sales  = $sales->orderby("created_at", "DESC")->paginate(10)->appends($request->inputs);
+
         $totalPrice = $sales->reduce(function ($carry, $sale) {
             return $carry + $sale->total_cost;
         });
@@ -106,6 +133,7 @@ class SaleController extends Controller
             "total_cost" => $request->total_cost,
             "status" => "complete"
         ]);
+        $sale->load("products");
         return redirect()->route("admin.sale.index");
     }
 
@@ -116,6 +144,20 @@ class SaleController extends Controller
     {
         return view("admin.sale.show", [
             "sale" => $sale->load("products")
+        ]);
+    }
+
+    public function drafts(Request $request)
+    {
+        $sales = Sale::with("admin")->where("status", "incomplete");
+        if ($request["customer_name"]) {
+            $sales->where("customer", $request["customer_name"]);
+        }
+
+        $sales  = $sales->orderby("created_at", "DESC")->paginate(10)->appends($request->except(['page']));
+
+        return view("admin.sale.drafts", [
+            "sales" => $sales
         ]);
     }
 
@@ -140,6 +182,7 @@ class SaleController extends Controller
      */
     public function destroy(Sale $sale)
     {
-        //
+        $sale->delete();
+        return redirect()->back()->with("success", "Sale Successfullly deleted!");
     }
 }

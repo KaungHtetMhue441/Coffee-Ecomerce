@@ -143,7 +143,7 @@ $sale = request()['sale'];
                                         <div class="form-group border-top-1">
                                             <div class="d-flex justify-content-between mb-2">
                                                 <label for="">Customer's Name</label>
-                                                <input type="text" class="form-control w-50 " id="customer" name="customer_name" placeholder="Enter customer's name" />
+                                                <input type="text" class="form-control w-50 " value="Guest" id="customer" name="customer_name" placeholder="Enter customer's name" />
                                             </div>
                                             <div class="d-flex justify-content-between mb-2">
                                                 <label for="total">Total Price</label>
@@ -158,7 +158,9 @@ $sale = request()['sale'];
                                                 </select>
                                             </div>
                                             <div class="mt-3">
-                                                <button type="submit " class="btn btn-success mb-3 float-end">Pay Bill
+                                                <button type="submit " class="btn btn-success mb-3 float-end" onclick="openPdf()">
+
+                                                    Pay Bill
                                                     <i class="fa fa-paper-plane "></i>
                                                 </button>
                                             </div>
@@ -176,6 +178,9 @@ $sale = request()['sale'];
 
     <x-slot name="script">
         <script type="text/javascript">
+            function openPdf() {
+                window.open("{{route('admin.bouncer',$sale->id)}}");
+            }
             $(".product").each((index, product) => {
                 $(product).click(function() {
                     $("#product").val($(product).attr("name"));

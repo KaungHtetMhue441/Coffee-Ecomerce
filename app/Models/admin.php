@@ -11,14 +11,15 @@ class Admin extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $fillable=[
+    protected $fillable = [
         "name",
         "email",
         "password",
         "role_id",
     ];
-    
-    public function roles(){
-        return $this->hasMany(Role::class);
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 }

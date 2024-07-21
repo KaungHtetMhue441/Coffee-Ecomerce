@@ -14,9 +14,9 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $categories = Category::query();
-        if($request['category'])
-            $categories->where("name",$request['category']);
-        return view('admin.category.index',['categories'=>$categories->paginate(10)]);
+        if ($request['category'])
+            $categories->where("name", $request['category']);
+        return view('admin.category.index', ['categories' => $categories->paginate(10)->appends($request->except(['page']))]);
     }
 
     /**
@@ -49,7 +49,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view("admin.category.edit",["category"=>$category]);
+        return view("admin.category.edit", ["category" => $category]);
     }
 
     /**

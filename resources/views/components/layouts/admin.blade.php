@@ -37,7 +37,8 @@
   <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/assets/css/plugins.min.css" />
   <link rel="stylesheet" href="/assets/css/kaiadmin.min.css" />
-
+  <!-- Flatpicker css -->
+  <link rel="stylesheet" href="{{asset("flatpicker/flatpicker.min.css")}}">
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link rel="stylesheet" href="/assets/css/demo.css" />
   <link rel="stylesheet" href="{{asset('css/admin/app.css')}}">
@@ -355,6 +356,10 @@
 
   <!-- Kaiadmin DEMO methods, don't include it in your project! -->
   <script src="/assets/js/setting-demo.js"></script>
+
+  <!-- flatpicker js -->
+  <script src="{{asset("flatpicker/flatpicker.min.js")}}"></script>
+
   <script src="/assets/js/demo.js"></script>
   {{$script}}
   <x-admin.message></x-admin.message>

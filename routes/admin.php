@@ -2,14 +2,18 @@
 
 <?php
 
-use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Admin\Auth\RegisteredAdminController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\SaleController;
+use App\Http\Controllers\Admin\Account\AdminAccountController;
+use App\Http\Controllers\Admin\Account\UserAccountController;
 use Illuminate\Support\Facades\Route;
-
-
+use App\Http\Controllers\PdfController;
+use App\Http\Controllers\Admin\SaleController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\BouncerPDFController;
+use App\Http\Controllers\Admin\Auth\RegisteredAdminController;
+use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\HomeController;
+use App\Models\User;
 
 Route::middleware("guest:admin")->prefix("/admin")->name("admin.")->group(function () {
     Route::get('/register', [RegisteredAdminController::class, 'create'])
@@ -25,9 +29,7 @@ Route::middleware("guest:admin")->prefix("/admin")->name("admin.")->group(functi
 
 
 Route::middleware("auth:admin")->prefix('/admin')->name("admin.")->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name("dashboard");
+    Route::get('/dashboard', [HomeController::class, "index"])->name("dashboard");
 
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
@@ -61,6 +63,21 @@ Route::middleware("auth:admin")->prefix('/admin')->name("admin.")->group(functio
         Route::get("/all", "index")->name("index");
         Route::post("/product/add/{sale}", "addProduct")->name("product.add");
         Route::put("/product/update/{sale}", "updateProduct")->name("product.update");
-        Route::post("/store/{sale}", [SaleController::class, "store"])->name("store");
+        Route::post("/store/{sale}", "store")->name("store");
+        Route::get("/drafts", "drafts")->name("drafts");
+        Route::delete("/destory/{sale}", "destory")->name("destory");
+    });
+
+    Route::get('generate-pdf/{sale}', [BouncerPDFController::class, 'generatePDF'])->name("bouncer");
+
+    Route::controller(AdminAccountController::class)->prefix("/account/admin")->name("account.admin.")->group(function () {
+        Route::get("/index", "index")->name("index");
+        Route::get("/create", "create")->name("create");
+        Route::post("/store", "store")->name("store");
+        Route::get("/edit/{admin}", "edit")->name("edit");
+        Route::put('/update/{admin}', "update")->name("update");
+    });
+    Route::controller(UserAccountController::class)->prefix("/account/user")->name("account.user.")->group(function () {
+        Route::get("/index", "index")->name("index");
     });
 });
