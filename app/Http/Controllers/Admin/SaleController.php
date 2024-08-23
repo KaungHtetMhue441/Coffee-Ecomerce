@@ -6,6 +6,7 @@ use PDF;
 use App\Models\Sale;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Transaction;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -61,8 +62,9 @@ class SaleController extends Controller
     public function new()
     {
         $sale = Sale::create([
-            "admin_id" => auth()->user()->id
+            "admin_id" => auth()->guard("admin")->user()->id
         ]);
+
 
         $category = Category::first();
 
@@ -105,7 +107,7 @@ class SaleController extends Controller
                 "price" => $product->price
             ]
         ]);
-        return redirect()->back()->with("success", "Product successfully added!");
+        return redirect()->back();
     }
 
     public function updateProduct(Request $request, Sale $sale)
@@ -119,7 +121,7 @@ class SaleController extends Controller
                 "price" => $product->price
             ]
         ], false);
-        return redirect()->back()->with("success", "Product successfully Updated!");
+        return redirect()->back();
     }
 
     /**
@@ -132,6 +134,12 @@ class SaleController extends Controller
             "payment_type" => $request->payment_type,
             "total_cost" => $request->total_cost,
             "status" => "complete"
+        ]);
+        Transaction::create([
+            "sale_id" => $sale->id,
+            "total_amount" => $sale->total_cost,
+            "payment_type" => $sale->payment_type,
+            "application_type" => "sale"
         ]);
         $sale->load("products");
         return redirect()->route("admin.sale.index");

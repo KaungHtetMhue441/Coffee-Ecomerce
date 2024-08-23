@@ -20,7 +20,6 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            Admin Accounts
                             <div class="inline-block float-end">
                                 <form action="{{route('admin.account.admin.index')}}" method="get">
                                     <div class="row justify-end">

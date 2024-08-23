@@ -11,7 +11,7 @@ $sale = request()['sale'];
     <x-slot name="content">
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 px-3">
                 <div class="card">
                     <div class="card-body pb-0 pt-0 mt-3" style="border-top:1px solid grey;background-color:#e3f6f5;">
                         <form action="{{route("admin.sale.product.add",request()['sale']->id)}}" id="product-add" method="POST">
@@ -23,46 +23,58 @@ $sale = request()['sale'];
                         </form>
                         <form action="{{ route('admin.sale.store',$sale->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="container text-center rounded px-1">
+                            <div class="container text-center rounded p-0">
                                 <div class="row">
-                                    <div class="col-5">
-                                        <ul class="nav nav-tabs mt-3">
+                                    <div class="col-5 px-2">
+                                        <div class="card mt-3 p-2 mb-3">
+                                            <div class="card-body p-0 pb-3 px-3">
+                                                <ul class="nav">
 
-                                            @forelse ($categories as $category )
-                                            <li class="nav-item me-3 p-0" style="border: none;">
-                                                <a href="{{route('admin.sale.create',[
-                                                    'sale'=>request()["sale"]->id,
-                                                    'category'=>$category->id
-                                                    ])}}" class="
-                                                    nav-link 
-                                                    px-4 
-                                                    fw-bolder fs-6
-                                                    @if(request()['category']->id==$category->id) 
-                                                    active 
-                                                    @endif" aria-current="page">
-                                                    {{$category->name}}
-                                                </a>
-                                            </li>
-                                            @empty
+                                                    @forelse ($categories as $category )
+                                                    <li class="nav-item me-2 p-0" style="border: none;">
+                                                        <a href="{{route('admin.sale.create',[
+                                                                'sale'=>request()["sale"]->id,
+                                                                'category'=>$category->id
+                                                                ])}}" class="
+                                                                nav-link 
+                                                                btn btn-info
+                                                                mt-3
+                                                                px-3
+                                                                fw-bolder fs-6
+                                                                @if(request()['category']->id==$category->id) 
+                                                                custom_active 
+                                                                @endif" aria-current="page">
+                                                            {{$category->name}}
+                                                        </a>
+                                                    </li>
+                                                    @empty
 
-                                            @endforelse
-                                        </ul>
+                                                    @endforelse
+                                                </ul>
+                                            </div>
+                                        </div>
 
-                                        <div class="row">
-                                            @forelse ( $products as $product)
-                                            <div class="col-3">
-                                                <div class=" rounded mt-3">
-                                                    <a href="#" class="product btn btn-sm btn-outline-success" value="{{$product->id}}" name="{{$product->name}}">
+                                        <div class="row px-3">
+                                            <div class="card px-2">
+                                                <div class="card-body p-0 pb-3 px-3">
+                                                    <div class="row">
+                                                        @forelse ( $products as $product)
+                                                        <div class="col-3 p-0">
+                                                            <div class=" rounded mt-3">
+                                                                <a href="#" style="min-width: 85px;" class="product btn btn-sm btn-outline-success" value="{{$product->id}}" name="{{$product->name}}">
 
-                                                        {{$product->name}}
+                                                                    {{$product->name}}
 
-                                                    </a>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        @empty
+
+                                                        @endforelse
+                                                    </div>
+
                                                 </div>
                                             </div>
-                                            @empty
-
-                                            @endforelse
-
                                         </div>
                                     </div>
                                     <div class="col-7 px-2 bg-white pt-2" style="border-left:1px solid grey;" class="">

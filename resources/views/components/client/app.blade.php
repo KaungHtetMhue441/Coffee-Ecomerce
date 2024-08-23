@@ -1,5 +1,5 @@
 @props([
-  "script" => ""
+"script" => ""
 ])
 <!DOCTYPE html>
 <html lang="en">
@@ -14,13 +14,11 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   <!-- End Fonts -->
 
   <!-- Fonts and icons -->
-  <script src="assets/js/plugin/webfont/webfont.min.js"></script>
+  <script src="{{asset("assets/js/plugin/webfont/webfont.min.js")}}"></script>
   <script>
     WebFont.load({
       custom: {
@@ -30,9 +28,9 @@
           "Font Awesome 5 Brands",
           "simple-line-icons",
         ],
-        urls: ["assets/css/fonts.min.css"],
+        urls: ["/assets/css/fonts.min.css"]
       },
-      active: function () {
+      active: function() {
         sessionStorage.fonts = true;
       },
     });
@@ -59,14 +57,18 @@
   </div>
 
   <!--   Core JS Files   -->
-  <script src="assets/js/core/jquery-3.7.1.min.js"></script>
-  <script src="assets/js/core/popper.min.js"></script>
-  <script src="assets/js/core/bootstrap.min.js"></script>
+  <script src="{{asset("assets/js/core/jquery-3.7.1.min.js")}}"></script>
+  <script src="{{asset("assets/js/core/popper.min.js")}}"></script>
+  <script src="{{asset("assets/js/core/bootstrap.min.js")}}"></script>
 
   <!-- jQuery Scrollbar -->
-  <script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+  <script src="{{asset("assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js")}}"></script>
 
-  <script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+  <script src="{{asset("assets/js/plugin/sweetalert/sweetalert.min.js")}}"></script>
+  <script src="{{asset("js/client/order.js")}}"></script>
+  <script type="text/javascript">
+    window.user_id = parseInt('{{auth()->user()?->id}}');
+  </script>
   {{$script}}
 </body>
 

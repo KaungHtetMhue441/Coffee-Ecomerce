@@ -1,4 +1,7 @@
 <x-guest-layout>
+    <x-slot name="title">
+        <h1 class="text-white te ">Admin Registration</h1>
+    </x-slot>
     <form method="POST" action="{{ route('admin.register') }}">
         @csrf
 
@@ -17,12 +20,12 @@
         </div>
 
         <div class="mt-4">
-        <select id="countries" name="role_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <select id="countries" name="role_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option value="">Choose role</option>
                 @forelse ( $roles as $role)
-                    <option value="{{$role->id}}">{{$role->name}}</option>
+                <option value="{{$role->id}}">{{$role->name}}</option>
                 @empty
-                    
+
                 @endforelse
             </select>
             <x-input-error :messages="$errors->get('role_id')" class="mt-2" />
@@ -32,10 +35,7 @@
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -44,9 +44,7 @@
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+            <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>

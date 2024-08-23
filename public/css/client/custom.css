@@ -5,6 +5,10 @@ body {
     background-color: #fff7f7;
 }
 
+.bg_primary {
+    background-color: #a53e30;
+}
+
 .fs-18 {
     font-size: 18px;
 }

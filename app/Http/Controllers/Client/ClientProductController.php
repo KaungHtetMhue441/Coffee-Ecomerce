@@ -23,10 +23,16 @@ class ClientProductController extends Controller
         }
 
         $categories = Category::all();
-        $products->paginate(8);
+        $products = $products->paginate(8)->appends($request->except("page"));
         return view("client.product", [
             "categories" => $categories,
-            "products" => $products->get()
+            "products" => $products
+        ]);
+    }
+    public function show(Product $product)
+    {
+        return view("client.product-detail", [
+            "product" => $product
         ]);
     }
 }

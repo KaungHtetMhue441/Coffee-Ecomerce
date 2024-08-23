@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
     <title>Laravel 11 Generate PDF Example - ItSolutionStuff.com</title>
     <style>
-        body {
-            font-family: 'Pyidaungsu' !important;
+        @font-face {
+            font-family: 'Pyidaungsu';
+            src: url("{{public_path('fonts/Pyidaungsu-1.8.3_Regular.ttf')}}") format('truetype');
+            /* font-weight: normal;
+            font-style: normal; */
+        }
+
+        /* body {
+            font-family: 'Pyidaungsu', sans-serif;
             font-weight: normal;
             font-style: normal;
-        }
+        } */
 
         table {
             width: 100%;
@@ -36,6 +44,7 @@
 <body>
     <h3 style="text-align: center;">{{ $title }}</h3>
     <p>{{ $date }}</p>
+    ကောင်းထက်
     <p>Yaongon-Mandalay Road,Thandaung Stree conor,Taungoo</p>
     <p> Open Daily : 8:00AM To 8:00PM</p>
     <p class="text-left">CasherID.{{auth()->guard("admin")->user()->name}}</p>

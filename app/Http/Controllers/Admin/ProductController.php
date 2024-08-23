@@ -16,17 +16,20 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $products = Product::query();
+
         if ($request['name']) {
             $products->where("name", 'like', '%' . $request['name'] . '%')
                 ->orWhere("en_name", 'like', '%' . $request['name'] . '%');
         }
+
         if ($request['caategory']) {
             $products->whereHas("categories", function (Builder $query) use ($request) {
                 $query->where("name", 'like', '%' . $request['name'] . '%');
             });
         }
+
         return view('admin.product.index', [
-            "products" => $products->paginate(10)->appends($request->except(['page']))
+            "products" => $products->orderBy("id", "DESC")->paginate(10)->appends($request->except(['page']))
         ]);
     }
 
@@ -46,6 +49,10 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            "name" => "required|string|min:3"
+        ]);
         $file = $request->file("file");
         $request['image'] = uploadFile($file, "/products/");
 

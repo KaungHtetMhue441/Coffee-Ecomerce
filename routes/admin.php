@@ -2,18 +2,20 @@
 
 <?php
 
-use App\Http\Controllers\Admin\Account\AdminAccountController;
-use App\Http\Controllers\Admin\Account\UserAccountController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\SaleController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\BouncerPDFController;
+use App\Http\Controllers\Admin\VouncherPDFController;
+use App\Http\Controllers\Admin\Account\UserAccountController;
+use App\Http\Controllers\Admin\Account\AdminAccountController;
 use App\Http\Controllers\Admin\Auth\RegisteredAdminController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Admin\HomeController;
-use App\Models\User;
 
 Route::middleware("guest:admin")->prefix("/admin")->name("admin.")->group(function () {
     Route::get('/register', [RegisteredAdminController::class, 'create'])
@@ -68,7 +70,7 @@ Route::middleware("auth:admin")->prefix('/admin')->name("admin.")->group(functio
         Route::delete("/destory/{sale}", "destory")->name("destory");
     });
 
-    Route::get('generate-pdf/{sale}', [BouncerPDFController::class, 'generatePDF'])->name("bouncer");
+    Route::get('generate-pdf/{sale}', [VouncherPDFController::class, 'generatePDF'])->name("bouncer");
 
     Route::controller(AdminAccountController::class)->prefix("/account/admin")->name("account.admin.")->group(function () {
         Route::get("/index", "index")->name("index");
@@ -80,4 +82,13 @@ Route::middleware("auth:admin")->prefix('/admin')->name("admin.")->group(functio
     Route::controller(UserAccountController::class)->prefix("/account/user")->name("account.user.")->group(function () {
         Route::get("/index", "index")->name("index");
     });
+
+    Route::controller(OrderController::class)->prefix("/order")->name("order.")->group(function () {
+        Route::get("index/{type?}", "index")->name("index");
+        Route::get("approve/{order}", "approve")->name("approve");
+        Route::get("complete/{order}", "complete")->name("complete");
+
+        Route::get("show/{order}", "show")->name("show");
+    });
 });
+Route::get('generate-order-pdf/{order}', [VouncherPDFController::class, 'generateOrderPDF'])->name("admin.order.vouncer");

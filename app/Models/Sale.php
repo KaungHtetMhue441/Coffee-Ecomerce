@@ -24,4 +24,8 @@ class Sale extends Model
     {
         return $this->belongsTo(Admin::class);
     }
+    public function transactions()
+    {
+        return $this->hasOne(Transaction::class);
+    }
 }

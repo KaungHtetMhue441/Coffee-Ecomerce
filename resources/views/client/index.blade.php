@@ -1,18 +1,18 @@
 @php
-    $menus = [
-        "Latest Menu",
-        "Upcoming Menu",
-        "Trending Menu"
-    ]
+$menus = [
+"Latest Menu",
+"Upcoming Menu",
+"Trending Menu"
+]
 @endphp
 <x-client.app>
     <x-slot name="title">
         Home
     </x-slot>
     <x-slot name="content">
-        <div class="row my-5 pb-3">
-            <div class="col-6 text-justify mt-5">
-                <h1 class="text_primary pb-2 text_shadow_primary roboto-medium-italic">Kaung Coffee Shop</h1>
+        <div class="row my-5 pb-3 pt-3 pb-5">
+            <div class="col-6 text-justify my-5 ">
+                <h1 class="text_primary pb-2 text_shadow_primary roboto-medium-italic">Coffee House Shop</h1>
                 <p class="text-pretty text_primary_soft text_justify">
                     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum, voluptatum dolorum eum doloribus
                     eveniet ullam inventore cupiditate illum ipsa laudantium, id neque impedit. Consequuntur vero
@@ -21,8 +21,7 @@
                 <a href="" class="btn btn_primary">See Menus</a>
             </div>
             <div class="col-6">
-                <div id="carouselExampleRide" class="carousel slide shadow rounded p-4" data-bs-ride="carousel"
-                    data-bs-interval="1000">
+                <div id="carouselExampleRide" class="carousel slide shadow rounded p-4" data-bs-ride="carousel" data-bs-interval="1000">
                     <div class="carousel-inner rounded h-100" data-bs-interval="0">
                         <div class="carousel-item active">
                             <img src="{{asset("images/coffee1.jpg")}}" class="d-block w-100" width="" alt="...">
@@ -34,13 +33,11 @@
                             <img src="{{asset("images/coffee1.jpg")}}" class="d-block w-100" width="" alt="...">
                         </div>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide"
-                        data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide"
-                        data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>

@@ -22,7 +22,7 @@ class Product extends Model
 
     public function GetshortDescAttribute()
     {
-        return Str::words($this->description, 10, '...');
+        return Str::words($this->description, 5, '...');
     }
 
     public function category()

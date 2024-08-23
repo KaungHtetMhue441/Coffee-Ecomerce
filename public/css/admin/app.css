@@ -6,3 +6,7 @@
     height: 50px;
     /* border-radius: 50%; */
 }
+
+.custom_active {
+    background-color: rgb(255, 81, 96) !important;
+}

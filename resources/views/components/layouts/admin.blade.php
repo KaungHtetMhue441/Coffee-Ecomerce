@@ -3,6 +3,7 @@
 'script' => '',
 'user'=>auth()->guard("admin")->user()
 ])
+
 <!DOCTYPE html>
 <html lang="en">
 
