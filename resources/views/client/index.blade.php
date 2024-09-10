@@ -18,7 +18,7 @@ $menus = [
                     eveniet ullam inventore cupiditate illum ipsa laudantium, id neque impedit. Consequuntur vero
                     laboriosam iusto officia, fugiat <voluptatibus class="lo"></voluptatibus>
                 </p>
-                <a href="" class="btn btn_primary">See Menus</a>
+                <a href="{{route("client.product")}}" class="btn btn_primary">See Menus</a>
             </div>
             <div class="col-12 col-md-6 shadow">
                 <div id="carouselExampleRide" class="carousel slide  rounded p-0 p-md-4 pt-3 px-3" data-bs-ride="carousel" data-bs-interval="1000">

@@ -1,9 +1,11 @@
 @php
 $breadCrumbs = ['Order','Uncomplete Orders'];
+$breadCrumbs[1] = Str::ucfirst(request()["type"])." Order";
+
 @endphp
 <x-layouts.admin>
     <x-slot name="header">
-        Uncomplete Orders
+        {{Str::ucfirst(request()["type"])}} Orders
     </x-slot>
 
     <x-slot name="script">
