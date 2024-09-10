@@ -353,7 +353,7 @@
   <script src="/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
 
   <!-- Kaiadmin JS -->
-  <script src="/assets/js/kaiadmin.min.js"></script>
+  <script src="/assets/js/kaiadmin.js"></script>
 
   <!-- Kaiadmin DEMO methods, don't include it in your project! -->
   <script src="/assets/js/setting-demo.js"></script>

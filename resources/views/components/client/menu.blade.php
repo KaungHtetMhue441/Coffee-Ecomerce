@@ -2,8 +2,26 @@
 "product" => "",
 "menuCount" => 3
 ])
-<div class="col-12 col-lg-{{$menuCount}} mb-3">
-    <div class="card h-100 shadow p-2" style="width: 17rem;">
+<div class="col">
+    <div class="card p-2">
+        <img src="{{$product->image_url}}" class="card-img-top shadow rounded card_image" alt="...">
+        <div class="card-body text-center px-1">
+            <h6 class="card-title">{{$product->name}}</h6>
+            <p class="card-text">{{$product->short_desc}}</p>
+            <div class="d-flex justify-content-center mt-2 mb-2">
+                <span>{{$product->price}} kyats</span>
+            </div>
+            <div class="d-flex justify-content-between">
+                <a href="{{route("client.product.show",$product->id)}}" class="btn btn-outline-info">See Details</a>
+                <a class="btn btn-outline-success" onclick="addToCard('{{$product->id}}')">
+                    <i class="fas fa-cart-plus"></i> Add
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="col-12 col-lg-{{$menuCount}} mb-3">
+    <div class="card h-100 shadow p-2">
         <img src="{{$product->image_url}}" class="card-img-top shadow rounded card_image" alt="...">
         <div class="card-body">
             <h5 class="card-title">{{$product->name}}</h5>
@@ -20,4 +38,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

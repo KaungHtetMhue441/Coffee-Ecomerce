@@ -136,7 +136,7 @@
                         <td>${product.name} </td>
                         <td><input type="number" class="quantity${product.id}" style="width:50px" value="${product.quantity}" disabled/>    </td>
                         <td> ${product.price}  </td>
-                        <td> $<span class="total_price" id="total_price${product.id}">${(product.price * product.quantity)}</span>  </td>
+                        <td> <span class="total_price" id="total_price${product.id}">${(product.price * product.quantity)} kyats</span>  </td>
                         </tr>
                         `;
                     $('#cart-table tbody').append(newRow);
@@ -145,7 +145,7 @@
                 let tFoot = `
                         <tr>
                         <td colspan="3">Total Amount : </td>
-                        <td><span id="total_amount">$${total_amount}</span></td>
+                        <td><span id="total_amount">${total_amount}</span> Kyats</td>
                         </tr>
                     `;
                 $('#cart-table tfoot').append(tFoot);
@@ -163,7 +163,7 @@
                                     <img src="${product.image}" class="card-img-top rounded card_image" alt="...">
                                             <div class="card-body">
                                                 <h5 class="card-title fs-6 mt-3">${product.name}</h5>
-                                                <p class="card-text fs-6">Price - $${product.price}</p>
+                                                <p class="card-text fs-6">Price - ${product.price} Kyats</p>
                                                 <p class="card-text mb-5 fs-6">${product.desc}</p>
                                                 <div class="position-absolute w-100 px-2 " style="bottom: 20px;left: 0px; z-index:2;">
                                                     <div class="d-flex justify-content-between">

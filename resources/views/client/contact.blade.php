@@ -5,11 +5,8 @@
     <x-slot name="content">
         <div class="row pt-3 py-5">
             <h4 class="text_primary text-center mb-3 fw-bolder">Contact Us</h4>
-            <div class="col-12 shadow">
-                <gmp-map center="43.4142989,-124.2301242" zoom="4" map-id="DEMO_MAP_ID" style="height: 400px">
-                    <gmp-advanced-marker position="37.4220656,-122.0840897" title="Mountain View, CA"></gmp-advanced-marker>
-                    <gmp-advanced-marker position="47.648994,-122.3503845" title="Seattle, WA"></gmp-advanced-marker>
-                </gmp-map>
+            <div class="col-9 shadow m-auto">
+                <iframe wid src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60382.39122830435!2d96.40000664754244!3d18.935844203130245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c5d8555974337d%3A0xe80203355a75298!2sTaungoo!5e0!3m2!1sen!2smm!4v1725956344640!5m2!1sen!2smm" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div class="row justify-content-center pt-5">
                 <div class="col-3">

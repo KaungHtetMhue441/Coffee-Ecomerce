@@ -19,6 +19,7 @@ class SaleController extends Controller
      */
     public function index(Request $request)
     {
+        // dd($request->all());
         $sales = Sale::with("admin")->where("status", "complete");
         if ($request["customer_name"]) {
             $sales->where("customer", "like", "%" . $request["customer_name"] . "%");
@@ -35,12 +36,12 @@ class SaleController extends Controller
         if ($request["total_cost"]) {
             $sales->where("total_cost", ">=", $request['total_cost']);
         }
-        if ($request["form"]) {
+        if ($request["from"]) {
             $sales->whereDate("created_at", ">=", $request["from"]);
         }
-        if ($request["to"]) {
-            $sales->whereDate("created_at", "<=", $request["to"]);
-        }
+        // if ($request["to"]) {
+        //     $sales->whereDate("created_at", "<=", $request["to"]);
+        // }
 
         $sales  = $sales->orderby("created_at", "DESC")->paginate(10)->appends($request->inputs);
 

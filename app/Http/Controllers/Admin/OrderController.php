@@ -42,7 +42,7 @@ class OrderController extends Controller
     public function approve(Order $order)
     {
         $order->update([
-            "admin_id" => auth()->guard("admin")->user()->name,
+            "admin_id" => auth()->guard("admin")->user()->id,
             "status" => OrderStatus::PAID
         ]);
         return redirect()->back()->with("success", "Successfullly Approved");
@@ -54,6 +54,20 @@ class OrderController extends Controller
             "status" => OrderStatus::COMPLETED
         ]);
         return redirect()->back()->with("success", "Successfullly Completed");
+    }
+
+    public function getMostBuyCustomer()
+    {
+
+        $orders = Order::with('user')->join("users", 'orders.user_id', '=', 'users.id')
+            ->groupBy("users.id")
+            ->selectRaw("
+        users.id as user_id,sum(orders.total_amount) as total")
+            ->orderby("total")
+            ->take(10)
+            ->get();
+        // dd($users);
+        return view("admin.order.most-buy-customer", ["orders" => $orders]);
     }
 
     /**

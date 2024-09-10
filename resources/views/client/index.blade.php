@@ -10,8 +10,8 @@ $menus = [
         Home
     </x-slot>
     <x-slot name="content">
-        <div class="row my-5 pb-3 pt-3 pb-5">
-            <div class="col-6 text-justify my-5 ">
+        <div class="row my-md-5 pb-3 pt-3 pb-5 px-3">
+            <div class="col-12 col-md-6 text-justify my-md-5 mb-3 pb-3 pt-3">
                 <h1 class="text_primary pb-2 text_shadow_primary roboto-medium-italic">Coffee House Shop</h1>
                 <p class="text-pretty text_primary_soft text_justify">
                     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum, voluptatum dolorum eum doloribus
@@ -20,8 +20,8 @@ $menus = [
                 </p>
                 <a href="" class="btn btn_primary">See Menus</a>
             </div>
-            <div class="col-6">
-                <div id="carouselExampleRide" class="carousel slide shadow rounded p-4" data-bs-ride="carousel" data-bs-interval="1000">
+            <div class="col-12 col-md-6 shadow">
+                <div id="carouselExampleRide" class="carousel slide  rounded p-0 p-md-4 pt-3 px-3" data-bs-ride="carousel" data-bs-interval="1000">
                     <div class="carousel-inner rounded h-100" data-bs-interval="0">
                         <div class="carousel-item active">
                             <img src="{{asset("images/coffee1.jpg")}}" class="d-block w-100" width="" alt="...">

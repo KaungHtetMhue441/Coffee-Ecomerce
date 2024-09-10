@@ -7,42 +7,107 @@ $menuTitle="Menus For ".$category->name."";
 }
 @endphp
 <x-client.app>
+
     <x-slot name="title">
         Menus
     </x-slot>
     <x-slot name="content">
-        <div class="d-flex mt-3 pt-3 rounded shadow justify-content-start" style="background-color: white;">
-            @foreach ($categories as $category)
-            @php
-            if(request()['category_id']==$category->id)
-            $categoryName="Menu for ".$category->name;
-            @endphp
-            <div class=" ms-3" style="min-width: 100px;">
-                <a class="w-100 btn btn_primary text-center  
-                    @if(request()['category_id']==$category->id) k_active
-                    @endif mb-3" href="{{route("client.product")}}?category_id={{$category->id}}">{{$category->name}}</a>
-            </div>
+        <style>
+            .badge {
+                top: 10px;
+                left: 10px;
+            }
 
-            @endforeach
-        </div>
+            .card {
+                position: relative;
+            }
 
-        <div class="row bg-white mt-3 px-0">
-            <div class="d-flex justify-content-between px-5 pt-3 mb-3">
-                <h4>{{$menuTitle}}</h4>
-                <h4>Total - {{$products->count()}}</h4>
+            .card img {
+                height: 180px;
+                object-fit: cover;
+            }
+        </style>
 
-            </div>
-            <hr>
-            @forelse ($products as $product)
-            <x-client.menu :product="$product" manuCount=""></x-client.menu>
-        @empty
-            <h4>Nothing to Show</h4>
-            @endforelse
+        <div class="container-fluid mt-4">
             <div class="row">
-                {{$products->links()}}
+                <!-- Sidebar for Categories -->
+                <div class="col-12 col-md-3 mb-3">
+                    <div class="card border-0 p-1">
+                        <div class="card-header border-0">
+                            <div class="card-title">
+                                <h5>Categories</h5>
+                            </div>
+                        </div>
+                        <div class="card-body px-0">
+                            <ul class="list-group">
+                                @foreach ($categories as $category)
+                                @php
+                                if(request()['category_id']==$category->id)
+                                $categoryName="Menu for ".$category->name;
+                                @endphp
+                                <a class="nav-link w-100" href="{{route("client.product")}}?category_id={{$category->id}}">
+                                    <li class="list-group-item  d-flex justify-content-between align-items-center  @if(request()['category_id']==$category->id) k_active @endif">
+                                        {{$category->name}}
+                                        <i class="fas fa-chevron-right"></i>
+                                    </li>
+                                </a>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="col-12 col-md-9">
+                    <!-- <div class="d-flex justify-content-between"> -->
+                    <h4 class="text-center title p-2 shadow">{{$menuTitle}}</h4>
+                    <!-- </div> -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <form action="{{request()->fullUrl()}}" method="get" class="w-100">
+                            <div class="d-flex w-100 flex-wrap justify-content-md-end">
+                                <div class="col-12 mb-3 mb-md-0 col-md-6 d-flex justify-content-md-start justify-content-between">
+                                    <input type="text" placeholder="...search" class="form-control me-3" style="width: 200px;" name="search" value="{{old("search")}}">
+                                    <button type="submit" class="btn btn-info">Search</button>
+                                </div>
+                                <div class=" col-12 col-md-6 d-flex justify-content-between justify-content-md-end">
+                                    <input type="hidden" name="category_id" value="{{request()['category_id']}}">
+                                    <select class="form-select w-auto me-2 float-end search-form" name="items" aria-label="Show number of products">
+                                        <option selected value="">Show: 50</option>
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                    <select class="form-select search-form w-auto float-endxx" aria-label="Sort by" name="sort_by">
+                                        <option selected value="">Sort by: Featured</option>
+                                        <option value="price">Price</option>
+                                        <option value="rating">Rating</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <!-- Product Grid -->
+                    <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 g-4">
+                        <!-- Example Product Card -->
+                        @forelse ($products as $product)
+                        <x-client.menu :product="$product" manuCount=""></x-client.menu>
+                        @empty
+                        @endforelse
+                    </div>
+                    <div class="row mt-3">
+                        {{$products->links()}}
+                    </div>
+                </div>
             </div>
-
         </div>
-
+    </x-slot>
+    <x-slot name="script">
+        <script>
+            $(".search-form").on("change", function() {
+                $(this).closest("form").submit();
+            })
+        </script>
     </x-slot>
 </x-client.app>

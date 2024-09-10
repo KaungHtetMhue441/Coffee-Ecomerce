@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\Account\UserAccountController;
 use App\Http\Controllers\Admin\Account\AdminAccountController;
 use App\Http\Controllers\Admin\Auth\RegisteredAdminController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\Report\ReportController;
 
 Route::middleware("guest:admin")->prefix("/admin")->name("admin.")->group(function () {
     Route::get('/register', [RegisteredAdminController::class, 'create'])
@@ -90,5 +91,8 @@ Route::middleware("auth:admin")->prefix('/admin')->name("admin.")->group(functio
 
         Route::get("show/{order}", "show")->name("show");
     });
+
+Route::get("report/budget", [ReportController::class, "index"])->name("report.budget");
 });
 Route::get('generate-order-pdf/{order}', [VouncherPDFController::class, 'generateOrderPDF'])->name("admin.order.vouncer");
+Route::get("most-buy-customer", [OrderController::class, 'getMostBuyCustomer'])->name("users.most.buy");

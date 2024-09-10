@@ -44,9 +44,6 @@ Route::controller(StripePaymentController::class)->prefix("order-stripe-checkout
     Route::get('cancel', 'showCancel')->name('cancel');
 });
 
-Route::get("test", function () {
-    $transaction = Transaction::with(["order", "sale"])->get();
-    dd($transaction);
-});
+
 
 // Route::post('stripe/webhook', [PaymentController::class, 'handleWebhook']);

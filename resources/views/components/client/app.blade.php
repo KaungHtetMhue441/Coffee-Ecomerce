@@ -50,10 +50,65 @@
     <x-client.nav.nav>
 
     </x-client.nav.nav>
-    <div class="container-fluid" style="padding:0px 80px;">
+    <div class="container-fluid px-md-5">
       {{$content}}
 
     </div>
+  <footer class="bg-dark text-light py-5 mt-5">
+      <div class="container">
+        <div class="row">
+          <!-- About Us Section -->
+          <div class="col-md-4">
+            <h5 class="text-uppercase mb-4">About Us</h5>
+            <p>
+              We are a leading coffee shop with a passion for serving quality coffee and snacks. Visit us to experience the best in town.
+            </p>
+            <p>
+              <i class="fas fa-map-marker-alt me-2"></i> 123 Coffee Street, Myanmar
+            </p>
+          </div>
+
+          <!-- Quick Links Section -->
+          <div class="col-md-4">
+            <h5 class="text-uppercase mb-4">Quick Links</h5>
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-light">Home</a></li>
+              <li><a href="#" class="text-light">Shop</a></li>
+              <li><a href="#" class="text-light">About Us</a></li>
+              <li><a href="#" class="text-light">Contact</a></li>
+            </ul>
+          </div>
+
+          <!-- Social Media & Contact Section -->
+          <div class="col-md-4">
+            <h5 class="text-uppercase mb-4">Follow Us</h5>
+            <a href="#" class="text-light me-3 hvr-float-shadow">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="text-light me-3 hvr-float-shadow">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="text-light me-3 hvr-float-shadow">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="text-light me-3 hvr-float-shadow">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+
+            <h5 class="text-uppercase mt-4">Contact Us</h5>
+            <p><i class="fas fa-envelope me-2"></i> info@coffeeshop.com</p>
+            <p><i class="fas fa-phone me-2"></i> +95 123-456-789</p>
+          </div>
+        </div>
+        <hr class="my-4">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p>&copy; {{ date('Y') }} Coffee Shop. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
   </div>
 
   <!--   Core JS Files   -->
