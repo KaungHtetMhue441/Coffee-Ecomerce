@@ -14,9 +14,8 @@ $menus = [
             <div class="col-12 col-md-6 text-justify my-md-5 mb-3 pb-3 pt-3">
                 <h1 class="text_primary pb-2 text_shadow_primary roboto-medium-italic">Coffee House Shop</h1>
                 <p class="text-pretty text_primary_soft text_justify">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum, voluptatum dolorum eum doloribus
-                    eveniet ullam inventore cupiditate illum ipsa laudantium, id neque impedit. Consequuntur vero
-                    laboriosam iusto officia, fugiat <voluptatibus class="lo"></voluptatibus>
+                    Our baristas craft each cup with passion, ensuring the perfect blend of flavors in every sip. From classic espresso to specialty lattes, we cater to every taste.
+                    Join us for a cup of coffee, and let’s make every moment a little warmer, one brew at a time.<voluptatibus class="lo"></voluptatibus>
                 </p>
                 <a href="{{route("client.product")}}" class="btn btn_primary">See Menus</a>
             </div>

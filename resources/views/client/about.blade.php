@@ -10,9 +10,9 @@
             <div class="col-12 p-3 col-md-6 ">
                 <h4 class="fw-bolder text_primary text-center mb-3">About Cofee House</h4>
                 <p class="text-justify" style="text-align: justify;">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia doloremque voluptates optio dicta rerum atque enim! Expedita, voluptates illo? Necessitatibus aperiam a quia error harum voluptatum, ex recusandae voluptates alias.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque quibusdam beatae soluta qui velit reprehenderit. Nulla neque quas porro, accusamus voluptate quam hic ratione blanditiis architecto sapiente culpa, dolorem incidunt.Lorem
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni quis amet, sapiente, neque, consequuntur quaerat vel sed saepe recusandae necessitatibus quas facere? Quos labore quia amet veritatis soluta totam est.
+                    At Coffee Shop Ecommerce, we believe coffee is more than just a drink—it’s an experience. Whether you're here for your daily caffeine boost or looking for a cozy spot to relax, our carefully curated selection of artisan brews and fresh pastries is sure to delight. Our baristas craft each cup with passion, ensuring the perfect blend of flavors in every sip. From classic espresso to specialty lattes, we cater to every taste.
+
+                    “Join us for a cup of coffee, and let’s make every moment a little warmer, one brew at a time.”
                 </p>
             </div>
         </div>
