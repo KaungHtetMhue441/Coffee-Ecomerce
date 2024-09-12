@@ -51,8 +51,15 @@ class ProductController extends Controller
     {
 
         $request->validate([
-            "name" => "required|string|min:3"
+            'name' => 'required|string|max:255',
+            'en_name' => 'required|string|max:255',
+            'code' => 'required|string|max:50|unique:products,code',
+            'category_id' => 'required|exists:categories,id',
+            'price' => 'required|numeric|min:0',
+            'description' => 'required|string|max:1000',
+            'file' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048', // validate file
         ]);
+
         $file = $request->file("file");
         $request['image'] = uploadFile($file, "/products/");
 
@@ -87,6 +94,15 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'en_name' => 'required|string|max:255',
+            'code' => 'required|string|max:50',
+            'category_id' => 'required|exists:categories,id',
+            'price' => 'required|numeric|min:0',
+            'description' => 'required|string|max:1000',
+        ]);
+
         if ($request->hasFile("file")) {
             $file = $request->file("file");
             $request['image'] = uploadFile($file, "/products/");

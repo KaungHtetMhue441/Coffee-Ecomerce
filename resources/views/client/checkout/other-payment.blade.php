@@ -7,6 +7,7 @@
     </x-slot>
     <x-slot name="content">
         <div class="row mt-3 pt-3 rounded shadow justify-content-start" style="background-color: white;">
+
             <h4 class="text-center text_primary">Order List</h4>
         </div>
 
@@ -70,6 +71,7 @@
                             </div>
 
                             <div class="mb-2">
+                                <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
                                 <button class="btn btn-success float-end" type="submit">Order Products</button>
                             </div>
 

@@ -4,5 +4,3 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 import swal from 'sweetalert';
 window.swal = swal;
 const flatpickr = require("flatpickr")
-
-console.log("hello");

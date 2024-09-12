@@ -1,9 +1,9 @@
 @php
-$breadCrumbs = ['Product','all'];
+$breadCrumbs = ['Menu','all'];
 @endphp
 <x-layouts.admin>
   <x-slot name="header">
-    All Products
+    All Menus
   </x-slot>
 
   <x-slot name="script">
@@ -24,7 +24,7 @@ $breadCrumbs = ['Product','all'];
                   <form action="{{route('admin.product.index')}}" method="get">
                     <div class="d-flex justify-end">
                       <input type="text" value="{{request()->get('category')}}" name="category" class="form-control me-3" placeholder="Enter Category Name"></input>
-                      <input type="text" value="{{request()->get('name')}}" name="name" class="form-control me-3" placeholder="Product Name">
+                      <input type="text" value="{{request()->get('name')}}" name="name" class="form-control me-3" placeholder="Menu Name">
                       <button type="submit" class="btn btn-primary  float-end">Search</button>
                     </div>
                   </form>

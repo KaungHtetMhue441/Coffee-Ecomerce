@@ -61,6 +61,17 @@
                             </tfoot>
                         </table>
                     </div>
+
+                </div>
+            </div>
+            <div class="card mt-3">
+                <div class="card-header">
+                    Comment:
+                </div>
+                <div class="card-body">
+                    <p>
+                        {{$order->comment->description}}
+                    </p>
                 </div>
             </div>
         </div>

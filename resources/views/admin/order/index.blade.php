@@ -23,7 +23,7 @@ $breadCrumbs[1] = Str::ucfirst(request()["type"])." Order";
                             <div class="card-title">
                                 <!-- All Sales -->
                                 <div class="inline-block float-end">
-                                    <form action="{{route('admin.sale.index')}}" method="get">
+                                    <form action="{{route('admin.order.index',request()["type"])}}" method="get">
                                         <div class="row pt-2">
                                             <div class="col-4 mb-3">
                                                 <input type="text" value="{{request()->get('customer_name')}}" name="customer_name" class="form-control me-3" placeholder="Enter Customer Name">
@@ -42,12 +42,12 @@ $breadCrumbs[1] = Str::ucfirst(request()["type"])." Order";
                                                 <input type="text" value="{{request()->get('payment_type')}}" name="payment_type" class="form-control me-3" placeholder="Enter Payment Type.."></input>
                                             </div>
                                             <div class="col-4">
-                                                <input type="text" value="{{request()->get('total_amount')}}" name="total_amount" class="form-control me-3" placeholder="Enter Total Amount"></input>
+                                                <input type="number" value="{{request()->get('total_amount')}}" name="total_amount" class="form-control me-3" placeholder="Enter Total Amount"></input>
                                             </div>
                                             <div class="col-12 mt-3">
                                                 <div class="d-flex justify-content-end">
                                                     <button type="submit" class="btn btn-primary me-3">Search</button>
-                                                    <a class="btn btn-dark text-white" href="{{route("admin.sale.index")}}">Reset</a>
+                                                    <a class="btn btn-dark text-white" href="{{route("admin.order.index",request()["type"])}}">Reset</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -66,7 +66,7 @@ $breadCrumbs[1] = Str::ucfirst(request()["type"])." Order";
                                             <th>Total Amount</th>
                                             <th>Admin</th>
                                             <th>Status</th>
-                                            <th>created</th>
+                                            <th>Order Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -80,7 +80,7 @@ $breadCrumbs[1] = Str::ucfirst(request()["type"])." Order";
                                                 </a>
                                             </td>
                                             <td>{{$order->total_amount}} Kyats</td>
-                                            <td>{{$order->admin?->npame}}</td>
+                                            <td>{{$order->admin?->name}}</td>
                                             <td>{{$order->status}}</td>
                                             <td style="width: 140px;">{!!$order->order_date?->format("Y-m-d")."
                                                 <br>(".$order->order_date?->diffForHumans().")"!!}
@@ -88,7 +88,7 @@ $breadCrumbs[1] = Str::ucfirst(request()["type"])." Order";
                                             <td style="width: 250px;">
                                                 @if($status=="pending")
 
-                                                <a href="{{route("admin.order.show",$order->id)}}" class=" btn btn-outline-info btn-sm me-1 px-1 py-1">
+                                                <a href="{{route("admin.order.reject",$order->id)}}" class=" btn btn-outline-info btn-sm me-1 px-1 py-1">
                                                     <!-- <i class="fa fa-eye fa-lg text-block"></i> -->
                                                     reject
                                                 </a>

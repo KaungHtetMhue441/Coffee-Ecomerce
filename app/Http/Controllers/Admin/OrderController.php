@@ -16,14 +16,36 @@ class OrderController extends Controller
     {
 
         $orders = Order::query();
+        if ($request["customer_name"]) {
+            $orders->where("customer", "like", "%" . $request["customer_name"] . "%");
+        }
+
+        if ($request["admin_name"]) {
+            $orders->whereHas("admin", function ($query) use ($request) {
+                $query->where("name", "like", "%" . $request['admin_name'] . "%");
+            });
+        }
+        if ($request["payment_type"]) {
+            $orders->where("payment_type", "like", "%" . $request["payment_type"] . "%");
+        }
+        if ($request["total_amount"]) {
+            $orders->where("total_amount", "=", $request['total_amount']);
+        }
         if ($request["type"]) {
             $orders->where("status", $request["type"]);
+        }
+        if ($request["from"]) {
+            $orders->whereDate("order_date", ">=", $request["from"]);
+        }
+        if ($request["to"]) {
+            $orders->whereDate("order_date", "<=", $request["to"]);
         }
         if ($request['username']) {
             $orders->whereHas("user", function ($query) use ($request) {
                 $query->where("name", "like", "%" . $request['username'] . "%");
             });
         }
+
 
         $orders = $orders->orderby("order_date", "DESC")->paginate(10)->appends($request->all());
         $totalPrice = $orders->reduce(function ($carry, $order) {
@@ -46,6 +68,27 @@ class OrderController extends Controller
             "status" => OrderStatus::PAID
         ]);
         return redirect()->back()->with("success", "Successfullly Approved");
+    }
+
+    public function showRejectPage(Order $order)
+    {
+        return view("admin.order.reject", [
+            'order' => $order
+        ]);
+    }
+    public function reject(Request $request, Order $order)
+    {
+        $request->validate([
+            "description" => "required|string"
+        ]);
+        $order->update([
+            "admin_id" => auth()->guard("admin")->user()->id,
+            "status" => OrderStatus::REJECTED
+        ]);
+        $order->comment()->create([
+            "description" => $request->description
+        ]);
+        return redirect()->route("admin.order.index", ["type" => "pending"])->with("success", "Successfullly Reject");
     }
     public function complete(Order $order)
     {

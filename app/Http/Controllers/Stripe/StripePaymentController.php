@@ -91,7 +91,7 @@ class StripePaymentController extends Controller
             if ($session->payment_status === 'paid') {
 
                 $order->status = OrderStatus::PAID;
-                $order->order_date = Carbon::now();
+                // $order->order_date = Carbon::now();
                 $order->payment_type = $cardBrand;
                 Transaction::create([
                     "order_id" => $order->id,

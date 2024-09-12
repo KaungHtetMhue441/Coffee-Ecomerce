@@ -235,7 +235,7 @@
                     let total_price = parseInt($(this).html());
                     total_amount += total_price;
                 });
-                $("#total_amount").html("$" + total_amount);
+                $("#total_amount").html(total_amount);
 
                 updateProductInCart({
                     id: id,

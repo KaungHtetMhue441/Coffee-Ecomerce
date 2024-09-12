@@ -21,7 +21,7 @@ class RegisteredAdminController extends Controller
      */
     public function create(): View
     {
-        return view('admin.auth.register',["roles"=>Role::all()]);
+        return view('admin.auth.register', ["roles" => Role::all()]);
     }
 
     /**
@@ -33,8 +33,14 @@ class RegisteredAdminController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255',
-            'unique:'.Admin::class],
+            'email' => [
+                'required',
+                'string',
+                'lowercase',
+                'email',
+                'max:255',
+                'unique:' . Admin::class
+            ],
             'role_id' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -42,7 +48,7 @@ class RegisteredAdminController extends Controller
         $admin = Admin::create([
             'name' => $request->name,
             'email' => $request->email,
-            'role_id'=>$request->role_id,
+            'role_id' => $request->role_id,
             'password' => Hash::make($request->password),
         ]);
 
@@ -50,6 +56,17 @@ class RegisteredAdminController extends Controller
 
         Auth::guard("admin")->login($admin);
 
-        return redirect(route('admin.dashboard', absolute: false));
+        if ($admin->role->name == "admin") {
+            $url = route('admin.dashboard', absolute: false);
+        }
+        if ($admin->role->name == "staff") {
+            $url = route("admin.order.index", "pending");
+        }
+        if ($admin->role->anme = "cashier") {
+            $url = route("admin.sale.index");
+        }
+
+
+        return redirect($url);
     }
 }

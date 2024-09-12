@@ -39,9 +39,9 @@ class SaleController extends Controller
         if ($request["from"]) {
             $sales->whereDate("created_at", ">=", $request["from"]);
         }
-        // if ($request["to"]) {
-        //     $sales->whereDate("created_at", "<=", $request["to"]);
-        // }
+        if ($request["to"]) {
+            $sales->whereDate("created_at", "<=", $request["to"]);
+        }
 
         $sales  = $sales->orderby("created_at", "DESC")->paginate(10)->appends($request->inputs);
 

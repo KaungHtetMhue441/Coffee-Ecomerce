@@ -8,6 +8,7 @@ class OrderStatus
     const PAID = 'paid';
     const COMPLETED = 'completed';
     const CANCELLED = 'cancelled';
+    const REJECTED = 'rejected';
 
     public static function getValues()
     {
@@ -16,6 +17,7 @@ class OrderStatus
             self::PAID,
             self::COMPLETED,
             self::CANCELLED,
+            self::REJECTED
         ];
     }
 }

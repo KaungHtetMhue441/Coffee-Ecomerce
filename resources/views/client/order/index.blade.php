@@ -65,7 +65,7 @@
                                 </a>
                                 @elseif($type=="pending")
 
-                                @else
+                                @elseir($type=='completed')
 
                                 <a class="btn btn-outline-success py-1 btn-sm" href="{{route("admin.order.vouncer",$order->id)}}">
                                     <i class="fa fa-money-bill fa-md"></i>

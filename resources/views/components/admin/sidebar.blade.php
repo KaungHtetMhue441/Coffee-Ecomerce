@@ -1,84 +1,6 @@
-@props([
-"menus" => [
-[
-"name" => "Category",
-"icon" => '<i class="fas fa-th-list"></i>',
-"sub_menu" => [
-[
-"All Categories",
-route("admin.category.index")
-],
-[
-"Add Category",
-route('admin.category.create')
-]
-
-]
-],
-[
-"name" => "Product",
-"icon" => '<i class="fas fa-box-open"></i>',
-"sub_menu" => [
-[
-"All Product",
-route("admin.product.index")
-],
-[
-"Add Product",
-route("admin.product.create")
-]
-]
-],
-[
-"name" => "Sales",
-"icon" => '<i class="fas fa-tag"></i>',
-"sub_menu" => [
-[
-"Create new sale",
-route("admin.sale.new")
-],
-[
-"Sale report",
-route("admin.sale.index")
-],
-[
-"Drafts sale",
-route("admin.sale.drafts")
-]
-]
-],
-[
-"name" => "Orders",
-"icon" => '<i class="fas fa-receipt"></i>',
-"sub_menu" => [
-[
-"Pending Orders",
-route("admin.order.index", "pending")
-],
-[
-"Paid Orders",
-route("admin.order.index", "paid")
-],
-[
-"Completed Orders",
-route("admin.order.index", "completed")
-]
-]
-],
-[
-"name" => "Account",
-"icon" => '<i class="fas fa-user"></i>','sub_menu'=> [
-[
-" Users",
-route("admin.account.user.index")
-],
-[ "Admins" ,
-route("admin.account.admin.index")
-],
-]
-],
-]
-])
+@php
+$user = auth()->guard("admin")->user();
+@endphp
 <div class="sidebar" data-background-color="dark">
   <div class="sidebar-logo">
     <!-- Logo Header -->
@@ -104,27 +26,163 @@ route("admin.account.admin.index")
   <div class="sidebar-wrapper scrollbar scrollbar-inner">
     <div class="sidebar-content">
       <ul class="nav nav-secondary">
+
+        <!-- Menu Item for Most Buy Customer -->
+        @if ($user->role->name=="admin")
+        
         <li class="nav-item">
           <a href="{{route("admin.dashboard")}}" class="collapsed">
             <i class="fas fa-home"></i>
             <p>Dashboard</p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="{{route("users.most.buy")}}" class="collapsed">
-            <i class="fas fa-users"></i>
-            <p>Most buy customer</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{{route("admin.report.budget")}}" class="collapsed">
-            <i class="fas fa-chart-bar"></i>
-            <p>Final budget</p>
-          </a>
-        </li>
-        <x-admin.nav-item :menus="$menus">
 
-        </x-admin.nav-item>
+        <li class="nav-item">
+          <a href="{{ route('users.most.buy') }}" class="collapsed">
+            <i class="fas fa-users"></i>
+            <p>Most Buy Customer</p>
+          </a>
+        </li>
+
+        <!-- Menu Item for Final Budget -->
+        <li class="nav-item">
+          <a href="{{ route('admin.report.budget') }}" class="collapsed">
+            <i class="fas fa-chart-bar"></i>
+            <p>Final Transaction Report</p>
+          </a>
+        </li>
+        <!-- Category Menu Item -->
+        <li class="nav-item">
+          <a data-bs-toggle="collapse" href="#sidebarLayoutsCategory">
+            <i class="fas fa-th-list"></i>
+            <p>Category</p>
+            <span class="caret"></span>
+          </a>
+          <div class="collapse" id="sidebarLayoutsCategory">
+            <ul class="nav nav-collapse">
+              <li>
+                <a href="{{ route('admin.category.index') }}">
+                  <span class="sub-item">All Categories</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('admin.category.create') }}">
+                  <span class="sub-item">Add Category</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Product Menu Item -->
+        <li class="nav-item">
+          <a data-bs-toggle="collapse" href="#sidebarLayoutsProduct">
+            <i class="fas fa-box-open"></i>
+            <p>Menu</p>
+            <span class="caret"></span>
+          </a>
+          <div class="collapse" id="sidebarLayoutsProduct">
+            <ul class="nav nav-collapse">
+              <li>
+                <a href="{{ route('admin.product.index') }}">
+                  <span class="sub-item">All Menus</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('admin.product.create') }}">
+                  <span class="sub-item">Add Menu</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        @endif
+
+        @if ($user->role->name=="admin"||$user->role->name=="cashier")
+
+        <!-- Sales Menu Item -->
+        <li class="nav-item">
+          <a data-bs-toggle="collapse" href="#sidebarLayoutsSales">
+            <i class="fas fa-tag"></i>
+            <p>Sales</p>
+            <span class="caret"></span>
+          </a>
+          <div class="collapse" id="sidebarLayoutsSales">
+            <ul class="nav nav-collapse">
+              <li>
+                <a href="{{ route('admin.sale.new') }}">
+                  <span class="sub-item">Create New Sale</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('admin.sale.index') }}">
+                  <span class="sub-item">Sales Report</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('admin.sale.drafts') }}">
+                  <span class="sub-item">Drafts Sale</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        @endif
+
+        @if ($user->role->name=="admin"||$user->role->name=="staff")
+        <!-- Orders Menu Item -->
+        <li class="nav-item">
+          <a data-bs-toggle="collapse" href="#sidebarLayoutsOrders">
+            <i class="fas fa-receipt"></i>
+            <p>Orders</p>
+            <span class="caret"></span>
+          </a>
+          <div class="collapse" id="sidebarLayoutsOrders">
+            <ul class="nav nav-collapse">
+              <li>
+                <a href="{{ route('admin.order.index', 'pending') }}">
+                  <span class="sub-item">Pending Orders</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('admin.order.index', 'paid') }}">
+                  <span class="sub-item">Paid Orders</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('admin.order.index', 'completed') }}">
+                  <span class="sub-item">Completed Orders</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        @endif
+        <!-- Account Menu Item -->
+        @if ($user->role->name=="admin")
+        <li class="nav-item">
+          <a data-bs-toggle="collapse" href="#sidebarLayoutsAccount">
+            <i class="fas fa-user"></i>
+            <p>Account</p>
+            <span class="caret"></span>
+          </a>
+          <div class="collapse" id="sidebarLayoutsAccount">
+            <ul class="nav nav-collapse">
+              <li>
+                <a href="{{ route('admin.account.user.index') }}">
+                  <span class="sub-item">Users</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('admin.account.admin.index') }}">
+                  <span class="sub-item">Admins</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        @endif
+
       </ul>
     </div>
   </div>

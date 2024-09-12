@@ -5,7 +5,7 @@
 route("client.index")
 ],
 [
-"Product",
+"Menu",
 route("client.product")
 ],
 [

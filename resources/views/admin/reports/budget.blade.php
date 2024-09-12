@@ -81,7 +81,7 @@ $breadCrumbs = ['Sale','all'];
                                             <!-- <td>{{$transaction->sale->admin->name}}</td> -->
                                             <td>{{$transaction->sale->created_at->diffForHumans()}}</td>
                                             <td>
-                                                <a href="{{route("admin.sale.show",$transaction->sale->id)}}" class=" btn btn-outline-info btn-sm me-3 py-1">
+                                                <a href="{{route("admin.sale.show",$transaction->sale->id)}}" class=" btn btn-outline-info btn-sm  py-1">
                                                     <i class="fa fa-eye fa-lg text-black"></i>
                                                 </a>
                                                 <a class="btn btn-outline-success py-1 btn-sm" href="{{route("admin.bouncer",$transaction->sale->id)}}">

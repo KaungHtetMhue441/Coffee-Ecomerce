@@ -41,6 +41,7 @@
   <link rel="stylesheet" href="{{asset("css/client/custom.css")}}" />
   <link rel="stylesheet" href="{{asset("css/client/animate.css")}}">
   <link rel="stylesheet" href="{{asset("css/client/fontStyle.css")}}">
+  <link rel="stylesheet" href="{{asset("flatpicker/flatpicker.min.css")}}">
 
   <!-- @vite(['resources/css/app.css', 'resources/js/app.js']) -->
 </head>
@@ -54,7 +55,7 @@
       {{$content}}
 
     </div>
-  <footer class="bg-dark text-light py-5 mt-5">
+    <footer class="bg-dark text-light py-5 mt-5">
       <div class="container">
         <div class="row">
           <!-- About Us Section -->
@@ -121,6 +122,7 @@
 
   <script src="{{asset("assets/js/plugin/sweetalert/sweetalert.min.js")}}"></script>
   <script src="{{asset("js/client/order.js")}}"></script>
+  <script src="{{asset("flatpicker/flatpicker.min.js")}}"></script>
   <script type="text/javascript">
     window.user_id = parseInt('{{auth()->user()?->id}}');
   </script>

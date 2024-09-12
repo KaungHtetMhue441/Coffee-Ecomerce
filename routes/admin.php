@@ -88,11 +88,12 @@ Route::middleware("auth:admin")->prefix('/admin')->name("admin.")->group(functio
         Route::get("index/{type?}", "index")->name("index");
         Route::get("approve/{order}", "approve")->name("approve");
         Route::get("complete/{order}", "complete")->name("complete");
-
+        Route::get("reject/{order}", "showRejectPage")->name("reject");
+        Route::post("reject/{order}", "reject")->name("reject");
         Route::get("show/{order}", "show")->name("show");
     });
 
-Route::get("report/budget", [ReportController::class, "index"])->name("report.budget");
+    Route::get("report/budget", [ReportController::class, "index"])->name("report.budget");
 });
 Route::get('generate-order-pdf/{order}', [VouncherPDFController::class, 'generateOrderPDF'])->name("admin.order.vouncer");
 Route::get("most-buy-customer", [OrderController::class, 'getMostBuyCustomer'])->name("users.most.buy");

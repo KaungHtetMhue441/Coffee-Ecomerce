@@ -28,6 +28,7 @@ Route::controller(ClientCartController::class)->name("client.")->group(function 
 
 Route::controller(ClientOrderController::class)->prefix("order/")->name("order.")->group(function () {
     Route::get("choose-payment/{order?}", "choosePayment")->name("payment");
+    Route::post("choose-date/{order}", 'chooseOrderDate')->name('chooseDate');
     Route::get("/payment-with-kbz-or-wave/{order}", "otherPayment")->name("payment.other");
     Route::post("/pay-bill-with-kbz-or-wave/{order}", "payBillWithOther")->name("pay-bill-other");
     Route::get("index/{type?}", "index")->name("index");

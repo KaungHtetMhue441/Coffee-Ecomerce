@@ -27,8 +27,21 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        $admin = auth()->guard("admin")->user();
 
-        return redirect()->intended(route('admin.dashboard', absolute: false));
+        $url = route('admin.dashboard', absolute: false);
+
+        if ($admin->role->name == "admin") {
+            $url = route('admin.dashboard', absolute: false);
+        }
+        if ($admin->role->name == "staff") {
+            $url = route("admin.order.index", "pending");
+        }
+        if ($admin->role->name == "cashier") {
+            $url = route("admin.sale.index");
+        }
+        // dd($url);
+        return redirect($url);
     }
 
     /**

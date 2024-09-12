@@ -30,7 +30,7 @@ class ClientOrderController extends Controller
         $orders = $orders->paginate(8)->appends($request->all());
         return view("client.order.index", [
             "orders" => $orders,
-            "type"=>$type
+            "type" => $type
         ]);
     }
 
@@ -46,9 +46,6 @@ class ClientOrderController extends Controller
         $total_amount = collect($products)->sum(function ($product) {
             return $product["price"] * $product["quantity"];
         });
-
-        Log::info($total_amount);
-
 
         $order = Order::create([
             "user_id" => $userId,
@@ -68,6 +65,18 @@ class ClientOrderController extends Controller
         ]);
     }
 
+    public function chooseOrderDate(Request $request, Order $order)
+    {
+        $request->validate([
+            "order_date" => "required|date"
+        ]);
+
+        $order->update([
+            "order_date" => $request->order_date
+        ]);
+        return redirect()->back()->with("success", "Successfully Choosed order date");
+    }
+
     public function otherPayment(Order $order)
     {
         return view("client.checkout.other-payment", [
@@ -83,7 +92,7 @@ class ClientOrderController extends Controller
         $file = $request->file("file");
         $request['image'] = uploadFile($file, "/orders/bill/");
         $request["status"] = "pending";
-        $request["order_date"] = Carbon::now();
+        // $request["order_date"] = Carbon::now();
         $order->update($request->all());
         Transaction::create([
             "order_id" => $order->id,
