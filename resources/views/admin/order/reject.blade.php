@@ -21,7 +21,8 @@ $breadCrumbs = ['Order','Show'];
                             <div class="card-title">
                                 Customer :
                                 <span class="text-info">
-                                    {{$order->id}}
+                                    {{$order->user->name}}
+
                                 </span>
                             </div>
                         </div>
