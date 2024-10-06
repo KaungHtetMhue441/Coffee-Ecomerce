@@ -38,7 +38,7 @@
     <p>Yaongon-Mandalay Road,Thandaung Stree conor,Taungoo</p>
     <p> Open Daily : 8:00AM To 8:00PM</p>
     @if($admin)
-    <p class="text-left">CasherID.{{$admin}}</p>
+    <p class="text-left">CasherID.{{$admin->name}}</p>
     @endif
     <hr>
     <table class="table table-bordered">

@@ -38,4 +38,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Sale::class);
     }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class);
+    }
 }

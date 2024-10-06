@@ -64,6 +64,7 @@
 
                 </div>
             </div>
+            @if($order->comment!=null){
             <div class="card mt-3">
                 <div class="card-header">
                     Comment:
@@ -74,6 +75,7 @@
                     </p>
                 </div>
             </div>
+            @endif
         </div>
     </x-slot>
 </x-client.app>

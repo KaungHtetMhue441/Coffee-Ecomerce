@@ -6,7 +6,7 @@ $user = auth()->guard("admin")->user();
     <!-- Logo Header -->
     <div class="logo-header" data-background-color="dark">
       <a href="index.html" class="logo text-white">
-        <img src="{{asset("images/logo2.jpg")}}" alt="navbar brand" class="navbar-brand rounded-circle me-2" />
+        <!-- <img src="{{asset("images/logo2.jpg")}}" alt="navbar brand" class="navbar-brand rounded-circle me-2" /> -->
         Coffee House
       </a>
       <div class="nav-toggle">
@@ -29,7 +29,7 @@ $user = auth()->guard("admin")->user();
 
         <!-- Menu Item for Most Buy Customer -->
         @if ($user->role->name=="admin")
-        
+
         <li class="nav-item">
           <a href="{{route("admin.dashboard")}}" class="collapsed">
             <i class="fas fa-home"></i>

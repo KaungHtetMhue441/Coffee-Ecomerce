@@ -5,7 +5,7 @@
    <x-slot name="content">
       <div class="container mt-3">
          <div class="row">
-            <div class="col-sm-6 col-md-3">
+            <div class="col-sm-6 col-md-4">
                <div class="card card-stats card-round">
                   <a href="{{route("admin.account.admin.index")}}">
 
@@ -28,7 +28,7 @@
 
                </div>
             </div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-sm-6 col-md-4">
                <div class="card card-stats card-round">
                   <a href="{{route("admin.category.index")}}">
                      <div class="card-body">
@@ -49,7 +49,7 @@
                   </a>
                </div>
             </div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-sm-6 col-md-4">
                <div class="card card-stats card-round">
                   <a href="{{route("admin.product.index")}}">
                      <div class="card-body">
@@ -70,7 +70,7 @@
                   </a>
                </div>
             </div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-sm-6 col-md-6">
                <div class="card card-stats card-round">
                   <a href="{{route("admin.sale.index")}}">
                      <div class="card-body">
@@ -84,6 +84,27 @@
                               <div class="numbers">
                                  <p class="card-category">Sales</p>
                                  <h4 class="card-title">{{$saleCount}}</h4>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </a>
+               </div>
+            </div>
+            <div class="col-12 col-md-6">
+               <div class="card card-stats card-round">
+                  <a href="{{route("admin.order.index")}}">
+                     <div class="card-body">
+                        <div class="row align-items-center">
+                           <div class="col-icon">
+                              <div class="icon-big text-center icon-secondary bubble-shadow-small">
+                                 <i class="far fa-check-circle"></i>
+                              </div>
+                           </div>
+                           <div class="col col-stats ms-3 ms-sm-0">
+                              <div class="numbers">
+                                 <p class="card-category">Orders</p>
+                                 <h4 class="card-title">{{$orderPendingCount}}</h4>
                               </div>
                            </div>
                         </div>

@@ -18,7 +18,8 @@ class HomeController extends Controller
         $categoryCount = Category::count();
         $productCount = Product::count();
         $saleCount = Sale::where("status", "complete")->count();
-        $orderCount = Order::where("status", "pending")->count();
+        $orderPendingCount = Order::where("status", "pending")->count();
+        $orderCount = Order::whereIn("status", ['pending', 'paid', 'complete'])->count();
         $orders = Order::where("status", "pending")->take(10)->get();
         $latestUsers = User::take(10)->orderBy("created_at", "DESC")->get();
         $latestSales = Sale::where("status", "complete")->take(10)->orderBy("created_at", "DESC")->get();
@@ -31,6 +32,7 @@ class HomeController extends Controller
             "saleCount" => $saleCount,
             "latestUsers" => $latestUsers,
             "latestSales" => $latestSales,
+            "orderPendingCount" => $orderPendingCount,
             'orderCount' => $orderCount,
             "orders" => $orders
         ]);

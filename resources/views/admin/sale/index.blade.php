@@ -45,7 +45,8 @@ $breadCrumbs = ['Sale','all'];
                                             <div class="col-12 mt-3">
                                                 <div class="d-flex justify-content-end">
                                                     <button type="submit" class="btn btn-primary me-3">Search</button>
-                                                    <a class="btn btn-dark text-white" href="{{route("admin.sale.index")}}">Reset</a>
+                                                    <a class="btn btn-dark text-white me-3" href="{{route("admin.sale.index")}}">Reset</a>
+                                                    <button href="{{route("admin.sale.index")}}" name="export" value="true" class="btn btn-success">Export</button>
                                                 </div>
                                             </div>
                                         </div>

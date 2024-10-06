@@ -30,10 +30,10 @@ $breadCrumbs[1] = Str::ucfirst(request()["type"])." Order";
                                                 </input>
                                             </div>
                                             <div class="col-4">
-                                                <input type="text" id="from_datepicker" class=" form-control" name="from" placeholder="Date From..">
+                                                <input type="text" id="from_datepicker" class=" form-control" name="from" placeholder="Order Date From..">
                                             </div>
                                             <div class="col-4">
-                                                <input type="text" id="to_datepicker" class="form-control" name="to" placeholder="Date to..">
+                                                <input type="text" id="to_datepicker" class="form-control" name="to" placeholder="Order Date to..">
                                             </div>
                                             <div class="col-4">
                                                 <input type="text" value="{{request()->get('admin_name')}}" name="admin_name" class="form-control me-3" placeholder="Enter Admin Name"></input>
@@ -44,10 +44,19 @@ $breadCrumbs[1] = Str::ucfirst(request()["type"])." Order";
                                             <div class="col-4">
                                                 <input type="number" value="{{request()->get('total_amount')}}" name="total_amount" class="form-control me-3" placeholder="Enter Total Amount"></input>
                                             </div>
+
+                                            <div class="col-4">
+                                                <select class="form-select form-control mt-3" name="sort_by" id="sort_by">
+                                                    <option value="">Sort By</option>
+                                                    <option value="total_amount">Total Amount</option>
+                                                    <option value="pay_date">Pay Date</option>
+                                                </select>
+                                            </div>
                                             <div class="col-12 mt-3">
                                                 <div class="d-flex justify-content-end">
                                                     <button type="submit" class="btn btn-primary me-3">Search</button>
-                                                    <a class="btn btn-dark text-white" href="{{route("admin.order.index",request()["type"])}}">Reset</a>
+                                                    <a class="btn btn-dark text-white me-3" href="{{route("admin.order.index",request()["type"])}}">Reset</a>
+                                                    <button class=" btn btn-success" name="export" value="true">Export</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -64,9 +73,12 @@ $breadCrumbs[1] = Str::ucfirst(request()["type"])." Order";
                                             <th>Payment
                                                 Type</th>
                                             <th>Total Amount</th>
+                                            @if($status!="pending")
                                             <th>Admin</th>
+                                            @endif
                                             <th>Status</th>
                                             <th>Order Date</th>
+                                            <th>Pay Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -80,33 +92,52 @@ $breadCrumbs[1] = Str::ucfirst(request()["type"])." Order";
                                                 </a>
                                             </td>
                                             <td>{{$order->total_amount}} Kyats</td>
+                                            @if($status!="pending")
                                             <td>{{$order->admin?->name}}</td>
-                                            <td>{{$order->status}}</td>
-                                            <td style="width: 140px;">{!!$order->order_date?->format("Y-m-d")."
+
+                                            @endif
+
+                                            @php
+                                            $btn = "badge ";
+                                            if($order->status=="pending"){
+                                            $btn .= "badge-warning";
+                                            }elseif($order->status=="paid"){
+                                            $btn .="badge-success";
+                                            }else{
+                                            $btn.="badge-infa";
+                                            }
+                                            @endphp
+                                            <td style="width: 60px!important;">
+                                                <span class="badge {{$btn}}">{{$order->status}}</span>
+                                            </td>
+                                            <td style="width: 150px;">{!!$order->order_date?->format("Y-m-d")."
                                                 <br>(".$order->order_date?->diffForHumans().")"!!}
+                                            </td>
+                                            <td style="width: 140px;">{!!$order->transaction?->created_at->format("Y-m-d")."
+                                                <br>(".$order->transaction?->created_at?->diffForHumans().")"!!}
                                             </td>
                                             <td style="width: 250px;">
                                                 @if($status=="pending")
 
-                                                <a href="{{route("admin.order.reject",$order->id)}}" class=" btn btn-outline-info btn-sm me-1 px-1 py-1">
+                                                <a href="{{route("admin.order.reject",$order->id)}}" class=" btn btn-danger me-1 px-1 py-1">
                                                     <!-- <i class="fa fa-eye fa-lg text-block"></i> -->
                                                     reject
                                                 </a>
-                                                <a class="btn btn-outline-success px-1 py-1 btn-sm" href="{{route("admin.order.approve",$order->id)}}">
+                                                <a class="btn btn-success px-1 py-1" href="{{route("admin.order.approve",$order->id)}}">
                                                     <!-- <i class="fa fa-money-bill"></i> -->
                                                     Paid
                                                 </a>
                                                 @endif
                                                 @if($status=="paid")
-                                                <a class="btn btn-outline-success px-1 py-1 btn-sm" href="{{route("admin.order.complete",$order->id)}}">
+                                                <a class="btn btn-outline-success px-1 py-1" href="{{route("admin.order.complete",$order->id)}}">
                                                     <!-- <i class="fa fa-money-bill"></i> -->
                                                     complete
                                                 </a>
                                                 @endif
-                                                <a href="{{route("admin.order.show",$order->id)}}" class=" btn btn-outline-info btn-sm me-1 py-1">
+                                                <a href="{{route("admin.order.show",$order->id)}}" class=" btn btn-info me-1 px-3 py-1">
                                                     <i class="fa fa-eye fa-lg text-black"></i>
                                                 </a>
-                                                <a class="btn btn-outline-success py-1 btn-sm" href="{{route("admin.order.vouncer",$order->id)}}">
+                                                <a class="btn btn-primary py-1 px-3 " href="{{route("admin.order.vouncer",$order->id)}}">
                                                     <i class="fa fa-money-bill"></i>
                                                 </a>
                                             </td>
@@ -132,6 +163,10 @@ $breadCrumbs[1] = Str::ucfirst(request()["type"])." Order";
         </div>
         <x-slot name="script">
             <script>
+                $("#sort_by").change(function() {
+                    $(this).closest("form").submit();
+                });
+
                 flatpickr("#from_datepicker", {
                     enableTime: false, // Set to true if you want to include time selection
                     dateFormat: "Y-m-d",

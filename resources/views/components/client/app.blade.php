@@ -1,5 +1,6 @@
 @props([
-"script" => ""
+"script" => "",
+"style"=>""
 ])
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +37,9 @@
     });
   </script>
 
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
   <!-- CSS Files -->
   <link rel="stylesheet" href="{{asset("css/client/bootstrap/dist/css/bootstrap.min.css")}}">
   <link rel="stylesheet" href="{{asset("css/client/custom.css")}}" />
@@ -43,6 +47,7 @@
   <link rel="stylesheet" href="{{asset("css/client/fontStyle.css")}}">
   <link rel="stylesheet" href="{{asset("flatpicker/flatpicker.min.css")}}">
 
+  {{$style}}
   <!-- @vite(['resources/css/app.css', 'resources/js/app.js']) -->
 </head>
 
@@ -121,9 +126,31 @@
   <script src="{{asset("assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js")}}"></script>
 
   <script src="{{asset("assets/js/plugin/sweetalert/sweetalert.min.js")}}"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <script src="{{asset("js/client/order.js")}}"></script>
   <script src="{{asset("flatpicker/flatpicker.min.js")}}"></script>
   <script type="text/javascript">
+    function showToast(message, x, y) {
+      Toastify({
+        text: message,
+        offset: {
+          x, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+          y // vertical axis - can be a number or a string indicating unity. eg: '2em'
+        },
+        duration: 1500,
+        class: "info",
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, #00b09b, #96c93d)",
+        },
+        onClick: function() {} // Callback after click
+      }).showToast();
+    }
+
     window.user_id = parseInt('{{auth()->user()?->id}}');
   </script>
   {{$script}}

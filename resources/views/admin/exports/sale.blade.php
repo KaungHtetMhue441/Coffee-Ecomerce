@@ -7,7 +7,6 @@
             <th>Total Cost</th>
             <th>Admin</th>
             <th>created</th>
-            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -23,10 +22,4 @@
         </tr>
         @endforeach
     </tbody>
-    <tfoot>
-        <tr rowspan="2">
-            <th colspan="2">Total Selling Price</th>
-            <th colspan="4" class="text-success">{{$total_cost}} Kyats</th>
-        </tr>
-    </tfoot>
 </table>

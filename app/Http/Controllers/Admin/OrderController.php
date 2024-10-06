@@ -6,6 +6,8 @@ use App\Models\Order;
 use App\Enums\OrderStatus;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\OrdersExport;
 
 class OrderController extends Controller
 {
@@ -15,7 +17,7 @@ class OrderController extends Controller
     public function index(Request $request)
     {
 
-        $orders = Order::query();
+        $orders = Order::query()->with("transaction");
         if ($request["customer_name"]) {
             $orders->where("customer", "like", "%" . $request["customer_name"] . "%");
         }
@@ -46,11 +48,31 @@ class OrderController extends Controller
             });
         }
 
+        if ($request['sort_by']) {
+            if ($request['sort_by'] == "pay_date")
+                $orders->join('transactions', 'orders.id', '=', 'transactions.order_id')
+                    ->orderBy('transactions.created_at', 'desc');
+            elseif ($request['sort_by'] == "total_amount") {
+                $orders->orderby("total_amount", "ASC");
+            }
+            $orders->select("orders.*");
+        } else {
+            $orders->orderby("order_date", direction: "ASC");
+        }
 
-        $orders = $orders->orderby("order_date", "DESC")->paginate(10)->appends($request->all());
+
+
+        if ($request['export']) {
+            $orders = $orders->get();
+            return Excel::download(new OrdersExport($orders), "orderReport.xlsx");
+        }
+
+        $orders = $orders->paginate(10)->appends($request->all());
+
         $totalPrice = $orders->reduce(function ($carry, $order) {
             return $carry + $order->total_amount;
         });
+
         return view("admin.order.index", [
             "status" => $request["type"],
             "orders" => $orders,

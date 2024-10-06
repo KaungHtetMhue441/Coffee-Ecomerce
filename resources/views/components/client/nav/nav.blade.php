@@ -1,10 +1,9 @@
-<nav class="navbar navbar-expand-lg nav_container nav_text_color bg-body-tertiary px-md-5 py-3 shadow" style="position:sticky;top:0;z-index:1001;">
+<nav class="navbar navbar-expand-lg nav_container nav_text_color bg-body-tertiary px-md-5 shadow" style="position:sticky;top:0;z-index:1001;">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">Coffee House</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse " id="navbarNav">
             <x-client.nav.nav-links></x-client.nav.nav-links>
             @if (!auth()->user())

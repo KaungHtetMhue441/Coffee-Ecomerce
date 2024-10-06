@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\SalesExport;
 use PDF;
 use App\Models\Sale;
 use App\Models\Product;
@@ -11,6 +12,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SaleController extends Controller
 {
@@ -43,7 +45,16 @@ class SaleController extends Controller
             $sales->whereDate("created_at", "<=", $request["to"]);
         }
 
-        $sales  = $sales->orderby("created_at", "DESC")->paginate(10)->appends($request->inputs);
+
+
+        $sales  = $sales->orderby("created_at", "DESC");
+
+        if ($request['export']) {
+            $sales = $sales->get();
+            return Excel::download(new SalesExport($sales), "saleReport.xlsx");
+        }
+
+        $sales = $sales->paginate(10)->appends($request->inputs);
 
         $totalPrice = $sales->reduce(function ($carry, $sale) {
             return $carry + $sale->total_cost;

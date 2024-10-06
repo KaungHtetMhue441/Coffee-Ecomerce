@@ -3,17 +3,17 @@
         Menus
     </x-slot>
     <x-slot name="content">
-        <div class="row mt-3 pt-3 rounded shadow justify-content-start" style="background-color: white;">
-            <h4 class="text_primary text-center">Your selected product in part</h4>
-        </div>
-        <div class="row mt-3 px-0">
-            <div class="col-8 d-flex justify-content-between pt-3 mb-3 bg-white">
-                <div class="row w-100" id="cart-data">
+        <div class="row mt-3 p-0">
+            <div class="col-8 p-0 mb-3 bg-white">
+                <div class="col-12  mb-1 p-2 rounded shadow justify-content-start" style="background-color: white;">
+                    <h4 class="text_primary text-center">Your selected product in part</h4>
+                </div>
+                <div class=" row p-0" id="cart-data">
 
                 </div>
             </div>
-            <div class="col-4">
-                <div class="card shadow">
+            <div class="col-4 p-0">
+                <div class="card shadow ms-2">
                     <div class="card-header">
                         <h4 class="card-title text-center
                         ">Cart List</h4>
@@ -34,7 +34,7 @@
                             </tfoot>
                         </table>
                         <div class="row px-2">
-                            <button class="btn btn-primary" onclick="checkout()">Checkout</button>
+                            <button class="btn btn-primary" onclick="checkout()">Order Now</button>
                         </div>
                     </div>
                 </div>
@@ -135,8 +135,8 @@
                     var newRow = ` <tr> 
                         <td>${product.name} </td>
                         <td><input type="number" class="quantity${product.id}" style="width:50px" value="${product.quantity}" disabled/>    </td>
-                        <td> ${product.price}  </td>
-                        <td> <span class="total_price" id="total_price${product.id}">${(product.price * product.quantity)} kyats</span>  </td>
+                        <td align="right"> ${product.price}  </td>
+                        <td align="right"> <span class="total_price" id="total_price${product.id}">${(product.price * product.quantity)}</span>  kyats </td>
                         </tr>
                         `;
                     $('#cart-table tbody').append(newRow);
@@ -157,7 +157,7 @@
                 $("#cart-data").html("");
                 products.forEach((product) => {
                     let productUi = `
-                                <div class="col-12 col-md-4 mb-3">
+                                <div class="col-12 col-md-4 mb-3 m-0">
                                     <div class="card shadow p-1">
 
                                     <img src="${product.image}" class="card-img-top rounded card_image" alt="...">
@@ -167,7 +167,7 @@
                                                 <p class="card-text mb-5 fs-6">${product.desc}</p>
                                                 <div class="position-absolute w-100 px-2 " style="bottom: 20px;left: 0px; z-index:2;">
                                                     <div class="d-flex justify-content-between">
-                                                        <input type="number"  value="${product.quantity}" class="form-control quantity quantity${product.id}"style="width:40%;"
+                                                        <input type="number" min="0"  value="${product.quantity}" class="form-control quantity quantity${product.id}"style="width:40%;"
                                                         productid="${product.id}"
                                                         id="quantity${product.id}"
                                                         price="${product.price}"
@@ -193,6 +193,7 @@
                     $("#cart-data").append(productUi);
 
                 });
+
                 $(".quantity").each(function() {
                     $(this).on("keyup change", function() {
                         let productId = $(this).attr("productid");
@@ -245,7 +246,8 @@
 
             function decreaseQty(id, price) {
                 let qty = parseInt($("#quantity" + id).val());
-                --qty;
+                if (qty != 0)
+                    --qty;
                 $(".quantity" + id).each(function(item) {
                     $(this).val(qty);
                 });

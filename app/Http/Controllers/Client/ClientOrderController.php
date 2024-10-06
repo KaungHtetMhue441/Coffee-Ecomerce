@@ -71,6 +71,8 @@ class ClientOrderController extends Controller
             "order_date" => "required|date"
         ]);
 
+        // dd($request->order_date);
+
         $order->update([
             "order_date" => $request->order_date
         ]);

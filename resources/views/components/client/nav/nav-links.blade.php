@@ -17,7 +17,8 @@ route("client.about")
 route("client.contact")
 ],
 [
-"Cart <div style='position:relative;display: inline-block;'><span id='cart_count' style='color:coral;position:absolute; top:-25px;left: -3px;'></span></div>",
+"<i class='fa fs-5 fa-cart-plus'></i>
+<div style='position:relative;display: inline-block;'><span id='cart_count' style='color:coral;position:absolute; top:-25px;left: -3px;'></span></div>",
 route("cart.index")
 ],
 [

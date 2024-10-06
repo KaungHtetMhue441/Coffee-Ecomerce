@@ -40,14 +40,16 @@ function setProductToCart(product) {
         return item.id == product.id
     });
     if (!!found) {
-        alert("Product alerady added");
+        showToast("Menu already added!", 100, 50);
+
         return;
     }
     products.push(product);
 
     localStorage.setItem("productsInCard", JSON.stringify(products));
     addCartCount();
-    alert("Product successfully added!");
+    showToast("Menu successfully added!", 100, 50);
+
 }
 
 function updateProductInCart(product) {
@@ -63,11 +65,16 @@ function getUserId() {
 }
 
 function addToCard(productId) {
+
     if (!user_id) {
         alert("Please login First");
         window.location.href = "login";
         return;
     }
+
+    if (!confirm('Are you sure to add to the cart?')) {
+        return;
+    };
     const product = { id: productId, quantity: 1 };
     setProductToCart(product)
 }
