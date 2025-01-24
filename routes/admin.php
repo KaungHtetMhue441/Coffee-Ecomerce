@@ -2,6 +2,7 @@
 
 <?php
 
+use App\Http\Controllers\Admin\OtherExpenseController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PdfController;
@@ -16,7 +17,14 @@ use App\Http\Controllers\Admin\Account\UserAccountController;
 use App\Http\Controllers\Admin\Account\AdminAccountController;
 use App\Http\Controllers\Admin\Auth\RegisteredAdminController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
+
 use App\Http\Controllers\Admin\Report\ReportController;
+
+use App\Http\Controllers\Admin\CostController;
+use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\ProfitController;
+use App\Http\Controllers\Admin\PurchaseController;
+use App\Http\Controllers\Admin\SalaryController;
 
 Route::middleware("guest:admin")->prefix("/admin")->name("admin.")->group(function () {
     Route::get('/register', [RegisteredAdminController::class, 'create'])
@@ -94,6 +102,15 @@ Route::middleware("auth:admin")->prefix('/admin')->name("admin.")->group(functio
     });
 
     Route::get("report/budget", [ReportController::class, "index"])->name("report.budget");
+
+    Route::resource('employees',  EmployeeController::class);
+    Route::resource('purchases', PurchaseController::class);
+    Route::resource('salaries', SalaryController::class);
+    route::prefix("expenses")->name("expenses.")->group(function () {
+        Route::resource('others', OtherExpenseController::class);
+    });
+
+    Route::get("profits", [ProfitController::class, "analysis"])->name('profits');
 });
 Route::get('generate-order-pdf/{order}', [VouncherPDFController::class, 'generateOrderPDF'])->name("admin.order.vouncer");
 Route::get("most-buy-customer", [OrderController::class, 'getMostBuyCustomer'])->name("users.most.buy");

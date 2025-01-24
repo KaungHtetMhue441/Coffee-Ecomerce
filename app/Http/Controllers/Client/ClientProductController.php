@@ -24,7 +24,6 @@ class ClientProductController extends Controller
                     $query->where("name", "like", "%" . $search . "%");
                 })
                 ->orWhere("price", "=", intval($search));
-            // dd(intval($search));
         }
         if ($request['category_id']) {
             $products->where("category_id", "=", $request['category_id']);
@@ -44,8 +43,6 @@ class ClientProductController extends Controller
         if ($request['sort_by'] == "least-order") {
             $products->withCount("orders")->orderBy("price", "DESC");
         }
-
-        
 
         $categories = Category::all();
         $products = $products->paginate($items)->appends($request->except("page"));

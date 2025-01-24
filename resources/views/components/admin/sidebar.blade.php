@@ -44,6 +44,13 @@ $user = auth()->guard("admin")->user();
           </a>
         </li>
 
+        <li class="nav-item">
+          <a href="{{ route('admin.profits') }}" class="collapsed">
+            <i class="fas fa-chart-line"></i>
+            <p>Calculation Profits</p>
+          </a>
+        </li>
+
         <!-- Menu Item for Final Budget -->
         <li class="nav-item">
           <a href="{{ route('admin.report.budget') }}" class="collapsed">
@@ -183,6 +190,57 @@ $user = auth()->guard("admin")->user();
         </li>
         @endif
 
+        @if ($user->role->name=="admin")
+        <li class="nav-item">
+          <a data-bs-toggle="collapse" href="#sidebarLayoutsEmployee">
+            <i class="fas fa-user"></i>
+            <p>Employees</p>
+            <span class="caret"></span>
+          </a>
+          <div class="collapse" id="sidebarLayoutsEmployee">
+            <ul class="nav nav-collapse">
+              <li>
+                <a href="{{ route('admin.employees.index') }}">
+                  <span class="sub-item">Lists</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('admin.employees.create') }}">
+                  <span class="sub-item">Add New</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        @endif
+        @if ($user->role->name=="admin")
+        <li class="nav-item">
+          <a data-bs-toggle="collapse" href="#sidebarLayoutsExpense">
+            <i class="fas fa-user"></i>
+            <p>Expense</p>
+            <span class="caret"></span>
+          </a>
+          <div class="collapse" id="sidebarLayoutsExpense">
+            <ul class="nav nav-collapse">
+              <li>
+                <a href="{{ route('admin.purchases.index') }}">
+                  <span class="sub-item">Purchases</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('admin.salaries.index') }}">
+                  <span class="sub-item">salaries</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('admin.expenses.others.index') }}">
+                  <span class="sub-item">Others</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        @endif
       </ul>
     </div>
   </div>

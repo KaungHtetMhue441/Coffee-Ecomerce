@@ -15,7 +15,7 @@
             <div class="col-4 p-0">
                 <div class="card shadow ms-2">
                     <div class="card-header">
-                        <h4 class="card-title text-center
+                        <h4 class="card-title text-center 
                         ">Cart List</h4>
                     </div>
                     <div class="card-body">
@@ -33,7 +33,7 @@
 
                             </tfoot>
                         </table>
-                        <div class="row px-2">
+                        <div class="row px-2"> 
                             <button class="btn btn-primary" onclick="checkout()">Order Now</button>
                         </div>
                     </div>
