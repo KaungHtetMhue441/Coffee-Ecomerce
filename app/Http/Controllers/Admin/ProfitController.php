@@ -19,7 +19,9 @@ class ProfitController extends Controller
         $fromMonth = $request->input('from_month', 1);
         $toMonth = $request->input('to_month', Carbon::now()->month);
         $year = $request->input('year', Carbon::now()->year);
-        $perPage = 5; // Number of items per page
+        $fromDate = $request->input('from_date');
+        $toDate = $request->input('to_date');
+        $perPage = 12; // Number of items per page
 
         $totalSalesAmount = 0;
         $totalOrdersAmount = 0;
@@ -32,6 +34,11 @@ class ProfitController extends Controller
         for ($m = $fromMonth; $m <= $toMonth; $m++) {
             $startOfMonth = Carbon::create($year, $m, 1)->startOfMonth();
             $endOfMonth = Carbon::create($year, $m, 1)->endOfMonth();
+
+            if ($fromDate && $toDate) {
+                $startOfMonth = Carbon::parse($fromDate)->startOfDay();
+                $endOfMonth = Carbon::parse($toDate)->endOfDay();
+            }
 
             $monthlySalesAmount = Sale::whereBetween('created_at', [$startOfMonth, $endOfMonth])->sum('total_cost');
             $monthlyOrdersAmount = Order::whereBetween('order_date', [$startOfMonth, $endOfMonth])->sum('total_amount');
@@ -62,6 +69,8 @@ class ProfitController extends Controller
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $currentItems = array_slice($monthlyProfits, ($currentPage - 1) * $perPage, $perPage);
         $paginatedMonthlyProfits = new LengthAwarePaginator($currentItems, count($monthlyProfits), $perPage);
+        $paginatedMonthlyProfits->setPath($request->url());
+        $paginatedMonthlyProfits->appends($request->query());
 
         return view("admin.profit.analysis", compact('totalSalesAmount', 'totalOrdersAmount', 'totalSalariesAmount', 'totalPurchasesAmount', 'totalOtherExpense', 'totalProfit', 'paginatedMonthlyProfits'));
     }
