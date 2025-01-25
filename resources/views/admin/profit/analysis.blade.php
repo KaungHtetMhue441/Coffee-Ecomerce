@@ -130,6 +130,7 @@
                             <table class="table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
+                                        <th>Year</th>
                                         <th>Month</th>
                                         <th>Total Sales Amount</th>
                                         <th>Total Orders Amount</th>
@@ -142,6 +143,7 @@
                                 <tbody>
                                     @foreach ($paginatedMonthlyProfits as $monthlyProfit)
                                     <tr>
+                                        <td>{{$monthlyProfit['year']}}</td>
                                         <td>{{ $monthlyProfit['month'] }}</td>
                                         <td>+{{ number_format($monthlyProfit['totalSalesAmount'], 2) }}</td>
                                         <td>+{{ number_format($monthlyProfit['totalOrdersAmount'], 2) }}</td>
