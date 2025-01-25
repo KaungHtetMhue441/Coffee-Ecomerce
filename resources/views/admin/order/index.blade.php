@@ -87,7 +87,11 @@ $breadCrumbs[1] = Str::ucfirst(request()["type"])." Order";
                                         <tr>
                                             <td>{{$order->user->name}}</td>
                                             <td>
-                                                <a href="/storage/orders/bill/{{$order->image}}" style="text-decoration: none;">
+                                                <a
+                                                    @if($order->payment_type!="visa")
+                                                    href="/storage/orders/bill/{{$order->image}}"
+                                                    @endif
+                                                    style="text-decoration: none;">
                                                     {{$order->payment_type}}
                                                 </a>
                                             </td>

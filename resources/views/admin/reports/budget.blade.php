@@ -94,7 +94,13 @@ $breadCrumbs = ['Sale','all'];
                                             <td>{{$transaction->application_type}}</td>
                                             <td>{{$transaction->order->user->name}}</td>
                                             <td>
-                                                <a href="/storage/orders/bill/{{$transaction->order->image}}" style="text-decoration: none;">
+
+                                                <a
+                                                    @if($transaction->order->payment_type!="visa")
+                                                    href="/storage/orders/bill/{{$transaction->order->image}}"
+                                                    @endif
+                                                    style="text-decoration: none;" >
+
                                                     {{$transaction->order->payment_type}}
                                                 </a>
                                             </td>
@@ -118,6 +124,13 @@ $breadCrumbs = ['Sale','all'];
                                         @endforeach
                                     </tbody>
                                     <tfoot>
+                                        <tr>
+                                            <th colspan="3">Total Amount</th>
+                                            <th>{{ $transactions->sum(function($transaction) {
+                                                return $transaction->application_type == 'sale' ? $transaction->sale->total_cost : $transaction->order->total_amount;
+                                            }) }} Kyats</th>
+                                            <th colspan="2"></th>
+                                        </tr>
                                     </tfoot>
                                 </table>
                             </div>

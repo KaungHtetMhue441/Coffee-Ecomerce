@@ -38,11 +38,19 @@ $user = auth()->guard("admin")->user();
         </li>
 
         <li class="nav-item">
-          <a href="{{ route('users.most.buy') }}" class="collapsed">
+          <a href="{{ route('admin.most_buy_products') }}" class="collapsed">
             <i class="fas fa-users"></i>
-            <p>Most Buy Customer</p>
+            <p>Most Buy Products</p>
           </a>
         </li>
+
+        <li class="nav-item">
+          <a href="{{ route('users.most.buy') }}" class="collapsed">
+            <i class="fas fa-users"></i>
+            <p>Most Buy Customers</p>
+          </a>
+        </li>
+
 
         <li class="nav-item">
           <a href="{{ route('admin.profits') }}" class="collapsed">

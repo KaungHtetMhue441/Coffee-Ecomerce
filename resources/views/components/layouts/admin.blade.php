@@ -54,7 +54,7 @@
     <!-- End Sidebar -->
 
     <div class="main-panel">
-      <div class="main-header">
+      <div class="main-header " style="">
         <div class="main-header-logo">
           <!-- Logo Header -->
           <div class="logo-header" data-background-color="dark">
@@ -78,7 +78,7 @@
         <!-- Navbar Header -->
         <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
           <div class="container-fluid">
-            <span class="font-bolder fs-3">
+            <span class="font-bolder fs-3 text-white">
               {{$header}}
 
             </span>
@@ -87,7 +87,7 @@
               <li class="nav-item topbar-user dropdown hidden-caret ">
                 <a class="dropdown-toggle text-black" data-bs-toggle="dropdown" href="#" aria-expanded="false">
                   <span class="profile-username">
-                    <span class="fw-bold">{{$user->name}}
+                    <span class="fw-bold text-white">{{$user->name}}
                       <i class="fa fa-angle-down fa-lg"></i>
                     </span>
                   </span>
@@ -96,8 +96,8 @@
                   <div class="dropdown-user-scroll scrollbar-outer">
                     <li>
                       <div class="user-box">
-                        <div class="u-text">
-                          <h4>{{$user->name}}</h4>
+                        <div class="u-text ">
+                          <h4 class="">{{$user->name}}</h4>
                           <p class="text-muted">{{$user->email}}</p>
                           <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">Edit Profile</a>
                         </div>

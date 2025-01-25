@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\Report\ReportController;
 
 use App\Http\Controllers\Admin\CostController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\MostBuyProductsController;
 use App\Http\Controllers\Admin\ProfitController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SalaryController;
@@ -111,6 +112,8 @@ Route::middleware("auth:admin")->prefix('/admin')->name("admin.")->group(functio
     });
 
     Route::get("profits", [ProfitController::class, "analysis"])->name('profits');
+
+    Route::get('most-buy-products', [MostBuyProductsController::class, 'index'])->name('most_buy_products');
 });
 Route::get('generate-order-pdf/{order}', [VouncherPDFController::class, 'generateOrderPDF'])->name("admin.order.vouncer");
 Route::get("most-buy-customer", [OrderController::class, 'getMostBuyCustomer'])->name("users.most.buy");
