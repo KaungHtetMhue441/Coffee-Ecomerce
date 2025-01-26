@@ -78,7 +78,7 @@
         <!-- Navbar Header -->
         <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
           <div class="container-fluid">
-            <span class="font-bolder fs-3 text-white">
+            <span class="font-bolder fs-3">
               {{$header}}
 
             </span>
@@ -87,7 +87,7 @@
               <li class="nav-item topbar-user dropdown hidden-caret ">
                 <a class="dropdown-toggle text-black" data-bs-toggle="dropdown" href="#" aria-expanded="false">
                   <span class="profile-username">
-                    <span class="fw-bold text-white">{{$user->name}}
+                    <span class="fw-bold ">{{$user->name}}
                       <i class="fa fa-angle-down fa-lg"></i>
                     </span>
                   </span>

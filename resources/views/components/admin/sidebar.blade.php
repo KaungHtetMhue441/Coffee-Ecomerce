@@ -7,7 +7,7 @@ $user = auth()->guard("admin")->user();
     <div class="logo-header" data-background-color="dark">
       <a href="index.html" class="logo text-white">
         <!-- <img src="{{asset("images/logo2.jpg")}}" alt="navbar brand" class="navbar-brand rounded-circle me-2" /> -->
-        Coffee House
+        Sale And Ordering
       </a>
       <div class="nav-toggle">
         <button class="btn btn-toggle toggle-sidebar">
