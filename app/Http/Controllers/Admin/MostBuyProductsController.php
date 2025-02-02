@@ -26,8 +26,8 @@ class MostBuyProductsController extends Controller
                 ->leftJoin('orders', 'orders.id', '=', 'order_product.order_id')
                 ->leftJoin('product_sale', 'products.id', '=', 'product_sale.product_id')
                 ->leftJoin('sales', 'sales.id', '=', 'product_sale.sale_id')
-                ->whereBetween('orders.order_date', [Carbon::parse($fromDate)->startOfDay(), Carbon::parse($toDate)->endOfDay()])
-                ->orWhereBetween('sales.created_at', [Carbon::parse($fromDate)->startOfDay(), Carbon::parse($toDate)->endOfDay()])
+                ->whereBetween('orders.order_date', [$fromDate, $toDate])
+                ->orWhereBetween('sales.created_at', [$fromDate, $toDate])
                 ->groupBy(['products.id', 'products.name', "products.code"])
                 ->orderBy('total_quantity', 'desc');
         } else {
@@ -41,6 +41,8 @@ class MostBuyProductsController extends Controller
                 ->groupBy(['products.id', 'products.name', "products.code"])
                 ->orderBy('total_quantity', 'desc');
         }
+
+        // dd($query->toSql());
 
         $mostBuyProducts = $query->paginate($perPage);
         $mostBuyProducts->appends($request->query());

@@ -2,22 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Order;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function index(Request $request): View
     {
-        return view('profile.edit', [
+        $type  = $request->type;
+        $orders = Order::where("user_id", "=", auth()->user()->id);
+        if ($type == null) {
+
+            $orders->whereNull("status");
+        } else {
+            $orders->where("status", "like", "%" . $type . "%");
+        }
+        $orders = $orders->paginate(8)->appends($request->all());
+
+        return view('client.profile.index', [
             'user' => $request->user(),
+            "orders" => $orders,
+            "type" => $type
         ]);
     }
 
@@ -34,7 +47,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('profile.index')->with('status', 'profile-updated');
     }
 
     /**

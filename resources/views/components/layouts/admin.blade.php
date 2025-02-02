@@ -11,7 +11,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>{{$header}}</title>
   <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
-  <!-- <link rel="icon" href="/assets/img/kaiadmin/favicon.ico" type="image/x-icon" /> -->
+
 
   <!-- Fonts and icons -->
   <script src="/assets/js/plugin/webfont/webfont.min.js"></script>
@@ -43,6 +43,8 @@
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link rel="stylesheet" href="/assets/css/demo.css" />
   <link rel="stylesheet" href="{{asset('css/admin/app.css')}}">
+  <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
+
 </head>
 
 <body>
@@ -59,7 +61,7 @@
           <!-- Logo Header -->
           <div class="logo-header" data-background-color="dark">
             <a href="index.html" class="logo">
-              <!-- <img src="{{asset("images/logo.jpg")}}" alt="navbar brand" class="navbar-brand" height="20" /> -->
+              <img src="{{asset("logo.png")}}" alt="navbar brand" class="navbar-brand" height="20" />
             </a>
             <div class="nav-toggle">
               <button class="btn btn-toggle toggle-sidebar">
@@ -76,7 +78,7 @@
           <!-- End Logo Header -->
         </div>
         <!-- Navbar Header -->
-        <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
+        <nav class="navbar admin-nav navbar-header  navbar-header-transparent navbar-expand-lg border-bottom">
           <div class="container-fluid">
             <span class="font-bolder fs-3">
               {{$header}}

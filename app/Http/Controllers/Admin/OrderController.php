@@ -8,9 +8,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\OrdersExport;
+use App\Repositories\OrderStatusRepository;
 
 class OrderController extends Controller
 {
+    private $orderStatusRepository;
+
+    public function __construct(OrderStatusRepository $orderStatusRepository)
+    {
+        $this->orderStatusRepository = $orderStatusRepository;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -179,5 +187,21 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+
+    public function updateStatus(Request $request, Order $order)
+    {
+        $request->validate([
+            'status' => 'required|string|max:255',
+        ]);
+
+        $this->orderStatusRepository->create([
+            'order_id' => $order->id,
+            'status' => $request->status,
+        ]);
+
+        return redirect()
+            ->route('admin.order.index')
+            ->with('success', "Order status successfully updated!");
     }
 }

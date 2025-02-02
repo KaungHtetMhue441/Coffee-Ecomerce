@@ -3,9 +3,7 @@
 <?php
 
 use App\Http\Controllers\Admin\OtherExpenseController;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PdfController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\OrderController;
@@ -20,7 +18,6 @@ use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 
 use App\Http\Controllers\Admin\Report\ReportController;
 
-use App\Http\Controllers\Admin\CostController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\MostBuyProductsController;
 use App\Http\Controllers\Admin\ProfitController;
@@ -115,5 +112,5 @@ Route::middleware("auth:admin")->prefix('/admin')->name("admin.")->group(functio
 
     Route::get('most-buy-products', [MostBuyProductsController::class, 'index'])->name('most_buy_products');
 });
-Route::get('generate-order-pdf/{order}', [VouncherPDFController::class, 'generateOrderPDF'])->name("admin.order.vouncer");
+Route::get('generate-order-pdf/{order}', [VouncherPDFController::class, 'generateOrderPDF'])->name("admin.order.voucher");
 Route::get("most-buy-customer", [OrderController::class, 'getMostBuyCustomer'])->name("users.most.buy");

@@ -26,28 +26,24 @@
     </x-slot>
     <x-slot name="content">
 
-        <div class="row mt-3 px-0">
-
-            <div class="col-3 ps-0">
+        <div class="row mt-5 px-0">
+            <div class="mt-2"></div>
+            <div class="col-12  ps-0">
                 <div class="card shadow">
                     <div class="card-body bg_primary rounded">
                         <!-- <div class="d-flex align-items-start p-0"> -->
-                        <div class="nav flex-column nav-pills me-3 w-100" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                            <a class="text-white w-100  text-start text_white m-0 {{ request()->is('order/index') ? 'active' : '' }}" href="{{ route('order.index', '') }}">Draft Orders</a>
-                            <hr>
-                            <a class="text-white w-100 text-start text_white {{ request()->is('order/index/pending') ? 'active' : '' }}" href="{{ route('order.index', 'pending') }}">Pending Orders</a>
-                            <hr>
-                            <a class="text-white w-100 text-start text_white {{ request()->is('order/index/paid') ? 'active' : '' }}" href="{{ route('order.index', 'paid') }}">Paid Orders</a>
-                            <hr>
-                            <a class="text-white w-100 text-start text_white {{ request()->is('order/index/completed') ? 'active' : '' }}" href="{{ route('order.index', 'completed') }}">Completed Orders</a>
-                            <hr>
-                            <a class="text-white w-100 text-start text_white {{ request()->is('order/rejected') ? 'active' : '' }}" href="{{ route('order.index', 'rejected') }}">Rejected Orders</a>
-                        </div>
+                        <select class="form-select" id="orderStatus">
+                            <option value="{{ route('order.index', '') }}" {{ request()->is('order/index') ? 'selected' : '' }}>Draft Orders</option>
+                            <option value="{{ route('order.index', 'pending') }}" {{ request()->is('order/index/pending') ? 'selected' : '' }}>Pending Orders</option>
+                            <option value="{{ route('order.index', 'paid') }}" {{ request()->is('order/index/paid') ? 'selected' : '' }}>Paid Orders</option>
+                            <option value="{{ route('order.index', 'completed') }}" {{ request()->is('order/index/completed') ? 'selected' : '' }}>Completed Orders</option>
+                            <option value="{{ route('order.index', 'rejected') }}" {{ request()->is('order/rejected') ? 'selected' : '' }}>Rejected Orders</option>
+                        </select>
                         <!-- </div> -->
                     </div>
                 </div>
             </div>
-            <div class="col-9 shadow bg-white rounded">
+            <div class="col-12 mt-3 shadow bg-white rounded">
                 <div class="row mt-3 pt-3 rounded shadow justify-content-start" style="background-color: white;">
                     <h4 class="text-center text_primary">Order List</h4>
                 </div>
@@ -80,10 +76,14 @@
                                 <a class="btn btn-outline-success btn-sm" href="{{ route('order.show', $order->id) }}">
                                     <i class="fa fa-eye fa-md"></i>
                                 </a>
+                                <a class="btn btn-outline-success btn-sm" href="{{ route('order.tracking', $order->id) }}">
+                                    <i class="fas fa-location-arrow"></i>
+                                </a>
                                 @if($type == null)
                                 <a class="btn btn-outline-success btn-sm" href="{{ route('order.payment', $order->id) }}">
                                     Order Now
                                 </a>
+
                                 @elseif($type == 'pending')
                                 <!-- No additional button -->
                                 @elseif($type == 'completed')
@@ -105,5 +105,14 @@
                 </div>
             </div>
         </div>
+    </x-slot>
+    <x-slot name="script">
+        <script>
+            $(document).ready(function() {
+                $('#orderStatus').on('change', function() {
+                    window.location.href = $(this).val();
+                });
+            });
+        </script>
     </x-slot>
 </x-client.app>

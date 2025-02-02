@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer("user_id");
             $table->integer("total_amount")->nullable();
-            $table->string("status")->comment("submit,resubmit,reject,processing,delivered,completed")->nullable();
+            $table->string(column: "status")->comment("submit,resubmit,reject,processing,delivered,completed")->nullable();
             $table->timestamps();
         });
         

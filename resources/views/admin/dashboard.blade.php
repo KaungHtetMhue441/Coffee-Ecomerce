@@ -3,7 +3,7 @@
       Admin Dashboard
    </x-slot>
    <x-slot name="content">
-      <div class="container mt-3">
+      <div class="container-fluid mt-3">
          <div class="row">
             <div class="col-sm-6 col-md-4">
                <div class="card card-stats card-round">

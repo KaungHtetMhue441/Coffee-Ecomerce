@@ -89,7 +89,7 @@ $breadCrumbs = ['Order','Done Orders'];
                                                 <a href="{{route("admin.order.show",$order->id)}}" class=" btn btn-outline-info btn-sm me-1 py-1">
                                                     <i class="fa fa-eye fa-lg text-black"></i>
                                                 </a>
-                                                <a class="btn btn-outline-success py-1 btn-sm" href="{{route("admin.order.vouncer",$order->id)}}">
+                                                <a class="btn btn-outline-success py-1 btn-sm" href="{{route("admin.order.voucher",$order->id)}}">
                                                     <i class="fa fa-money-bill"></i>
                                                 </a>
                                             </td>

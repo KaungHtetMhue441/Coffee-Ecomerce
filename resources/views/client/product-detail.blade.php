@@ -20,12 +20,39 @@
                             <td>{{$product->category->name}}</td>
                         </tr>
 
-                    </tbody>
 
+                    </tbody>
                 </table>
                 <p class="text-justify">
                     {{$product->description}}
                 </p>
+                @if($product->details)
+                <div class="card">
+                    <div class="card-body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Include thing
+                                    </th>
+                                    <th>
+                                        Grams
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($product->details as $detail=>$grams)
+                                <tr>
+                                    <td>{{$detail}}</td>
+                                    <td>{{$grams}}g</td>
+                                </tr>
+                                @empty
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                @endif
             </div>
             <div class="p-0 mt-3">
                 <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>

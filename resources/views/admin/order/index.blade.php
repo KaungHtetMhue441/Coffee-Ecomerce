@@ -141,9 +141,21 @@ $breadCrumbs[1] = Str::ucfirst(request()["type"])." Order";
                                                 <a href="{{route("admin.order.show",$order->id)}}" class=" btn btn-info me-1 px-3 py-1">
                                                     <i class="fa fa-eye fa-lg text-black"></i>
                                                 </a>
-                                                <a class="btn btn-primary py-1 px-3 " href="{{route("admin.order.vouncer",$order->id)}}">
+                                                <a class="btn btn-primary py-1 px-3 " href="{{route("admin.order.voucher",$order->id)}}">
                                                     <i class="fa fa-money-bill"></i>
                                                 </a>
+                                                <form action="{{ route('admin.order.updateStatus', $order->id) }}" method="POST" class="mt-2">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <select name="status" class="form-control">
+                                                        <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                                        <option value="accepted" {{ $order->status == 'accepted' ? 'selected' : '' }}>Accepted</option>
+                                                        <option value="cooking" {{ $order->status == 'cooking' ? 'selected' : '' }}>Cooking</option>
+                                                        <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
+                                                        <option value="arrived" {{ $order->status == 'arrived' ? 'selected' : '' }}>Arrived</option>
+                                                    </select>
+                                                    <button type="submit" class="btn btn-primary mt-2">Update Status</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         @endforeach

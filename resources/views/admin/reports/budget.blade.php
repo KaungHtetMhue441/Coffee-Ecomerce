@@ -114,7 +114,7 @@ $breadCrumbs = ['Sale','all'];
                                                 <a href="{{route("admin.order.show",$transaction->order->id)}}" class=" btn btn-outline-info btn-sm me-1 py-1">
                                                     <i class="fa fa-eye fa-lg text-black"></i>
                                                 </a>
-                                                <a class="btn btn-outline-success py-1 btn-sm" href="{{route("admin.order.vouncer",$transaction->order->id)}}">
+                                                <a class="btn btn-outline-success py-1 btn-sm" href="{{route("admin.order.voucher",$transaction->order->id)}}">
                                                     <i class="fa fa-money-bill"></i>
                                                 </a>
                                             </td>

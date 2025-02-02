@@ -1,6 +1,9 @@
-<nav class="navbar navbar-expand-lg nav_container nav_text_color bg-body-tertiary px-md-5 shadow" style="position:sticky;top:0;z-index:1001;">
+<nav class="navbar  py-md-3 navbar-expand-lg nav_container nav_text_color bg-body-tertiary px-md-5 shadow" style="position:sticky;top:0;z-index:1001;">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Coffee House</a>
+        <a class="navbar-brand" href="/">
+
+            ANGLE COFFEE HOUSE
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -10,22 +13,32 @@
             <a class="btn btn-secondary" href="{{route("login")}}">Login</a>
             <a class="btn btn-outline-secondary ms-2" href="{{route("register")}}">Register</a>
             @else
-            <div class="dropdown">
-                <p class="dropdown-toggle mb-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{auth()->user()->name}}
-                </p>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="{{ route("profile.edit") }}" class="ps-3" style="color:black!important;text-decoration: none;">Profile</a>
-                    </li>
-                    <li>
-                        <form action="{{route("logout")}}" method="POST">
-                            @csrf
-                            <button class="dropdown-item text-black" type="submit" style="color: black!important;" href="{{route("logout")}}">Logout</button>
-                        </form>
-                    </li>
-                </ul>
+            <div class="d-flex ">
+                <div class="dropdown">
+                    <p class="dropdown-toggle mb-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{auth()->user()->name}}
+                    </p>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{{ route("profile.index") }}" class="ps-3" style="color:black!important;text-decoration: none;">Profile</a>
+                        </li>
+                        <li>
+                            <form action="{{route("logout")}}" method="POST">
+                                @csrf
+                                <button class="dropdown-item text-black" type="submit" style="color: black!important;" href="{{route("logout")}}">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <div style="position: relative;">
+                    <a href="{{route("cart.index")}}" class="ms-3" style="display:inline;text-decoration: none;">
+                        <i class='fa fs-5 fa-cart-plus'>
+                            <div style='position:relative;display: inline-block;'><span id='cart_count' style='color:coral;position:absolute; top:-25px;left: -3px;'></span></div>
+                        </i>
+                    </a>
+                </div>
             </div>
+
             <h4></h4>
             @endif
         </div>

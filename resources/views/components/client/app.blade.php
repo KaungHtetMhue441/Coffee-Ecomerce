@@ -11,7 +11,6 @@
     {{$title}}
   </title>
   <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
-  <link rel="icon" href="" />
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,6 +45,7 @@
   <link rel="stylesheet" href="{{asset("css/client/animate.css")}}">
   <link rel="stylesheet" href="{{asset("css/client/fontStyle.css")}}">
   <link rel="stylesheet" href="{{asset("flatpicker/flatpicker.min.css")}}">
+  <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
 
   {{$style}}
   <!-- @vite(['resources/css/app.css', 'resources/js/app.js']) -->
@@ -60,7 +60,7 @@
       {{$content}}
 
     </div>
-    <footer class="bg-dark text-light py-5 mt-5">
+    <footer class="text-light py-5 mt-5" style="background-color: #45230f">
       <div class="container">
         <div class="row">
           <!-- About Us Section -->

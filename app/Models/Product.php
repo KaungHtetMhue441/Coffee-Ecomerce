@@ -17,7 +17,12 @@ class Product extends Model
         'image',
         'price',
         'description',
-        'category_id'
+        'category_id',
+        "details",
+    ];
+
+    protected $casts = [
+        'details' => 'array',
     ];
 
     public function GetshortDescAttribute()

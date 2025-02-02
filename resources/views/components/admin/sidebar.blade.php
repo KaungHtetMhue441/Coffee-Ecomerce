@@ -6,8 +6,8 @@ $user = auth()->guard("admin")->user();
     <!-- Logo Header -->
     <div class="logo-header" data-background-color="dark">
       <a href="index.html" class="logo text-white">
-        <!-- <img src="{{asset("images/logo2.jpg")}}" alt="navbar brand" class="navbar-brand rounded-circle me-2" /> -->
-        Sale And Ordering
+        <img src="{{asset("logo.png")}}" alt="navbar brand" class="navbar-brand rounded me-2" height="30px" />
+        Angle House
       </a>
       <div class="nav-toggle">
         <button class="btn btn-toggle toggle-sidebar">
@@ -167,6 +167,11 @@ $user = auth()->guard("admin")->user();
               <li>
                 <a href="{{ route('admin.order.index', 'completed') }}">
                   <span class="sub-item">Completed Orders</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('admin.order.index', 'track') }}">
+                  <span class="sub-item">Track Orders</span>
                 </a>
               </li>
             </ul>

@@ -5,28 +5,25 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
-use Illuminate\Database\Eloquent\Builder;
+use App\Repositories\ProductRepository;
+use App\Repositories\ProductRepositoryImpl;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    private $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $products = Product::query();
-
-        if ($request['name']) {
-            $products->where("name", 'like', '%' . $request['name'] . '%')
-                ->orWhere("en_name", 'like', '%' . $request['name'] . '%');
-        }
-
-        if ($request['caategory']) {
-            $products->whereHas("categories", function (Builder $query) use ($request) {
-                $query->where("name", 'like', '%' . $request['name'] . '%');
-            });
-        }
+        $products = $this->productRepository->getAll($request);
 
         return view('admin.product.index', [
             "products" => $products->orderBy("id", "DESC")->paginate(10)->appends($request->except(['page']))
@@ -38,7 +35,6 @@ class ProductController extends Controller
      */
     public function create(Request $request)
     {
-
         return view("admin.product.create", [
             "categories" => Category::all()
         ]);
@@ -49,7 +45,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-
+        // dd();
         $request->validate([
             'name' => 'required|string|max:255',
             'en_name' => 'required|string|max:255',
@@ -62,8 +58,8 @@ class ProductController extends Controller
 
         $file = $request->file("file");
         $request['image'] = uploadFile($file, "/products/");
-
-        Product::create($request->all());
+        $request['details'] = json_encode(json_decode($request->details, true)["details"]);
+        $this->productRepository->create($request->all());
 
         return redirect()
             ->route('admin.product.index')
@@ -109,7 +105,8 @@ class ProductController extends Controller
             deleteFile("/products/", $product->image);
         }
 
-        $product->update($request->all());
+        $this->productRepository->update($product, $request->all());
+
         return redirect()
             ->route('admin.product.index')
             ->with('success', "Product successfully updated!");
@@ -120,10 +117,11 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product->delete();
+        $this->productRepository->delete($product);
         deleteFile("/products", $product->image);
+
         return redirect()
             ->route("admin.product.index")
-            ->with("success", "Product successfully created!");
+            ->with("success", "Product successfully deleted!");
     }
 }
