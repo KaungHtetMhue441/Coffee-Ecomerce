@@ -99,8 +99,8 @@ Route::middleware("auth:admin")->prefix('/admin')->name("admin.")->group(functio
         Route::get("show/{order}", "show")->name("show");
     });
 
-    Route::get("report/budget", [ReportController::class, "index"])->name("report.budget");
-
+    Route::get("reports/income", [ReportController::class, "income"])->name("reports.income");
+    Route::get('reports/outcome', [ReportController::class, 'outcome'])->name('reports.outcome');
     Route::resource('employees',  EmployeeController::class);
     Route::resource('purchases', PurchaseController::class);
     Route::resource('salaries', SalaryController::class);

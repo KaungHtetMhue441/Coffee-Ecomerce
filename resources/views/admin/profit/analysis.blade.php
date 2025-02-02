@@ -24,7 +24,7 @@
         <div class="container-fluid mt-3">
             <div class="card">
                 <div class="card-body">
-                    <h1>Profit Analysis</h1>
+                    <h1>Analyzing Profits</h1>
                     <form method="GET" action="{{ route('admin.profits') }}">
                         <div class="row">
                             <div class="col-md-4">

@@ -136,7 +136,7 @@ class OrderController extends Controller
             ->groupBy("users.id")
             ->selectRaw("
         users.id as user_id,sum(orders.total_amount) as total")
-            ->orderby("total")
+            ->orderby("total", "desc")
             ->take(10)
             ->get();
         // dd($users);

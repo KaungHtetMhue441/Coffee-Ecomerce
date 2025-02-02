@@ -104,6 +104,8 @@ class ProductController extends Controller
             $request['image'] = uploadFile($file, "/products/");
             deleteFile("/products/", $product->image);
         }
+        $request['details'] = json_encode(json_decode($request->details, true));
+
 
         $this->productRepository->update($product, $request->all());
 

@@ -206,7 +206,6 @@ $(document).ready(function () {
 		toggle_topbar = true;
 	}
 
-	console.log(localStorage.getItem("close-nav-toggle"))
 	if (localStorage.getItem("close-nav-toggle")) {
 		console.log("hello");
 		$('.wrapper').removeClass('sidebar_minimize')
@@ -217,7 +216,7 @@ $(document).ready(function () {
 		mini_sidebar = 1;
 		$(window).resize();
 	}
-	
+
 
 	if (!minimize_sidebar) {
 		var minibutton = $('.toggle-sidebar');

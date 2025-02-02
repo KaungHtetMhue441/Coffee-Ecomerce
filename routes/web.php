@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\MostBuyProductsController;
 use App\Http\Controllers\Client\OrderTrackingController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\Report\ReportController;
 
 Route::get('/', function () {
     return view('client.index');
@@ -24,6 +25,7 @@ Route::get('/order-tracking/{order}', [OrderTrackingController::class, 'show'])-
 
 Route::middleware('auth:admin')->group(function () {
     Route::put('/admin/orders/{order}/status', [OrderController::class, 'updateStatus'])->name('admin.order.updateStatus');
+    Route::get('/admin/reports/outcome', [ReportController::class, 'outcome'])->name('admin.report.outcome');
 });
 
 require __DIR__ . '/auth.php';

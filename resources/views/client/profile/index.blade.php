@@ -63,7 +63,7 @@
         <div class="container-fluid">
             <div class="row d-flex flex-row-reverse pt-5">
                 <!-- Sidebar -->
-                <nav class="col-md-5 col-lg-2 sidebar bg_primary rounded profile pt-5">
+                <nav class="col-md-5 col-lg-3 sidebar bg_primary rounded profile pt-5">
                     <div class="text-center">
                         <img
                             id="profileImage"
@@ -97,7 +97,7 @@
 
 
                 <!-- Main Content -->
-                <main class="col-md-7 col-lg-10 content">
+                <main class="col-md-7 col-lg-9 content">
                     <div class="card p-3">
                         <div class="card-body">
                             <div id="orders" class="tab-content">

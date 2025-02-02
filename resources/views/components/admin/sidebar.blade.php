@@ -55,16 +55,34 @@ $user = auth()->guard("admin")->user();
         <li class="nav-item">
           <a href="{{ route('admin.profits') }}" class="collapsed">
             <i class="fas fa-chart-line"></i>
-            <p>Calculation Profits</p>
+            <p>Analyzing Profits</p>
           </a>
         </li>
 
         <!-- Menu Item for Final Budget -->
+
         <li class="nav-item">
-          <a href="{{ route('admin.report.budget') }}" class="collapsed">
-            <i class="fas fa-chart-bar"></i>
+          <a data-bs-toggle="collapse" href="#sidebarLayoutsFinalTransaction">
+            <i class="fas fa-th-list"></i>
             <p>Final Transaction Report</p>
+            <span class="caret"></span>
           </a>
+          <div class="collapse" id="sidebarLayoutsFinalTransaction">
+            <ul class="nav nav-collapse">
+              <li>
+                <a href="{{ route('admin.reports.income') }}">
+                  <i class="fas fa-chart-bar"></i>
+                  <p>Incomes</p>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('admin.reports.outcome') }}">
+                  <i class="fa fa-chart-line"></i>
+                  <p>Outcomes</p>
+                </a>
+              </li>
+            </ul>
+          </div>
         </li>
         <!-- Category Menu Item -->
         <li class="nav-item">

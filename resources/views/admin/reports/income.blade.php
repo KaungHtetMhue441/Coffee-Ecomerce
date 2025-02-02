@@ -21,7 +21,7 @@ $breadCrumbs = ['Sale','all'];
                             <div class="card-title">
                                 <!-- All Sales -->
                                 <div class="inline-block float-end">
-                                    <form action="{{route('admin.sale.index')}}" method="get">
+                                    <form action="{{route('admin.reports.income')}}" method="get">
                                         <div class="row pt-2">
                                             <div class="col-4 mb-3">
                                                 <input type="text" value="{{request()->get('customer_name')}}" name="customer_name" class="form-control me-3" placeholder="Enter Customer Name">
