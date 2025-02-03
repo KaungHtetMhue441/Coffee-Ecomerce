@@ -9,11 +9,11 @@
         <div class="row justify-content-end">
             <div class="col-3">
                 <select class="form-select" id="orderStatus">
-                    <option value="{{ route('profile.index') }}" {{ request()->is('profile/index') ? 'selected' : '' }}>Draft Orders</option>
-                    <option value="{{ route('profile.index', ) }}?type=pending" {{ request()->is('profile/index?type=pending') ? 'selected' : '' }}>Pending Orders</option>
-                    <option value="{{ route('profile.index') }}?type=paid" {{ request()->is('profile/index/paid?type=paid') ? 'selected' : '' }}>Paid Orders</option>
-                    <option value="{{ route('profile.index') }}?type=completed" {{ request()->is('profile/index?type=completed') ? 'selected' : '' }}>Completed Orders</option>
-                    <option value="{{ route('profile.index') }}?type=rejected" {{ request()->is('profile/rejected?type=rejected') ? 'selected' : '' }}>Rejected Orders</option>
+                    <option value="{{ route('profile.index') }}" {{ request()['type']=="" ? 'selected' : '' }}>Draft Orders</option>
+                    <option value="{{ route('profile.index', ) }}?type=pending" {{ request()['type']=="pending" ? 'selected' : '' }}>Pending Orders</option>
+                    <option value="{{ route('profile.index') }}?type=paid" {{ request()['type']=="paid" ? 'selected' : '' }}>Paid Orders</option>
+                    <option value="{{ route('profile.index') }}?type=completed" {{ request()['type']=="completed" ? 'selected' : '' }}>Completed Orders</option>
+                    <option value="{{ route('profile.index') }}?type=rejected" {{ request()['type']=="rejected" ? 'selected' : '' }}>Rejected Orders</option>
                 </select>
             </div>
             <div class="col-3">

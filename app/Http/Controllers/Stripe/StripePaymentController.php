@@ -105,7 +105,9 @@ class StripePaymentController extends Controller
             }
         }
 
-        return view('client.checkout.success', compact('order'));
+        return redirect()->route("profile.index", ['type' => "pending"])->with("success", "Successfully Order");
+
+        // return view('client.checkout.success', compact('order'));
     }
 
     public function showCancel()

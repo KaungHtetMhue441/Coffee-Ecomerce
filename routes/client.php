@@ -2,6 +2,7 @@
 
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Client\ClientCartController;
 use App\Http\Controllers\Client\ClientHomeController;
 use App\Http\Controllers\Client\ClientOrderController;
@@ -45,6 +46,13 @@ Route::controller(StripePaymentController::class)->prefix("order-stripe-checkout
     Route::get('cancel', 'showCancel')->name('cancel');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', action: [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profile/setting', action: [ProfileController::class, 'setting'])->name('profile.setting');
+    Route::get('/profile/inbox', action: [ProfileController::class, 'inbox'])->name(name: 'profile.inbox');
 
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
 // Route::post('stripe/webhook', [PaymentController::class, 'handleWebhook']);

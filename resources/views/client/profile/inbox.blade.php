@@ -63,14 +63,17 @@
         <div class="container-fluid">
             <div class="row d-flex flex-row-reverse pt-5">
                 <!-- Sidebar -->
-                <x-client.profile.sidebar pageName="orders"></x-client.profile.sidebar>
+                <x-client.profile.sidebar pageName="inbox"></x-client.profile.sidebar>
                 <!-- Main Content -->
                 <main class="col-md-7 col-lg-9 content">
                     <div class="card p-3">
                         <div class="card-body">
-                            <x-client.profile.orders :orders="$orders" :type="$type">
 
-                            </x-client.profile.orders>
+                            <!-- Mailbox Section -->
+                            <x-client.profile.inbox></x-client.profile.inbox>
+
+                            <!-- Settings Section -->
+                            <!-- <x-client.profile.setting :user="$user"></x-client.profile.setting> -->
                         </div>
                     </div>
                 </main>
@@ -108,58 +111,10 @@
     <x-slot name="script">
         <script>
             $(document).ready(function() {
-                // Sidebar navigation
-                $(".custom_nav_link").click(function(e) {
-                    e.preventDefault();
-                    $(".nav-link").removeClass("active");
-                    $(this).addClass("active");
-
-                    let tab = $(this).data("tab");
-                    $(".tab-content").addClass("d-none");
-                    $("#" + tab).removeClass("d-none");
-                });
-
                 // Open edit profile modal
                 $("#editProfile").click(function() {
                     $("#profileModal").modal("show");
                 });
-
-                // Save changes
-                $("#profileForm").submit(function(event) {
-                    event.preventDefault();
-
-                    let newName = $("#profileName").val();
-                    let newEmail = $("#profileEmail").val();
-                    let newPic = $("#profilePic").val();
-
-                    $("#userName").text(newName);
-                    $("#userEmail").html(
-                        '<i class="fas fa-envelope"></i> ' + newEmail
-                    );
-                    $("#profileImage").attr("src", newPic);
-
-                    $("#profileModal").modal("hide");
-                });
-            });
-
-
-            //For Order Page
-            $(document).ready(function() {
-                $('#orderStatus').on('change', function() {
-                    window.location.href = $(this).val();
-                });
-            });
-
-            flatpickr("#from_datepicker", {
-                enableTime: false, // Set to true if you want to include time selection
-                dateFormat: "Y-m-d",
-                // Customize the date format as needed
-                defaultDate: "{{request()->get('from')}}"
-            });
-            flatpickr("#to_datepicker", {
-                enableTime: false, // Set to true if you want to include time selection
-                dateFormat: "Y-m-d", // Customize the date format as needed
-                defaultDate: "{{request()->get('to')}}"
             });
         </script>
     </x-slot>

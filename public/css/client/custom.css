@@ -43,7 +43,7 @@ body {
 .k_active {
     background-color: #cf8980 !important;
 }
-.k_active:hover {
+.k_active_hover:hover {
     background-color: #cf8980 !important;
 }
 .nav_link::after {

@@ -103,7 +103,7 @@ class ClientOrderController extends Controller
             "user_id" => $order->user_id,
             "application_type" => "order"
         ]);
-        return redirect()->route("order.index")->with("success", "Successfully Order");
+        return redirect()->route("profile.index")->with("success", "Successfully Order");
     }
 
     /**

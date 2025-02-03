@@ -32,6 +32,21 @@ class ProfileController extends Controller
             "orders" => $orders,
             "type" => $type
         ]);
+        
+    }
+
+    public function inbox(Request $request): View
+    {
+        return view('client.profile.inbox', [
+            'user' => $request->user(),
+        ]);
+    }
+
+    public function setting(Request $request): View
+    {
+        return view('client.profile.setting', [
+            'user' => $request->user(),
+        ]);
     }
 
     /**
