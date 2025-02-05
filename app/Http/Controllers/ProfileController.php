@@ -17,22 +17,30 @@ class ProfileController extends Controller
      */
     public function index(Request $request): View
     {
-        $type  = $request->type;
+        $status  = $request->status;
         $orders = Order::where("user_id", "=", auth()->user()->id);
-        if ($type == null) {
+        if ($status == null) {
 
             $orders->whereNull("status");
         } else {
-            $orders->where("status", "like", "%" . $type . "%");
+            $orders->where("status", "like", "%" . $status . "%");
+        }
+        if ($request["from"]) {
+            $orders->whereDate("order_date", ">=", $request["from"]);
+        }
+        if ($request["to"]) {
+            $orders->whereDate("order_date", "<=", $request["to"]);
+        }
+        if ($request['id']) {
+            $orders->where("id", "=", $request['id']);
         }
         $orders = $orders->paginate(8)->appends($request->all());
 
         return view('client.profile.index', [
             'user' => $request->user(),
             "orders" => $orders,
-            "type" => $type
+            "status" => $status
         ]);
-        
     }
 
     public function inbox(Request $request): View

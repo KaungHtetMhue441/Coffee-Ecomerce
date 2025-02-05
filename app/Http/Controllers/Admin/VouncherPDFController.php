@@ -16,7 +16,7 @@ class VouncherPDFController extends Controller
 
         $data = [
             'title' => 'Coffee House',
-            'admin' => $sale->admin->name,
+            'admin' => $sale->admin,
             'date' => date('m/d/Y'),
             'totalPrice' => $sale->total_cost,
             'products' => $sale->products

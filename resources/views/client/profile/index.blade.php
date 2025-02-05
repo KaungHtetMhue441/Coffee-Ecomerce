@@ -68,7 +68,7 @@
                 <main class="col-md-7 col-lg-9 content">
                     <div class="card p-3">
                         <div class="card-body">
-                            <x-client.profile.orders :orders="$orders" :type="$type">
+                            <x-client.profile.orders :orders="$orders" :type="$status">
 
                             </x-client.profile.orders>
                         </div>

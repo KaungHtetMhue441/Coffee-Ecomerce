@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Purchase;
+use Carbon\Carbon;
 use App\Models\Sale;
 use App\Models\Order;
 use App\Models\Salary;
+use App\Models\Purchase;
 use App\Models\OtherExpense;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
+use App\Http\Controllers\Controller;
+use DB;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProfitController extends Controller
@@ -56,7 +57,7 @@ class ProfitController extends Controller
                     $monthlySalesAmount = Sale::whereBetween('created_at', [$startOfMonth, $endOfMonth])->sum('total_cost');
                     $monthlyOrdersAmount = Order::whereBetween('order_date', [$startOfMonth, $endOfMonth])->sum('total_amount');
                     $monthlySalariesAmount = Salary::whereBetween('incurred_at', [$startOfMonth, $endOfMonth])->sum('amount');
-                    $monthlyPurchasesAmount = Purchase::whereBetween('purchased_at', [$startOfMonth, $endOfMonth])->sum('price');
+                    $monthlyPurchasesAmount = Purchase::whereBetween('purchased_at', [$startOfMonth, $endOfMonth])->sum(DB::raw('price * quantity'));
                     $monthlyOtherExpense = OtherExpense::whereBetween('incurred_at', [$startOfMonth, $endOfMonth])->sum('price');
 
                     $monthlyProfit = ($monthlySalesAmount + $monthlyOrdersAmount) - ($monthlySalariesAmount + $monthlyPurchasesAmount + $monthlyOtherExpense);
@@ -88,7 +89,7 @@ class ProfitController extends Controller
                 $monthlySalesAmount = Sale::whereBetween('created_at', [$startOfMonth, $endOfMonth])->sum('total_cost');
                 $monthlyOrdersAmount = Order::whereBetween('order_date', [$startOfMonth, $endOfMonth])->sum('total_amount');
                 $monthlySalariesAmount = Salary::whereBetween('incurred_at', [$startOfMonth, $endOfMonth])->sum('amount');
-                $monthlyPurchasesAmount = Purchase::whereBetween('purchased_at', [$startOfMonth, $endOfMonth])->sum('price');
+                $monthlyPurchasesAmount = Purchase::whereBetween('purchased_at', [$startOfMonth, $endOfMonth])->sum(DB::raw('price * quantity'));
                 $monthlyOtherExpense = OtherExpense::whereBetween('incurred_at', [$startOfMonth, $endOfMonth])->sum('price');
 
                 $monthlyProfit = ($monthlySalesAmount + $monthlyOrdersAmount) - ($monthlySalariesAmount + $monthlyPurchasesAmount + $monthlyOtherExpense);

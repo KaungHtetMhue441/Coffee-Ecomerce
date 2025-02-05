@@ -27,6 +27,15 @@ class ClientOrderController extends Controller
         } else {
             $orders->where("status", "like", "%" . $type . "%");
         }
+        if ($request["from"]) {
+            $orders->whereDate("order_date", ">=", $request["from"]);
+        }
+        if ($request["to"]) {
+            $orders->whereDate("order_date", "<=", $request["to"]);
+        }
+        if ($request['id']) {
+            $orders->where("id", "=", $request['id']);
+        }
         $orders = $orders->paginate(8)->appends($request->all());
         return view("client.order.index", [
             "orders" => $orders,

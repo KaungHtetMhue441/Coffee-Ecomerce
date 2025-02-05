@@ -16,7 +16,7 @@ $col = 12 / $menuCount;
             </div>
             <div class="d-flex justify-content-between">
                 <a href="{{route("client.product.show",$product->id)}}" class="btn btn-outline-info">See Details</a>
-                Quantity {{$product->pivot->quantity}}
+                Quantity <input type="text" style="width:40px;" class="ps-2" value="{{$product->pivot->quantity}}" disabled>
             </div>
         </div>
     </div>

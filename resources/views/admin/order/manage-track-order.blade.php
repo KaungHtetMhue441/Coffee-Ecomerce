@@ -1,7 +1,8 @@
 @php
-$breadCrumbs = ['Order','Uncomplete Orders'];
+$breadCrumbs = ['Order','Manage Track Orders'];
 $breadCrumbs[1] = Str::ucfirst(request()["type"])." Order";
-$orderStatus = ["pending","accepted","cooking","delivered","arrived"];
+$orderStatus = ["accepted","rejected","cooking","delivered","arrived"];
+
 
 @endphp
 <x-layouts.admin>
@@ -66,7 +67,7 @@ $orderStatus = ["pending","accepted","cooking","delivered","arrived"];
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
+                            <div class="table-responsive overflow-scroll">
                                 <table class="display table-bordered border-black table table-striped table-hover">
                                     <thead>
                                         <tr>
@@ -80,8 +81,7 @@ $orderStatus = ["pending","accepted","cooking","delivered","arrived"];
                                             <th>Status</th>
                                             <th>Order Date</th>
                                             <th>Pay Date</th>
-                                            <th>Action</th>
-                                            <td></td>
+                                            <th colspan="2" width="300px">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -107,10 +107,10 @@ $orderStatus = ["pending","accepted","cooking","delivered","arrived"];
                                             $btn = "badge ";
                                             if($order->status=="pending"){
                                             $btn .= "badge-warning";
-                                            }elseif($order->status=="accepted"){
+                                            }elseif($order->status=="paid"){
                                             $btn .="badge-success";
                                             }else{
-                                            $btn.="badge-info";
+                                            $btn.="badge-infa";
                                             }
                                             @endphp
                                             <td style="width: 60px!important;">
@@ -123,7 +123,7 @@ $orderStatus = ["pending","accepted","cooking","delivered","arrived"];
                                                 <br>(".$order->transaction?->created_at?->diffForHumans().")"!!}
                                             </td>
                                             <td>
-                                                <form action="{{ route('admin.order.updateStatus', $order->id) }}" method="POST" class="mt-2">
+                                                <form action=" {{ route('admin.order.updateStatus', $order->id) }}" method="POST" class="mt-2">
                                                     @csrf
                                                     @method('PUT')
                                                     <select name="status" class="form-control">
@@ -132,23 +132,23 @@ $orderStatus = ["pending","accepted","cooking","delivered","arrived"];
 
                                                         // Find the index of the current status
                                                         $startIndex = array_search($currentStatus, $orderStatus);
-                                                        $nextStatus = $orderStatus[$startIndex+1];
-                                                        @endphp
-                                                        <option value="{{$nextStatus}}">{{$nextStatus}}
 
-                                                        </option>
-                                                        @if($status=="pending")
-                                                        <option value="rejected">rejected</option>
-                                                        @endif
+                                                        // Get statuses from current status to the end
+                                                        $filteredStatuses = array_slice($orderStatus, $startIndex);
+                                                        @endphp
+                                                        @foreach ($filteredStatuses as $status)
+                                                        <option value="{{$status}}">{{$status}}</option>
+                                                        @endforeach
                                                     </select>
-                                                    <button type="submit" class="btn btn-primary mt-2">Update</button>
+                                                    <button type="submit" class="btn btn-primary mt-2">Update Status</button>
                                                 </form>
                                             </td>
                                             <td style="width: 250px;">
+
                                                 <a href="{{route("admin.order.show",$order->id)}}" class=" btn btn-info me-1 px-3 py-1">
                                                     <i class="fa fa-eye fa-lg text-black"></i>
                                                 </a>
-                                                <a class="btn btn-primary py-1 px-3 mt-2" href="{{route("admin.order.voucher",$order->id)}}">
+                                                <a class="btn btn-primary py-1 px-3 " href="{{route("admin.order.voucher",$order->id)}}">
                                                     <i class="fa fa-money-bill"></i>
                                                 </a>
                                             </td>

@@ -24,21 +24,20 @@
         <div class="container-fluid mt-3">
             <div class="card">
                 <div class="card-body">
-                    <h1>Analyzing Profits</h1>
                     <form method="GET" action="{{ route('admin.profits') }}">
                         <div class="row">
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
                                 <label for="from_month">From Month:</label>
                                 <input type="number" id="from_month" name="from_month" class="form-control" min="1" max="12" value="{{ request('from_month', 1) }}">
-                            </div>
-                            <div class="col-md-4">
+                            </div> -->
+                            <!-- <div class="col-md-4">
                                 <label for="to_month">To Month:</label>
                                 <input type="number" id="to_month" name="to_month" class="form-control" min="1" max="12" value="{{ request('to_month', now()->month) }}">
-                            </div>
-                            <div class="col-md-4">
+                            </div> -->
+                            <!-- <div class="col-md-4">
                                 <label for="year">Year:</label>
                                 <input type="number" id="year" name="year" class="form-control" value="{{ request('year', now()->year) }}">
-                            </div>
+                            </div> -->
                             <div class="col-md-6 mt-3">
                                 <label for="from_date">From Date:</label>
                                 <input type="text" id="from_date" name="from_date" class="form-control" value="{{ request('from_date') }}">

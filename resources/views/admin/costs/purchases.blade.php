@@ -84,7 +84,7 @@
                                             <input type="number" step="0.01" class="form-control" id="quantity{{ $purchase->id }}" name="quantity" value="{{ $purchase->quantity }}" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="price{{ $purchase->id }}" class="form-label">Price</label>
+                                            <label for="price{{ $purchase->id }}" class="form-label">Unit Per Price</label>
                                             <input type="number" step="0.01" class="form-control" id="price{{ $purchase->id }}" name="price" value="{{ $purchase->price }}" required>
                                         </div>
                                         <div class="mb-3">
@@ -134,7 +134,7 @@
                                 <input type="number" step="0.01" class="form-control" id="quantity" name="quantity" required>
                             </div>
                             <div class="mb-3">
-                                <label for="price" class="form-label">Price</label>
+                                <label for="price" class="form-label">Unit Per Price</label>
                                 <input type="number" step="0.01" class="form-control" id="price" name="price" required>
                             </div>
                             <div class="mb-3">

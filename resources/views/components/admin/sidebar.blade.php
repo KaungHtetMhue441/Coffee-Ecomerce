@@ -40,7 +40,7 @@ $user = auth()->guard("admin")->user();
         <li class="nav-item">
           <a href="{{ route('admin.most_buy_products') }}" class="collapsed">
             <i class="fas fa-users"></i>
-            <p>Most Buy Products</p>
+            <p>Best Selling Products</p>
           </a>
         </li>
 
@@ -60,11 +60,33 @@ $user = auth()->guard("admin")->user();
         </li>
 
         <!-- Menu Item for Final Budget -->
-
+        <li class="nav-item">
+          <a data-bs-toggle="collapse" href="#sidebarLayoutsInventory">
+            <i class="fas fa-th-list"></i>
+            <p>Manage Inventory</p>
+            <span class="caret"></span>
+          </a>
+          <div class="collapse" id="sidebarLayoutsInventory">
+            <ul class="nav nav-collapse">
+              <li>
+                <a href="{{ route('admin.inventory.create') }}">
+                  <i class="fas fa-chart-bar"></i>
+                  <p>Add Items</p>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('admin.inventory.index') }}">
+                  <i class="fa fa-chart-line"></i>
+                  <p>Manage Item</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
         <li class="nav-item">
           <a data-bs-toggle="collapse" href="#sidebarLayoutsFinalTransaction">
             <i class="fas fa-th-list"></i>
-            <p>Final Transaction Report</p>
+            <p>Final Report</p>
             <span class="caret"></span>
           </a>
           <div class="collapse" id="sidebarLayoutsFinalTransaction">
@@ -78,7 +100,7 @@ $user = auth()->guard("admin")->user();
               <li>
                 <a href="{{ route('admin.reports.outcome') }}">
                   <i class="fa fa-chart-line"></i>
-                  <p>Outcomes</p>
+                  <p>Expenses</p>
                 </a>
               </li>
             </ul>
@@ -178,18 +200,18 @@ $user = auth()->guard("admin")->user();
                 </a>
               </li>
               <li>
-                <a href="{{ route('admin.order.index', 'paid') }}">
-                  <span class="sub-item">Paid Orders</span>
+                <a href="{{ route('admin.order.index', 'accepted') }}">
+                  <span class="sub-item">Delivering Orders</span>
                 </a>
               </li>
               <li>
-                <a href="{{ route('admin.order.index', 'completed') }}">
+                <a href="{{ route('admin.order.index', 'arrived') }}">
                   <span class="sub-item">Completed Orders</span>
                 </a>
               </li>
               <li>
-                <a href="{{ route('admin.order.index', 'track') }}">
-                  <span class="sub-item">Track Orders</span>
+                <a href="{{ route('admin.order.index', 'rejected') }}">
+                  <span class="sub-item">Rejected Orders</span>
                 </a>
               </li>
             </ul>

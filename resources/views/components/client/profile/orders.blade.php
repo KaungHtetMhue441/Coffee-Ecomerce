@@ -6,29 +6,36 @@
 
     <div class="card-body bg_primary rounded">
         <!-- <div class="d-flex align-items-start p-0"> -->
-        <div class="row justify-content-end">
-            <div class="col-3">
-                <select class="form-select" id="orderStatus">
-                    <option value="{{ route('profile.index') }}" {{ request()['type']=="" ? 'selected' : '' }}>Draft Orders</option>
-                    <option value="{{ route('profile.index', ) }}?type=pending" {{ request()['type']=="pending" ? 'selected' : '' }}>Pending Orders</option>
-                    <option value="{{ route('profile.index') }}?type=paid" {{ request()['type']=="paid" ? 'selected' : '' }}>Paid Orders</option>
-                    <option value="{{ route('profile.index') }}?type=completed" {{ request()['type']=="completed" ? 'selected' : '' }}>Completed Orders</option>
-                    <option value="{{ route('profile.index') }}?type=rejected" {{ request()['type']=="rejected" ? 'selected' : '' }}>Rejected Orders</option>
-                </select>
+        <form action="{{ route('profile.index') }}" method="GET">
+            <div class="row justify-content-end">
+                <div class="col-3">
+                    <select class="form-select" id="orderStatus">
+                        <option value="{{ route('profile.index', '') }}" {{ request()->is('order/index') ? 'selected' : '' }}>Draft Orders</option>
+                        <option value="{{ route('profile.index', ['status' => 'pending']) }}" {{ request()->is('order/index/pending') ? 'selected' : '' }}>Pending Orders</option>
+                        <option value="{{ route('profile.index', ['status' => 'accepted']) }}" {{ request()->is('order/index/accepted') ? 'selected' : '' }}>Accepted Orders</option>
+                        <option value="{{ route('profile.index', ['status' => 'arrived']) }}" {{ request()->is('order/index/arrived') ? 'selected' : '' }}>Arrived Orders</option>
+                        <option value="{{ route('profile.index', ['status' => 'rejected']) }}" {{ request()->is('order/index/rejected') ? 'selected' : '' }}>Rejected Orders</option>
+
+                    </select>
+                </div>
+                <div class="col-3">
+                    <input type="text" class="form-control" name="id" placeholder="Enter Order ID" value="{{ request('id') }}">
+                </div>
+                <div class="col-3">
+                    <input type="text" id="from_datepicker" class="form-control" name="from" placeholder="Order Date From.." value="{{ request('from') }}">
+                </div>
+                <div class="col-3">
+                    <input type="text" id="to_datepicker" class="form-control" name="to" placeholder="Order Date To.." value="{{ request('to') }}">
+                </div>
+                <div class="col-12 ">
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn_primary mt-3 px-5 me-3">Search</button>
+                        <a href="{{route("profile.index")}}" class="btn btn-secondary mt-3 px-5">Reset</a>
+                    </div>
+                </div>
             </div>
-            <div class="col-3">
-                <input type="text" class="form-control" placeholder="Enter Order ID">
-            </div>
-            <div class="col-3">
-                <input type="text" id="from_datepicker" class=" form-control" name="from" placeholder="Order Date From..">
-            </div>
-            <div class="col-3">
-                <input type="text" id="to_datepicker" class="form-control" name="to" placeholder="Order Date to..">
-            </div>
-            <div class="col-2 float-right">
-                <button type="submit" class="btn btn_primary mt-3 w-100">Search</button>
-            </div>
-        </div>
+        </form>
+
         <!-- </div> -->
 
     </div>
@@ -38,6 +45,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>Order ID</th>
                         <th>Product Amount</th>
                         <th>Total Amount</th>
                         <th>Payment Type</th>
@@ -50,6 +58,7 @@
                     @forelse ($orders as $order)
                     <tr>
                         <td>{{ ++$loop->index }}</td>
+                        <td>{{$order->id}}</td>
                         <td>{{ $order->products->count() }}</td>
                         <td>{{ $order->total_amount }}</td>
                         <td>
@@ -73,7 +82,7 @@
 
                             @elseif($type == 'pending')
                             <!-- No additional button -->
-                            @elseif($type == 'completed')
+                            @elseif($type == 'arrived')
                             <a class="btn btn-outline-success py-1 btn-sm" href="{{ route('admin.order.voucher', $order->id) }}">
                                 <i class="fa fa-money-bill fa-md"></i>
                             </a>

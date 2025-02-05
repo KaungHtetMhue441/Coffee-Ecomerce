@@ -1,9 +1,9 @@
 @php
-$breadCrumbs = ['Final Transaction','Outcome'];
+$breadCrumbs = ['Final Transaction','Expenses'];
 @endphp
 <x-layouts.admin>
     <x-slot name="header">
-        Final Income Report
+        Final Expenses Report
     </x-slot>
 
     <x-slot name="script">

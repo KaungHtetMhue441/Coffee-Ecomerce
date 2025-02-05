@@ -65,14 +65,14 @@
                 'delivered'=>"fas fa-lg fa-truck",
                 'arrived'=>"fas fa-lg fa-home"
                 ];
+
                 $orderStatusesArr = $orderStatuses->toArray();
 
 
                 $currentStatusIndex = array_search(end($orderStatusesArr)['status'], $statuses);
-
                 @endphp
                 <div class="progress-bar">
-                    <div class="filled" style="{{20 * count($orderStatusesArr)}}%"></div> <!-- Adjust width dynamically -->
+                    <div class="filled" style="width:{{20 * $orderStatuses->count()}}%"></div> <!-- Adjust width dynamically -->
                 </div>
                 @foreach($statuses as $index => $status)
 

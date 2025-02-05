@@ -42,7 +42,14 @@ class OrderController extends Controller
             $orders->where("total_amount", "=", $request['total_amount']);
         }
         if ($request["type"]) {
-            $orders->where("status", $request["type"]);
+            if ($request["type"] == "pending")
+                $orders->where("status", $request["type"]);
+            else if ($request["type"] == "rejected")
+                $orders->where("status", $request["type"]);
+            else {
+                $orders->where("status", "!=", OrderStatus::PENDING)
+                    ->where("status", "!=", OrderStatus::REJECTED);
+            }
         }
         if ($request["from"]) {
             $orders->whereDate("order_date", ">=", $request["from"]);
@@ -81,6 +88,14 @@ class OrderController extends Controller
             return $carry + $order->total_amount;
         });
 
+        if ($request["type"] == "track") {
+            return view("admin.order.manage-track-order", data: [
+                "status" => $request["type"],
+                "orders" => $orders,
+                "total_amount" => $totalPrice
+            ]);
+        }
+
         return view("admin.order.index", [
             "status" => $request["type"],
             "orders" => $orders,
@@ -95,7 +110,7 @@ class OrderController extends Controller
     {
         $order->update([
             "admin_id" => auth()->guard("admin")->user()->id,
-            "status" => OrderStatus::PAID
+            "status" => OrderStatus::ACCEPTED
         ]);
         return redirect()->back()->with("success", "Successfullly Approved");
     }
@@ -124,7 +139,7 @@ class OrderController extends Controller
     {
         $order->update([
             "admin_id" => auth()->guard("admin")->user()->id,
-            "status" => OrderStatus::COMPLETED
+            "status" => OrderStatus::ARRIVED
         ]);
         return redirect()->back()->with("success", "Successfullly Completed");
     }
@@ -199,6 +214,8 @@ class OrderController extends Controller
             'order_id' => $order->id,
             'status' => $request->status,
         ]);
+
+        Order::where('id', $order->id)->update(['status' => $request->status]);
 
         return redirect()
             ->route('admin.order.index')

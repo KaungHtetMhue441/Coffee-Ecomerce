@@ -3,7 +3,7 @@
 ])
 <x-layouts.admin>
     <x-slot name="header">
-        Most Buy Products
+        Best Selling Products
     </x-slot>
 
     <x-slot name="script">
@@ -26,7 +26,6 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <h1>Most Buy Products</h1>
                 <form method="GET" action="{{ route('admin.most_buy_products') }}">
                     <div class="row">
                         <div class="col-md-4">
@@ -51,7 +50,6 @@
                 </form>
                 <div class="row mt-4">
                     <div class="col-md-12">
-                        <h2>Most Buy Products</h2>
                         <table class="table table-bordered table-striped table-hover">
                             <thead>
                                 <tr>

@@ -1,5 +1,3 @@
-
-
 <?php
 
 use App\Http\Controllers\Admin\OtherExpenseController;
@@ -23,6 +21,7 @@ use App\Http\Controllers\Admin\MostBuyProductsController;
 use App\Http\Controllers\Admin\ProfitController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SalaryController;
+use App\Http\Controllers\InventoryController;
 
 Route::middleware("guest:admin")->prefix("/admin")->name("admin.")->group(function () {
     Route::get('/register', [RegisteredAdminController::class, 'create'])
@@ -111,6 +110,17 @@ Route::middleware("auth:admin")->prefix('/admin')->name("admin.")->group(functio
     Route::get("profits", [ProfitController::class, "analysis"])->name('profits');
 
     Route::get('most-buy-products', [MostBuyProductsController::class, 'index'])->name('most_buy_products');
+
+    Route::controller(InventoryController::class)->prefix('inventory')->name("inventory.")->group(function () {
+        Route::get("/",  "index")->name("index");
+        Route::get("create", "create")->name("create");
+        Route::post("store", "store")->name("store");
+        Route::get("details/{id}", "show")->name("details");
+        Route::get("edit/{id}", "edit")->name("edit");
+        Route::put("update/{id}", "update")->name("update");
+        Route::put("item/add-quantity", "addQuantity")->name("addQuantity");
+        Route::put("item/decrease-quantity", action: "decreaseQuantity")->name("decreaseQuantity");
+    });
 });
 Route::get('generate-order-pdf/{order}', [VouncherPDFController::class, 'generateOrderPDF'])->name("admin.order.voucher");
 Route::get("most-buy-customer", [OrderController::class, 'getMostBuyCustomer'])->name("users.most.buy");
