@@ -32,6 +32,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Item Name</th>
                         <th>Supplier</th>
                         <th>Price</th>
                         <th>Purchased At</th>
@@ -42,6 +43,7 @@
                     @forelse($purchases as $purchase)
                     <tr>
                         <td>{{ $purchase->id }}</td>
+                        <td>{{$purchase->item_name}}</td>
                         <td>{{ $purchase->supplier }}</td>
                         <td>{{ $purchase->price }}</td>
                         <td>{{ $purchase->purchased_at }}</td>
