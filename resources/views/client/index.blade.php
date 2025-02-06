@@ -9,18 +9,48 @@ $menus = [
     <x-slot name="title">
         Home
     </x-slot>
+    <x-slot name="style">
+        <style>
+            .hero {
+                /* background: url("https://wallpapercave.com/wp/wp2352846.jpg") no-repeat center center; */
+                background-size: cover;
+                height: 400px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            }
+
+            .video-background {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                /* Place it behind other content */
+                object-fit: cover;
+                /* Cover the entire area */
+            }
+        </style>
+    </x-slot>
     <x-slot name="content">
-        <div class="container-fluid px-5">
-            <div class="row my-md-5  pt-3 pb-5 px-5">
-                <div class="col-12 col-md-6 text-justify my-md-5 mb-3 pb-3 pt-3">
-                    <h1 class="text_primary pb-2 text_shadow_primary roboto-medium-italic">Coffee House Shop</h1>
-                    <p class="text-pretty text_primary_soft text_justify">
-                        Our baristas craft each cup with passion, ensuring the perfect blend of flavors in every sip. From classic espresso to specialty lattes, we cater to every taste.
-                        Join us for a cup of coffee, and let’s make every moment a little warmer, one brew at a time.<voluptatibus class="lo"></voluptatibus>
+        <div class="container-fluid hero" style="height: 90vh; position:relative">
+            <video autoplay muted loop class="video-background">
+                <source src="{{asset('videos/background-video.mp4')}}" type="video/mp4" />
+                <!-- <source src="background-video.webm" type="video/webm" /> -->
+                Your browser does not support the video tag.
+            </video>
+            <div class="row  my-md-5 justify-content-center h-100 align-items-center">
+                <div class="col-12 col-md-5 text-justify p-3" style="border-radius:30px;">
+                    <h1 class=" pb-2 text-white roboto-medium-italic">Coffee House Shop</h1>
+                    <p class="text-pretty text-white text_justify">
+                        Our baristas craft each cup with passion, ensuring the perfect blend of flavors in every sip. From classic espresso to specialty lattes, we cpater to every taste.<voluptatibus class="lo"></voluptatibus>
                     </p>
-                    <a href="{{route("client.product")}}" class="btn btn_primary">See Menus</a>
+                    <a href="{{route("client.product")}}" class="btn btn-coffee btn-dark">See Menus</a>
                 </div>
-                <div class="col-12 col-md-6 shadow">
+                <!-- <div class="col-12 col-md-6 shadow">
                     <div id="carouselExampleRide" class="carousel slide  rounded p-0 p-md-4 pt-3 px-3" data-bs-ride="carousel" data-bs-interval="1000">
                         <div class="carousel-inner rounded h-100" data-bs-interval="0">
                             <div class="carousel-item active">
@@ -42,8 +72,10 @@ $menus = [
                             <span class="visually-hidden">Next</span>
                         </button>
                     </div>
-                </div>
+                </div> -->
             </div>
+        </div>
+        <div class="container-fluid px-5">
 
             <x-client.menu-data :title="$menus[0]" :products="$latestProducts">
 

@@ -1,8 +1,7 @@
-<nav class="navbar  py-md-3 navbar-expand-lg nav_container nav_text_color bg-body-tertiary px-md-5 shadow" style="position:sticky;top:0;z-index:1001;">
+<nav class="navbar navbar-expand-lg nav_container nav_text_color bg-body-tertiary px-md-5 shadow" style="position:sticky;top:0;z-index:1001; background-color:#212529!important">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
-
-            ANGLE COFFEE HOUSE
+            ANGEL COFFEE HOUSE
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

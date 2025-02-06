@@ -7,7 +7,7 @@ $user = auth()->guard("admin")->user();
     <div class="logo-header" data-background-color="dark">
       <a href="index.html" class="logo text-white">
         <img src="{{asset("logo.png")}}" alt="navbar brand" class="navbar-brand rounded me-2" height="30px" />
-        Angle House
+        Angel House
       </a>
       <div class="nav-toggle">
         <button class="btn btn-toggle toggle-sidebar">
@@ -47,7 +47,7 @@ $user = auth()->guard("admin")->user();
         <li class="nav-item">
           <a href="{{ route('users.most.buy') }}" class="collapsed">
             <i class="fas fa-users"></i>
-            <p>Most Buy Customers</p>
+            <p>Top Purchased Customers</p>
           </a>
         </li>
 

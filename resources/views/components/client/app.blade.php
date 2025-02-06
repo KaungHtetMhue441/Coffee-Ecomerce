@@ -56,11 +56,10 @@
     <x-client.nav.nav>
 
     </x-client.nav.nav>
-    <div class="container-fluid px-md-5">
+    <div class="container-fluid p-0">
       {{$content}}
-
     </div>
-    <footer class="text-light py-5 mt-5" style="background-color: #45230f">
+    <footer class="text-light py-5 mt-5" style="background-color: #212529">
       <div class="container">
         <div class="row">
           <!-- About Us Section -->
