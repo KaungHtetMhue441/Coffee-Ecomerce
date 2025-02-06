@@ -47,9 +47,9 @@
                     @endif
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-                        <input type="email" class="form-control mb-2" placeholder="Email" />
+                        <input type="email" name="email" class="form-control mb-2" placeholder="Email" />
                         @error('email')<small class="text-danger">{{ $message }}</small>@enderror
-                        <input type="password" class="form-control mb-2" placeholder="Password" />
+                        <input type="password" name="password" class="form-control mb-2" placeholder="Password" />
                         @error('password')<small class="text-danger">{{ $message }}</small>@enderror
                         <button type="submit" class="btn btn-dark w-100">Login</button>
 

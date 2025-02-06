@@ -3,7 +3,7 @@
         Menus
     </x-slot>
     <x-slot name="content">
-        <div class="row mt-3 p-0">
+        <div class="row mt-3 px-5">
             <div class="col-8 p-0 mb-3 bg-white">
                 <div class="col-12  mb-1 p-2 rounded shadow justify-content-start" style="background-color: white;">
                     <h4 class="text_primary text-center">Your selected product in part</h4>
@@ -33,7 +33,7 @@
 
                             </tfoot>
                         </table>
-                        <div class="row px-2"> 
+                        <div class="row px-2">
                             <button class="btn btn-primary" onclick="checkout()">Order Now</button>
                         </div>
                     </div>
