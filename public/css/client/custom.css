@@ -5,6 +5,10 @@ body {
     background-color: #fff7f7;
 }
 
+.tab {
+    text-indent: 40px;
+}
+
 .bg_primary {
     background-color: #955f31;
 }

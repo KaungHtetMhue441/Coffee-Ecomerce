@@ -9,8 +9,10 @@ use Stripe\PaymentIntent;
 use Stripe\PaymentMethod;
 use App\Enums\OrderStatus;
 use App\Models\Transaction;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\OrderStatus as ModelsOrderStatus;
 
 class StripePaymentController extends Controller
 {
@@ -90,7 +92,16 @@ class StripePaymentController extends Controller
             // Update the order status to 'paid' if the payment was successful
             if ($session->payment_status === 'paid') {
 
+                $order->qr_code = Str::uuid();
                 $order->status = OrderStatus::ACCEPTED;
+                ModelsOrderStatus::create([
+                    "order_id" => $order->id,
+                    "status" => "pending"
+                ]);
+                ModelsOrderStatus::create([
+                    "order_id" => $order->id,
+                    "status" => "accepted"
+                ]);
                 // $order->order_date = Carbon::now();
                 $order->payment_type = $cardBrand;
                 Transaction::create([

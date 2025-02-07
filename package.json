@@ -20,7 +20,9 @@
         "@popperjs/core": "^2.11.8",
         "bootstrap": "^5.3.3",
         "flatpickr": "^4.6.13",
+        "jquery": "^3.7.1",
         "sass": "^1.77.8",
-        "sweetalert": "^2.1.2"
+        "sweetalert": "^2.1.2",
+        "toastr": "^2.1.4"
     }
 }

@@ -52,6 +52,16 @@
 
         <div class="container mt-5">
             <h3 class="text-center mb-5 mt-2">Tracking Order ({{request()->order->id}})</h3>
+
+            <div class="row justify-content-center my-3">
+                <div class="card col-3 shadow">
+                    <div class="card-body py-4">
+                        <center>
+                            {!!$qrCode!!}
+                        </center>
+                    </div>
+                </div>
+            </div>
             <div class="d-flex justify-content-between position-relative pb-5">
 
                 @php
@@ -89,6 +99,7 @@
             <div class="card mt-5">
                 <div class="card-header">
                     <h5>Your Order Details</h5>
+
                 </div>
                 <div class="card-body ">
                     <div class="row">

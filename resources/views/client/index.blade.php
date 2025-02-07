@@ -43,12 +43,12 @@ $menus = [
                 Your browser does not support the video tag.
             </video>
             <div class="row  my-md-5 justify-content-center h-100 align-items-center">
-                <div class="col-12 col-md-5 text-justify p-3" style="border-radius:30px;">
-                    <h1 class=" pb-2 text-white roboto-medium-italic">Coffee House Shop</h1>
-                    <p class="text-pretty text-white text_justify">
+                <div class="col-12 col-md-6 text-justify p-3" style="border-radius:30px;">
+                    <h1 class=" pb-2 text-white roboto-medium-italic text-center">Coffee House Shop</h1>
+                    <p class="text-pretty text-white text_justify tab">
                         Our baristas craft each cup with passion, ensuring the perfect blend of flavors in every sip. From classic espresso to specialty lattes, we cpater to every taste.<voluptatibus class="lo"></voluptatibus>
                     </p>
-                    <a href="{{route("client.product")}}" class="btn btn-coffee btn-dark">See Menus</a>
+                    <center><a href="{{route("client.product")}}" class="btn btn-coffee btn-dark ">See Menus</a></center>
                 </div>
                 <!-- <div class="col-12 col-md-6 shadow">
                     <div id="carouselExampleRide" class="carousel slide  rounded p-0 p-md-4 pt-3 px-3" data-bs-ride="carousel" data-bs-interval="1000">

@@ -49,19 +49,19 @@
                     @endif
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-                        <input type="name" class="form-control mb-2" placeholder="Enter Name" />
+                        <input type="name" name="name" class="form-control mb-2" placeholder="Enter Name" />
                         @error('name')
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
-                        <input type="email" class="form-control mb-2" placeholder="Email" />
+                        <input type="email" name="email" class="form-control mb-2" placeholder="Email" />
                         @error('email')
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
-                        <input type="password" class="form-control mb-2" placeholder="Password" />
+                        <input type="password" name="password" class="form-control mb-2" placeholder="Password" />
                         @error('password')
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
-                        <input type="password_confirmation" class="form-control mb-2" placeholder="password_confirmation" />
+                        <input type="password_confirmation" name="password_confirmation" class="form-control mb-2" placeholder="password_confirmation" />
                         @error('password_confirmation')
                         <small class="text-danger">{{ $message }}</small>
                         @enderror

@@ -8,7 +8,9 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\OrderStatus;
 use League\CommonMark\Extension\SmartPunct\EllipsesParser;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ClientOrderController extends Controller
 {
@@ -103,6 +105,11 @@ class ClientOrderController extends Controller
         $file = $request->file("file");
         $request['image'] = uploadFile($file, "/orders/bill/");
         $request["status"] = "pending";
+
+        OrderStatus::create([
+            "order_id" => $order->id,
+            "status" => "pending"
+        ]);
         // $request["order_date"] = Carbon::now();
         $order->update($request->all());
         Transaction::create([
