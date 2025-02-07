@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Order;
 use App\Enums\OrderStatus;
+use App\Notifications\OrderStatuses;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
@@ -72,11 +73,8 @@ class OrderController extends Controller
             }
             $orders->select("orders.*");
         } else {
-            $orders->orderby("order_date", direction: "ASC");
+            $orders->orderby("order_date",  "DESC");
         }
-
-
-
         if ($request['export']) {
             $orders = $orders->get();
             return Excel::download(new OrdersExport($orders), "orderReport.xlsx");
@@ -106,42 +104,12 @@ class OrderController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function approve(Order $order)
-    {
-        $order->update([
-            "admin_id" => auth()->guard("admin")->user()->id,
-            "status" => OrderStatus::ACCEPTED
-        ]);
-        return redirect()->back()->with("success", "Successfullly Approved");
-    }
 
     public function showRejectPage(Order $order)
     {
         return view("admin.order.reject", [
             'order' => $order
         ]);
-    }
-    public function reject(Request $request, Order $order)
-    {
-        $request->validate([
-            "description" => "required|string"
-        ]);
-        $order->update([
-            "admin_id" => auth()->guard("admin")->user()->id,
-            "status" => OrderStatus::REJECTED
-        ]);
-        $order->comment()->create([
-            "description" => $request->description
-        ]);
-        return redirect()->route("admin.order.index", ["type" => "pending"])->with("success", "Successfullly Reject");
-    }
-    public function complete(Order $order)
-    {
-        $order->update([
-            "admin_id" => auth()->guard("admin")->user()->id,
-            "status" => OrderStatus::ARRIVED
-        ]);
-        return redirect()->back()->with("success", "Successfullly Completed");
     }
 
     public function getMostBuyCustomer()
@@ -210,12 +178,29 @@ class OrderController extends Controller
             'status' => 'required|string|max:255',
         ]);
 
+        $oldStatus = $order->status;
+        $newStatus = $request->status;
+
         $this->orderStatusRepository->create([
             'order_id' => $order->id,
-            'status' => $request->status,
+            'status' => $newStatus,
         ]);
 
-        Order::where('id', $order->id)->update(['status' => $request->status]);
+        Order::where('id', $order->id)->update([
+            'status' => $newStatus,
+            'admin_id' => auth()->guard("admin")->user()->id
+        ]);
+
+        // Get appropriate message based on status
+        $message = match ($newStatus) {
+            OrderStatus::ACCEPTED => 'Your order has been approved and is being processed.',
+            OrderStatus::REJECTED => 'Your order has been rejected.',
+            OrderStatus::ARRIVED => 'Your order has been delivered successfully!',
+            OrderStatus::PENDING => 'Your order is pending approval.',
+            default => 'Your order status has been updated to ' . $newStatus,
+        };
+
+        $order->user->notify(new OrderStatuses($order,$message));
 
         return redirect()
             ->route('admin.order.index')

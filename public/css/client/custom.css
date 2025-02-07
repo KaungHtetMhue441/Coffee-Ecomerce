@@ -10,7 +10,7 @@ body {
 }
 
 .bg_primary {
-    background-color: #955f31;
+    background-color: #212529;
 }
 
 .fs-18 {
@@ -42,18 +42,21 @@ body {
     background-color: #cf8980 !important;
 }
 .btn_primary:hover {
+    color: #212529;
     background-color: #cf8980;
 }
 .k_active {
-    background-color: #cf8980 !important;
+    background-color: whitesmoke !important;
+    color: #212529 !important;
 }
 .k_active_hover:hover {
-    background-color: #cf8980 !important;
+    color: #212529 !important;
+    background-color: #b5b2b2 !important;
 }
 .nav_link::after {
     content: "";
     display: block;
-    border-bottom: 4px solid #dda15e;
+    border-bottom: 4px solid #be9362;
     transition: width 0.35s ease-in 0.001s;
     width: 0px;
 }

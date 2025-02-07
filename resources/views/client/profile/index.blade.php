@@ -20,10 +20,6 @@
                 height: 550px;
             }
 
-            .profile * {
-                color: white !important;
-            }
-
             .nav a:hover {
                 border-bottom: 2px solid white;
             }
@@ -41,12 +37,18 @@
                 color: white;
             }
 
+            .profile-pic-container {
+                width: 100px;
+                padding: 5px;
+                border: 3px solid white;
+                border-radius: 50px;
+            }
+
             .profile-pic {
-                width: 80px;
-                height: 80px;
+                width: 90px;
+                height: 90px;
                 border-radius: 50%;
                 object-fit: cover;
-                margin-bottom: 10px;
             }
         </style>
     </x-slot>
@@ -106,19 +108,9 @@
         </div>
     </x-slot>
     <x-slot name="script">
+
         <script>
             $(document).ready(function() {
-                // Sidebar navigation
-                $(".custom_nav_link").click(function(e) {
-                    e.preventDefault();
-                    $(".nav-link").removeClass("active");
-                    $(this).addClass("active");
-
-                    let tab = $(this).data("tab");
-                    $(".tab-content").addClass("d-none");
-                    $("#" + tab).removeClass("d-none");
-                });
-
                 // Open edit profile modal
                 $("#editProfile").click(function() {
                     $("#profileModal").modal("show");

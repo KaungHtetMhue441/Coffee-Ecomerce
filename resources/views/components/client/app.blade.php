@@ -128,7 +128,20 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <script src="{{asset("js/client/order.js")}}"></script>
   <script src="{{asset("flatpicker/flatpicker.min.js")}}"></script>
+
   <script type="text/javascript">
+    function markAsRead(notificationId, redirectUrl) {
+      fetch(`/notifications/${notificationId}/mark-as-read`, {
+        method: 'POST',
+        headers: {
+          'X-CSRF-TOKEN': "{{csrf_token()}}",
+          'Accept': 'application/json',
+        },
+      }).then(() => {
+        window.location.href = redirectUrl;
+      });
+    }
+
     function showToast(message, x, y) {
       Toastify({
         text: message,

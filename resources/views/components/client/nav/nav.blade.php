@@ -1,3 +1,9 @@
+@php
+if(auth()->user()){
+$notifications = auth()->user()->notifications;
+$notiCount = $notifications->count();
+}
+@endphp
 <nav class="navbar navbar-expand-lg nav_container nav_text_color bg-body-tertiary px-md-5 shadow" style="position:sticky;top:0;z-index:1001; background-color:#212529!important">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
@@ -13,6 +19,7 @@
             <a class="btn btn-outline-secondary ms-2" href="{{route("register")}}">Register</a>
             @else
             <div class="d-flex ">
+                <x-notifications-dropdown :notifications="$notifications"></x-notifications-dropdown>
                 <div class="dropdown">
                     <p class="dropdown-toggle mb-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {{auth()->user()->name}}
