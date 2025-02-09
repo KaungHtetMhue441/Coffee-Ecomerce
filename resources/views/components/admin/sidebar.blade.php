@@ -128,7 +128,28 @@ $user = auth()->guard("admin")->user();
             </ul>
           </div>
         </li>
-
+        <!-- Tables Management -->
+        <li class="nav-item">
+          <a data-bs-toggle="collapse" href="#sidebarLayoutsTables">
+            <i class="fas fa-table"></i>
+            <p>Tables</p>
+            <span class="caret"></span>
+          </a>
+          <div class="collapse" id="sidebarLayoutsTables">
+            <ul class="nav nav-collapse">
+              <li>
+                <a href="{{ route('admin.tables.index') }}">
+                  <span class="sub-item">All Tables</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('admin.tables.create') }}">
+                  <span class="sub-item">Add Table</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
         <!-- Product Menu Item -->
         <li class="nav-item">
           <a data-bs-toggle="collapse" href="#sidebarLayoutsProduct">
@@ -201,7 +222,7 @@ $user = auth()->guard("admin")->user();
               </li>
               <li>
                 <a href="{{ route('admin.order.index', 'accepted') }}">
-                  <span class="sub-item">Delivering Orders</span>
+                  <span class="sub-item">Processing Orders</span>
                 </a>
               </li>
               <li>

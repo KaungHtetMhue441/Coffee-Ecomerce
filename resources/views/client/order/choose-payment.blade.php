@@ -59,7 +59,7 @@
                         <div class="col-12">
                             <form action="{{route('order.chooseDate',$order->id)}}" method="post">
                                 @csrf
-                                <input type="text" id="from_datepicker" class=" form-control mb-3" name="order_date" placeholder="Date From..">
+                                <input type="text" id="from_datepicker" class=" form-control mb-3" name="order_date" placeholder="Choose Order Date ">
                                 @error('order_date')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror

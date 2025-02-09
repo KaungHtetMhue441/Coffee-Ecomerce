@@ -17,7 +17,7 @@
                         <table class="display table table-bordered-top border-black table-stripe table-hover">
                             <thead>
                                 <tr>
-                                    <th>Product</th>
+                                    <th>Menu</th>
                                     <th>Price</th>
                                     <th>QTY</th>
                                     <th>Total price</th>

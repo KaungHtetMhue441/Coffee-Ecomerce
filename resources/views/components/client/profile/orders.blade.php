@@ -10,11 +10,15 @@
             <div class="row justify-content-end">
                 <div class="col-3">
                     <select class="form-select" id="orderStatus">
-                        <option value="{{ route('profile.index', '') }}" {{ request()->is('order/index') ? 'selected' : '' }}>Draft Orders</option>
-                        <option value="{{ route('profile.index', ['status' => 'pending']) }}" {{ request()->is('order/index/pending') ? 'selected' : '' }}>Pending Orders</option>
-                        <option value="{{ route('profile.index', ['status' => 'accepted']) }}" {{ request()->is('order/index/accepted') ? 'selected' : '' }}>Accepted Orders</option>
-                        <option value="{{ route('profile.index', ['status' => 'arrived']) }}" {{ request()->is('order/index/arrived') ? 'selected' : '' }}>Arrived Orders</option>
-                        <option value="{{ route('profile.index', ['status' => 'rejected']) }}" {{ request()->is('order/index/rejected') ? 'selected' : '' }}>Rejected Orders</option>
+                        <option value="{{ route('profile.index', '') }}">All Orders</option>
+                        <option value="{{ route('profile.index', ['status' => 'pending']) }}" {{ request()['status']=="pending" ? 'selected' : '' }}>Pending Orders</option>
+                        <option value="{{ route('profile.index', ['status' => 'accepted']) }}" {{ request()['status']=="accepted"  ? 'selected' : '' }}>Accepted Orders</option>
+                        <option value="{{ route('profile.index', ['status' => 'cooking']) }}" {{ request()['status']=="cooking"  ? 'selected' : '' }}>Cooking Orders</option>
+
+
+                        <option value="{{ route('profile.index', ['status' => 'delivered']) }}" {{ request()['status']=="delivered"  ? 'selected' : '' }}>Delivered Orders</option>
+                        <option value="{{ route('profile.index', ['status' => 'arrived']) }}" {{ request()['status']=="arrived"  ? 'selected' : '' }}>Arrived Orders</option>
+                        <option value="{{ route('profile.index', ['status' => 'rejected']) }}" {{ request()['status']=="arrived" ? 'selected' : '' }}>Rejected Orders</option>
 
                     </select>
                 </div>

@@ -1,3 +1,7 @@
+@props([
+"showLogin"=>true
+])
+
 @php
 if(auth()->user()){
 $notifications = auth()->user()->notifications;
@@ -14,7 +18,9 @@ $notiCount = $notifications->count();
         </button>
         <div class="collapse navbar-collapse " id="navbarNav">
             <x-client.nav.nav-links></x-client.nav.nav-links>
-            @if (!auth()->user())
+            @if($showLogin==true)
+
+            @if(!auth()->user())
             <a class="btn btn-secondary" href="{{route("login")}}">Login</a>
             <a class="btn btn-outline-secondary ms-2" href="{{route("register")}}">Register</a>
             @else
@@ -44,10 +50,13 @@ $notiCount = $notifications->count();
                     </a>
                 </div>
             </div>
-
-            <h4></h4>
             @endif
+            @endif
+
         </div>
+
+    </div>
+    </div>
 </nav>
 
 <!-- <nav>

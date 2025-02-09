@@ -37,7 +37,7 @@ $breadCrumbs = ['Inventory', 'List'];
                                     <option value="desc" {{ old('order', request('order')) == 'desc' ? 'selected' : '' }}>Descending</option>
                                 </select>
                             </div>
-                    </div>
+                        </div>
                         <div class="row mt-3">
                             <div class="col-md-3">
                                 <label for="item_name">Search Item Name</label>
@@ -69,7 +69,7 @@ $breadCrumbs = ['Inventory', 'List'];
                                         {{ $item->quantity > 0 ? 'In Stock' : 'Out of Stock' }}
                                     </span>
                                 </td>
-                                <td>{{ $item->date_added->format("y-m-d") }}</td>
+                                <td>{{ $item->created_at->format("y-m-d") }}</td>
                                 <td>
                                     <a href="{{ route('admin.inventory.details', $item->id) }}" class="btn btn-info">View</a>
                                     <a href="{{ route('admin.inventory.edit', $item->id) }}" class="btn btn-warning">Edit</a>

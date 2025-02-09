@@ -29,6 +29,10 @@
         .text-left {
             text-align: left;
         }
+
+        .text-right {
+            text-align: right;
+        }
     </style>
 </head>
 
@@ -37,9 +41,18 @@
     <p>{{ $date }}</p>
     <p>Yaongon-Mandalay Road,Thandaung Stree conor,Taungoo</p>
     <p> Open Daily : 8:00AM To 8:00PM</p>
-    @if($admin)
-    <p class="text-left">CasherID.{{$admin->name}}</p>
-    @endif
+    <table>
+        <tr>
+            @if($admin)
+            <td class="text-left">CasherID.{{$admin->name}}</td>
+            @endif
+            @if($vouncher_type=="sale")
+            <td class="text-right">Table - {{$table}}</td>
+            @endif
+        </tr>
+    </table>
+
+
     <hr>
     <table class="table table-bordered">
         <tr>

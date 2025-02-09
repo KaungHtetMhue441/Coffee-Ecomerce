@@ -19,7 +19,9 @@ class VouncherPDFController extends Controller
             'admin' => $sale->admin,
             'date' => date('m/d/Y'),
             'totalPrice' => $sale->total_cost,
-            'products' => $sale->products
+            'products' => $sale->products,
+            'vouncher_type' => "sale",
+            "table" => $sale->table_name
         ];
 
         $mpdf = (new PDF())->getMpdf();
@@ -42,7 +44,8 @@ class VouncherPDFController extends Controller
             'date' => date('m/d/Y'),
             "admin" => $order->admin,
             'totalPrice' => $order->total_amount,
-            'products' => $order->products
+            'products' => $order->products,
+            'vouncher_type' => "order "
         ];
 
         $mpdf = (new PDF())->getMpdf();

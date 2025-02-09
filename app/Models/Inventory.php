@@ -19,4 +19,9 @@ class Inventory extends Model
         'date_added' => 'datetime',
         'date_retrieved' => 'datetime',
     ];
+
+    public function history()
+    {
+        return $this->hasMany(InventoryHistory::class);
+    }
 }

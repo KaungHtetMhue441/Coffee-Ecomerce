@@ -20,8 +20,7 @@ class ProfileController extends Controller
         $status  = $request->status;
         $orders = Order::where("user_id", "=", auth()->user()->id);
         if ($status == null) {
-
-            $orders->whereNull("status");
+            $orders->whereNotNull("status");
         } else {
             $orders->where("status", "like", "%" . $status . "%");
         }

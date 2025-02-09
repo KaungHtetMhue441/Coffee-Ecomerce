@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Client;
 
 use Carbon\Carbon;
 use App\Models\Order;
+use App\Models\OrderStatus;
 use App\Models\Transaction;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Models\OrderStatus;
-use League\CommonMark\Extension\SmartPunct\EllipsesParser;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use League\CommonMark\Extension\SmartPunct\EllipsesParser;
 
 class ClientOrderController extends Controller
 {
@@ -25,7 +26,7 @@ class ClientOrderController extends Controller
         $orders = Order::where("user_id", "=", auth()->user()->id);
         if ($type == null) {
 
-            $orders->whereNull("status");
+            $orders->whereNotNull("status");
         } else {
             $orders->where("status", "like", "%" . $type . "%");
         }
@@ -60,7 +61,8 @@ class ClientOrderController extends Controller
 
         $order = Order::create([
             "user_id" => $userId,
-            "total_amount" => $total_amount
+            "total_amount" => $total_amount,
+            "qr_code" => Str::uuid()
         ]);
 
         $order->products()->attach($products);

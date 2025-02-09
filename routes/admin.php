@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\Account\UserAccountController;
 use App\Http\Controllers\Admin\Account\AdminAccountController;
 use App\Http\Controllers\Admin\Auth\RegisteredAdminController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
-
+use App\Http\Controllers\Admin\TableController;
 use App\Http\Controllers\Admin\Report\ReportController;
 
 use App\Http\Controllers\Admin\EmployeeController;
@@ -121,6 +121,9 @@ Route::middleware("auth:admin")->prefix('/admin')->name("admin.")->group(functio
         Route::put("item/add-quantity", "addQuantity")->name("addQuantity");
         Route::put("item/decrease-quantity", action: "decreaseQuantity")->name("decreaseQuantity");
     });
+
+    // Tables Management Routes
+    Route::resource('tables', TableController::class);
 });
 Route::get('generate-order-pdf/{order}', [VouncherPDFController::class, 'generateOrderPDF'])->name("admin.order.voucher");
 Route::get("most-buy-customer", [OrderController::class, 'getMostBuyCustomer'])->name("users.most.buy");

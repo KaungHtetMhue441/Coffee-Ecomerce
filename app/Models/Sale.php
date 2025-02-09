@@ -13,6 +13,7 @@ class Sale extends Model
         "customer",
         "total_cost",
         "payment_type",
+        "table_name",
         "status"
     ];
 

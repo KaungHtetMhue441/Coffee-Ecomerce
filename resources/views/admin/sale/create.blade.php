@@ -28,11 +28,15 @@ $sale = request()['sale'];
                                     <div class="col-5 px-2">
                                         <div class="card mt-3 p-2 mb-3">
                                             <div class="card-body p-0 pb-3 px-3">
-                                                <ul class="nav">
+                                                <select class="form-select from-control" id="category_id">
 
                                                     @forelse ($categories as $category )
-                                                    <li class="nav-item me-2 p-0" style="border: none;">
-                                                        <a href="{{route('admin.sale.create',[
+                                                    <option style="border: none;"
+                                                        value="{{route('admin.sale.create',[
+                                                                'sale'=>request()["sale"]->id,
+                                                                'category'=>$category->id
+                                                                ])}}">
+                                                        <a value="{{route('admin.sale.create',[
                                                                 'sale'=>request()["sale"]->id,
                                                                 'category'=>$category->id
                                                                 ])}}" class="
@@ -46,11 +50,11 @@ $sale = request()['sale'];
                                                                 @endif" aria-current="page">
                                                             {{$category->name}}
                                                         </a>
-                                                    </li>
+                                                    </option>
                                                     @empty
 
                                                     @endforelse
-                                                </ul>
+                                                </select>
                                             </div>
                                         </div>
 
@@ -158,6 +162,14 @@ $sale = request()['sale'];
                                                 <input type="text" class="form-control w-50 " value="Guest" id="customer" name="customer_name" placeholder="Enter customer's name" />
                                             </div>
                                             <div class="d-flex justify-content-between mb-2">
+                                                <label for="">Table Number</label>
+                                                <select name="table_name" class="form-control w-50 form-select" id="table_name">
+                                                    @foreach ($tables as $table)
+                                                    <option value="{{$table->table}}">{{$table->table}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-2">
                                                 <label for="total">Total Price</label>
                                                 <input type="text" class="form form-control w-50 text-primary bg-white" value="{{$total_price}} kyats " disabled>
                                             </div>
@@ -190,6 +202,13 @@ $sale = request()['sale'];
 
     <x-slot name="script">
         <script type="text/javascript">
+            //For Order Page
+            $(document).ready(function() {
+                $('#category_id').on('change', function() {
+                    window.location.href = $(this).val();
+                });
+            });
+
             function openPdf() {
                 window.open("{{route('admin.bouncer',$sale->id)}}");
             }

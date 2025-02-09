@@ -12,6 +12,7 @@ class InventoryHistory extends Model
     protected $fillable = [
         'inventory_id',
         'quantity',
+        'date_added',
         'date_retrieved',
     ];
 }

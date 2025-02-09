@@ -11,6 +11,7 @@ use App\Models\Transaction;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Table;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -94,8 +95,10 @@ class SaleController extends Controller
         $totalPrice = $saleProducts->reduce(function ($carry, $product) {
             return $carry + ($product->price * $product->pivot->quantity);
         });
+        $tables = Table::active()->get();
 
         return view("admin.sale.create", [
+            "tables" => $tables,
             "categories" => $categories,
             "products" => $products,
             "saleProducts" => $saleProducts,
@@ -143,6 +146,7 @@ class SaleController extends Controller
     {
         $sale->update([
             "customer" => $request->customer_name,
+            "table_name" => $request->table_name,
             "payment_type" => $request->payment_type,
             "total_cost" => $request->total_cost,
             "status" => "complete"

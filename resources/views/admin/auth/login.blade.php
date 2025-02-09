@@ -1,4 +1,4 @@
-<x-client.app>
+<x-client.app :showLogin="false">
     <x-slot name="title">Login</x-slot>
     <x-slot name="style">
         <style>
@@ -67,5 +67,3 @@
         </div>
     </x-slot>
 </x-client.app>
-
-

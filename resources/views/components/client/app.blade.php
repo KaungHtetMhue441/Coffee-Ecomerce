@@ -1,6 +1,7 @@
 @props([
 "script" => "",
-"style"=>""
+"style"=>"",
+"showLogin"=>true
 ])
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +54,7 @@
 
 <body>
   <div style="position:relative;">
-    <x-client.nav.nav>
+    <x-client.nav.nav :showLogin="$showLogin">
 
     </x-client.nav.nav>
     <div class="container-fluid p-0">

@@ -43,14 +43,10 @@ class OrderController extends Controller
             $orders->where("total_amount", "=", $request['total_amount']);
         }
         if ($request["type"]) {
-            if ($request["type"] == "pending")
-                $orders->where("status", $request["type"]);
-            else if ($request["type"] == "rejected")
-                $orders->where("status", $request["type"]);
-            else {
-                $orders->where("status", "!=", OrderStatus::PENDING)
-                    ->where("status", "!=", OrderStatus::REJECTED);
-            }
+            $orders->where("status", $request["type"]);
+        } else {
+            $orders->where("status", "!=", OrderStatus::PENDING)
+                ->where("status", "!=", OrderStatus::REJECTED);
         }
         if ($request["from"]) {
             $orders->whereDate("order_date", ">=", $request["from"]);
@@ -200,7 +196,7 @@ class OrderController extends Controller
             default => 'Your order status has been updated to ' . $newStatus,
         };
 
-        $order->user->notify(new OrderStatuses($order,$message));
+        $order->user->notify(new OrderStatuses($order, $message));
 
         return redirect()
             ->route('admin.order.index')

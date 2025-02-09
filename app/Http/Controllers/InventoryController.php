@@ -42,7 +42,7 @@ class InventoryController extends Controller
         $inventory = new Inventory();
         $inventory->item_name = $request->item_name;
         $inventory->description = $request->description;
-        $inventory->date_added = Carbon::now();
+        $inventory->history->date_added = Carbon::now();
         $inventory->save();
 
         return redirect()->route('admin.inventory.index')->with('success', 'Inventory item created successfully.');

@@ -1,4 +1,4 @@
-<x-client.app>
+<x-client.app :showLogin="false">
     <x-slot name="title">
         Customer Registration
     </x-slot>
