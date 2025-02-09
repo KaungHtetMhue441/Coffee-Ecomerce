@@ -35,7 +35,11 @@ $sale = request()['sale'];
                                                         value="{{route('admin.sale.create',[
                                                                 'sale'=>request()["sale"]->id,
                                                                 'category'=>$category->id
-                                                                ])}}">
+                                                                ])}}"
+                                                        @if(request()['category']->id==$category->id)
+                                                        selected
+                                                        @endif
+                                                        >
                                                         <a value="{{route('admin.sale.create',[
                                                                 'sale'=>request()["sale"]->id,
                                                                 'category'=>$category->id
